@@ -22,6 +22,7 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
+	private int counter;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -32,10 +33,12 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		counter++;
 		oi = new OI();
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putNumber("Value" + counter, 5.0);
 	}
 
 	/**
@@ -45,7 +48,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		
 	}
 
 	@Override
