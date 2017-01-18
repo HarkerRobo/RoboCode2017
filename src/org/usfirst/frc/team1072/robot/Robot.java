@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1072.robot;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -11,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1072.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1072.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team1072.robot.subsystems.GearPiston;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,6 +27,9 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	private int counter;
 	public static DriveTrain drivetrain;
+	public static GearPiston gearPiston;
+	public static int encoderA, encoderB, encoderC;
+	public static Encoder encoder;
 
 	Command autonomousCommand;
 	//SendableChooser<Command> chooser = new SendableChooser<>();
@@ -37,6 +42,12 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		counter++;
 		oi = new OI();
+		drivetrain = new DriveTrain();
+		gearPiston = new GearPiston();
+		encoderA = 0;
+		encoderB = 0;
+		encoderC = 0;
+		encoder = new Encoder(encoderA, encoderB, encoderC);
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		//SmartDashboard.putData("Auto mode", chooser);
@@ -71,18 +82,18 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		//autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		//if (autonomousCommand != null)
-		//	autonomousCommand.start();
+//		autonomousCommand = chooser.getSelected();
+//
+//		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+//		switch(autoSelected) {
+//			case "My Auto": autonomousCommand = new MyAutoCommand(); break;
+//			case "Default Auto": default: autonomousCommand = new ExampleCommand(); break;
+//		}
+//
+//		// schedule the autonomous command (example)
+		if (autonomousCommand != null) {
+			autonomousCommand.start();
+		}
 	}
 
 	/**
