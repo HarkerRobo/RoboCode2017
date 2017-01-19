@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1072.robot.commands.ExampleCommand;
-import org.usfirst.frc.team1072.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1072.robot.subsystems.GearPiston;
 
@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	private int counter;
-	public static DriveTrain drivetrain;
+	public static Drivetrain drivetrain;
 	public static GearPiston gearPiston;
 	public static int encoderA, encoderB, encoderC;
 	public static Encoder encoder;
@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		counter++;
 		oi = new OI();
-		drivetrain = new DriveTrain();
+		drivetrain = new Drivetrain();
 		gearPiston = new GearPiston();
 		encoderA = 0;
 		encoderB = 0;

@@ -19,4 +19,13 @@ public class RobotMap {
 	public static double P;
 	public static double I;
 	public static double D;
+	public class Robot {
+		public static final int GYRO = 0;
+		public class Drive {
+			public static final int FR = 0;
+			public static final int FL = 0;
+			public static final int BR = 0;
+			public static final int BL = 0;
+		}
+	}
 }
