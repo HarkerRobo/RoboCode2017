@@ -19,6 +19,7 @@ public class RobotMap {
 	public static double P;
 	public static double I;
 	public static double D;
+	public static final int XBOX = 0;
 	public class Robot {
 		public static final int GYRO = 0;
 		public class Drive {
