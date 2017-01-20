@@ -1,28 +1,37 @@
 package org.usfirst.frc.team1072.robot.commands;
+
 import org.usfirst.frc.team1072.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  *
  */
-public class MoveTimeCommand extends TimedCommand {
+public class AngleTurnCommand extends Command {
+	private double initialAngle;
+	private double angleChange;
 	private double speed;
-    public MoveTimeCommand(double ti) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    		this(ti, 1);
-    		requires(Robot.drivetrain);
+	private boolean sign; // true is positive
+	
+    public AngleTurnCommand(double angle) {
+        this(angle, 1);
     }
     
-    public MoveTimeCommand(double ti, double sp){
-    		super(ti);
+    public AngleTurnCommand(double angle, double sp){
+    		angleChange = angle;
     		speed = sp;
+    		initialAngle = Robot.drivetrain.getGyro().getAngle();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    		Robot.drivetrain.tankDrive(speed, speed);
+    		if(angleChange < 0){
+    			Robot.drivetrain.tankDrive(speed, -speed);
+    			sign = false;
+    		}else{
+    			Robot.drivetrain.tankDrive(-speed, speed);
+    			sign = true;
+    		}
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,12 +40,15 @@ public class MoveTimeCommand extends TimedCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if(sign){
+    		return Robot.drivetrain.getGyro().getAngle() >= initialAngle+angleChange;
+    	}
+    	return Robot.drivetrain.getGyro().getAngle() <= initialAngle + angleChange;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    		Robot.drivetrain.tankDrive(0, 0);
+    	Robot.drivetrain.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
