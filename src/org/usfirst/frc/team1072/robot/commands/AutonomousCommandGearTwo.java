@@ -9,7 +9,7 @@ import org.usfirst.frc.team1072.robot.RobotMap;
  *
  */
 public class AutonomousCommandGearTwo extends Command {
-	double gearOneDist = 187.8; // inches
+	double gearTwoDistance = 187.8; // inches
 	double kp = RobotMap.P, ki = RobotMap.I, kd = RobotMap.D;
 	public AutonomousCommandGearTwo() {
 		// Use requires() here to declare subsystem dependencies
@@ -25,11 +25,11 @@ public class AutonomousCommandGearTwo extends Command {
 	@Override
 	protected void execute() {
 		double sum = 0;
-		double prevError = gearOneDist;
+		double prevError = gearTwoDistance;
 		double currentError;
-		while (Robot.encoder.getDistance() < gearOneDist) {
+		while (Robot.encoder.getDistance() < gearTwoDistance) {
 			sum += prevError;
-			currentError = gearOneDist - Robot.encoder.getDistance();
+			currentError = gearTwoDistance - Robot.encoder.getDistance();
 			Robot.drivetrain.tankDrive(kp*currentError + ki*sum + kd*(currentError - prevError),
 					kp*currentError + ki*sum + kd*(currentError - prevError));
 			prevError = currentError;

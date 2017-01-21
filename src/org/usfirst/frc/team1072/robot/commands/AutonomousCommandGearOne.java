@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AutonomousCommandGearOne extends Command {
 
-	double gearOneDist = 112; // inches
+	double gearOneDistance = 112; // inches
 	double kp = RobotMap.P, ki = RobotMap.I, kd = RobotMap.D;
 	
 	public AutonomousCommandGearOne(int dist) {
-		gearOneDist = dist;
+		gearOneDistance = dist;
 	}
 	
 	@Override
@@ -24,21 +24,21 @@ public class AutonomousCommandGearOne extends Command {
 	protected void execute() {
 		// TODO Auto-generated method stub
 		double sum = 0;
-		double prevError = gearOneDist;
-		double curError;
-		while (Robot.encoder.getDistance() < gearOneDist) {
+		double prevError = gearOneDistance;
+		double currentError;
+		while (Robot.encoder.getDistance() < gearOneDistance) {
 			sum += prevError;
-			curError = gearOneDist - Robot.encoder.getDistance();
-			Robot.drivetrain.tankDrive(kp*curError + ki*sum + kd*(curError - prevError),
-					kp*curError + ki*sum + kd*(curError - prevError));
-			prevError = curError;
+			currentError = gearOneDistance - Robot.encoder.getDistance();
+			Robot.drivetrain.tankDrive(kp*currentError + ki*sum + kd*(currentError - prevError),
+					kp*currentError + ki*sum + kd*(currentError - prevError));
+			prevError = currentError;
 		}
 	}
 
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return Robot.encoder.getDistance() >= gearOneDist;
+		return Robot.encoder.getDistance() >= gearOneDistance;
 	}
 
 	@Override
