@@ -1,19 +1,17 @@
 package org.usfirst.frc.team1072.robot.commands;
 
 import org.usfirst.frc.team1072.robot.Robot;
+import org.usfirst.frc.team1072.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AutonomousCommandGearOne extends Command {
 
 	double gearOneDist = 112; // inches
-	double kp, ki, kd;
+	double kp = RobotMap.P, ki = RobotMap.I, kd = RobotMap.D;
 	
-	public AutonomousCommandGearOne(int dist, int p, int i, int d) {
+	public AutonomousCommandGearOne(int dist) {
 		gearOneDist = dist;
-		kp = p;
-		ki = i;
-		kd = d;
 	}
 	
 	@Override
