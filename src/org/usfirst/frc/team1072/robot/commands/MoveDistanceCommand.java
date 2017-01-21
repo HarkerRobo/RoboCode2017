@@ -16,16 +16,19 @@ public class MoveDistanceCommand extends Command {
     	
     }
     
-    public MoveDistanceCommand(double dist, double sd){
-    	distance = dist;
-    	speed = sd;
+    public MoveDistanceCommand(double distance, double speed){
+    	this.distance = distance;
+    	this.speed = speed;
     	requires(Robot.drivetrain);
     	Robot.drivetrain.getBackRight().reset();
+    	Robot.drivetrain.getBackLeft().reset();
+    	Robot.drivetrain.getFrontRight().reset();
+    	Robot.drivetrain.getFrontLeft().reset();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.tankDrive(1, 1);
+    	Robot.drivetrain.tankDrive(speed, speed);
     }
 
     // Called repeatedly when this Command is scheduled to run

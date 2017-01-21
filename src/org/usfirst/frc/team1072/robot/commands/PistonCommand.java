@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class PistonCommand extends Command {
 	
-	double gearDistance = 0;
+	double gearDistance = 10; // inches
 
 	@Override
 	protected void initialize() {
