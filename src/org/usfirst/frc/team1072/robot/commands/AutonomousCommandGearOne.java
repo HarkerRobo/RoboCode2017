@@ -17,7 +17,7 @@ public class AutonomousCommandGearOne extends Command {
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
-		
+		Robot.encoder.reset();
 	}
 
 	@Override
