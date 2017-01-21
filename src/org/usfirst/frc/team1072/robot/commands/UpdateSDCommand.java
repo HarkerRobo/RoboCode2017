@@ -1,15 +1,20 @@
 package org.usfirst.frc.team1072.robot.commands;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class UpdateSDCommand extends Command {
-
-    public UpdateSDCommand() {
+	private SmartDashboard sd;
+	private Encoder ec;
+    public UpdateSDCommand(Encoder e) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	sd = new SmartDashboard();
+    	ec = e;
     }
 
     // Called just before this Command runs the first time
@@ -18,6 +23,7 @@ public class UpdateSDCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	sd.putNumber("talonspeed", ec.getRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
