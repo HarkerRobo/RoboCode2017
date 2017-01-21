@@ -3,12 +3,15 @@ package org.usfirst.frc.team1072.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team1072.robot.Robot;
+import org.usfirst.frc.team1072.robot.RobotMap;
 
 /**
  *
  */
-public class ExampleCommand extends Command {
-	public ExampleCommand() {
+public class AutonomousCommandGearTwo extends Command {
+	double gearOneDist = 187.8; // inches
+	double kp = RobotMap.P, ki = RobotMap.I, kd = RobotMap.D;
+	public AutonomousCommandGearTwo() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.exampleSubsystem);
 	}
@@ -21,6 +24,17 @@ public class ExampleCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+		double sum = 0;
+		double prevError = gearOneDist;
+		double currentError;
+		while (Robot.encoder.getDistance() < gearOneDist) {
+			sum += prevError;
+			currentError = gearOneDist - Robot.encoder.getDistance();
+			Robot.drivetrain.tankDrive(kp*currentError + ki*sum + kd*(currentError - prevError),
+					kp*currentError + ki*sum + kd*(currentError - prevError));
+			prevError = currentError;
+		}
+		AngleTurnCommand ATC = new AngleTurnCommand(120);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
