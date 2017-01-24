@@ -13,6 +13,7 @@ public class UpdateSDCommand extends Command {
 	private Encoder talon2;
 	private Encoder talon3;
 	private Encoder talon4;
+
 	
     public UpdateSDCommand(Encoder talon1, Encoder talon2, Encoder talon3, Encoder talon4) {
         // Use requires() here to declare subsystem dependencies
@@ -22,7 +23,6 @@ public class UpdateSDCommand extends Command {
     	this.talon2 = talon2;
     	this.talon3 = talon3;
     	this.talon4 = talon4;
-    	
     }
 
     // Called just before this Command runs the first time
@@ -32,12 +32,15 @@ public class UpdateSDCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
     	sd.putString("title", "Title");  
     	sd.putNumber("talonspeed", talon1.getRate());
     	sd.putNumber("talonspeed", talon2.getRate());
     	sd.putNumber("talonspeed", talon3.getRate());
     	sd.putNumber("talonspeed", talon4.getRate());
     	
+
+
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -47,6 +50,10 @@ public class UpdateSDCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	 sd.putString("talon1speed", "no Longer Updating");
+    	 sd.putString("talon2speed", "no Longer Updating");
+    	 sd.putString("talon3speed", "no Longer Updating");
+    	 sd.putString("talon4speed", "no Longer Updating");
     }
 
     // Called when another command which requires one or more of the same
