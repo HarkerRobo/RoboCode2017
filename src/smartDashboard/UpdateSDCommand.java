@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1072.robot.commands;
+package smartDashboard;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
@@ -32,7 +32,12 @@ public class UpdateSDCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	sd.putNumber("talonspeed", ec.getRate());
+    	sd.putString("title", "Title");  
+    	sd.putNumber("talonspeed", talon1.getRate());
+    	sd.putNumber("talonspeed", talon2.getRate());
+    	sd.putNumber("talonspeed", talon3.getRate());
+    	sd.putNumber("talonspeed", talon4.getRate());
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
