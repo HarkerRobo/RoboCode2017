@@ -1,23 +1,37 @@
 package org.usfirst.frc.team1072.robot.commands;
 
+import org.usfirst.frc.team1072.robot.RobotMap;
+import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
+
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class TankDriveCommand extends Command {
+	
+	XboxController controller = new XboxController(RobotMap.XBOX);
 
     public TankDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(new Drivetrain());
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Drivetrain drivetrain = new Drivetrain();
+    	while (true) {
+    		double s1 = controller.getY();
+    		double s2 = controller.getY();
+    		drivetrain.tankDrive(s1, s2);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
