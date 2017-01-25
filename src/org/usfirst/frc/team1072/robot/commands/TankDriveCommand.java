@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1072.robot.commands;
 
+import org.usfirst.frc.team1072.robot.OI;
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
@@ -13,9 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TankDriveCommand extends Command {
 	
-	XboxController controller = new XboxController(RobotMap.XBOX);
-
-    public TankDriveCommand() {
+	public TankDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
@@ -28,11 +27,9 @@ public class TankDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	while (true) {
-    		double sLeft = controller.getY(Hand.kLeft);
-    		double sRight = controller.getY(Hand.kRight);
-    		Robot.drivetrain.tankDrive(sLeft, sRight);
-    	}
+		double sLeft = OI.cont.getY(Hand.kLeft);
+		double sRight = OI.cont.getY(Hand.kRight);
+		Robot.drivetrain.tankDrive(sLeft, sRight);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -42,6 +39,7 @@ public class TankDriveCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.drivetrain.tankDrive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

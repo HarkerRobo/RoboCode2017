@@ -9,9 +9,19 @@ public class AutonomousCommandGearOne extends Command {
 
 	double gearOneDistance = 112; // inches
 	double kp = RobotMap.P, ki = RobotMap.I, kd = RobotMap.D;
+	double sum = 0;
+	double prevError;
+	double currentError;
 	
 	public AutonomousCommandGearOne(int dist) {
 		gearOneDistance = dist;
+		prevError = gearOneDistance;
+		requires(Robot.drivetrain);
+		Robot.drivetrain.getBackRight().reset();
+    	Robot.drivetrain.getBackLeft().reset();
+    	Robot.drivetrain.getFrontRight().reset();
+    	Robot.drivetrain.getFrontLeft().reset();
+    	Robot.encoder.reset();
 	}
 	
 	@Override
@@ -23,16 +33,11 @@ public class AutonomousCommandGearOne extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		double sum = 0;
-		double prevError = gearOneDistance;
-		double currentError;
-		while (Robot.encoder.getDistance() < gearOneDistance) {
-			sum += prevError;
-			currentError = gearOneDistance - Robot.encoder.getDistance();
-			Robot.drivetrain.tankDrive(kp*currentError + ki*sum + kd*(currentError - prevError),
-					kp*currentError + ki*sum + kd*(currentError - prevError));
-			prevError = currentError;
-		}
+		sum += prevError;
+		currentError = gearOneDistance - Robot.encoder.getDistance();
+		Robot.drivetrain.tankDrive(kp*currentError + ki*sum + kd*(currentError - prevError),
+				kp*currentError + ki*sum + kd*(currentError - prevError));
+		prevError = currentError;
 	}
 
 	@Override
@@ -44,7 +49,7 @@ public class AutonomousCommandGearOne extends Command {
 	@Override
 	protected void end() {
 		// TODO Auto-generated method stub
-		
+		Robot.drivetrain.tankDrive(0, 0);
 	}
 
 	@Override
