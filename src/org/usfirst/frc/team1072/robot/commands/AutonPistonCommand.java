@@ -4,34 +4,40 @@ import org.usfirst.frc.team1072.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PistonCommand extends Command {
+public class AutonPistonCommand extends Command {
+	
+	double gearDistance = 10; // inches
 
 	@Override
 	protected void initialize() {
-	}
-
-	// Called repeatedly when this Command is scheduled to run
-	@Override
-	protected void execute() {
+		// TODO Auto-generated method stub
 		
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected void execute() {
+		// TODO Auto-generated method stub
+		if (Robot.encoder.getDistance() == gearDistance) {
+			Robot.gearPiston.putIn();
+		}
+	}
+
 	@Override
 	protected boolean isFinished() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
-	// Called once after isFinished returns true
 	@Override
 	protected void end() {
+		// TODO Auto-generated method stub
 		
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

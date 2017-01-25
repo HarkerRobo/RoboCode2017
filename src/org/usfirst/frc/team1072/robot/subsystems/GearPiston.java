@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
-import org.usfirst.frc.team1072.robot.commands.PistonCommand;
+import org.usfirst.frc.team1072.robot.commands.AutonPistonCommand;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -76,7 +76,7 @@ public class GearPiston extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		setDefaultCommand(new PistonCommand());
+		setDefaultCommand(new AutonPistonCommand());
 	}
 
 }
