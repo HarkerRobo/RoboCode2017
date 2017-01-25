@@ -22,7 +22,6 @@ public class RobotMap {
 	public static final int XBOX = 0;
 	public class Robot {
 		public static final int GYRO = 0;
-		public static final int PISTONBUTTON = 0;
 		public class Drive {
 			public static final int FR = 0;
 			public static final int FL = 0;
