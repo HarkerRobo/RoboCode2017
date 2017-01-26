@@ -18,7 +18,7 @@ public class PIDWheel extends PIDSubsystem {
 	private Encoder enc;
 	private boolean thin = false;
 
-	public PIDWheel(Encoder e, int tport ) {
+	public PIDWheel(Encoder e, int tport) {
 		super(RobotMap.P, RobotMap.I, RobotMap.D);
 		enc = e;
 		t = new Talon(tport);
