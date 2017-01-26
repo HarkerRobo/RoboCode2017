@@ -3,6 +3,7 @@ package org.usfirst.frc.team1072.robot.commands;
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class AutonomousCommandGearOne extends Command {
@@ -12,6 +13,9 @@ public class AutonomousCommandGearOne extends Command {
 	double sum = 0;
 	double prevError;
 	double currentError;
+	double rate;
+	boolean direction;
+	double distance;
 	
 	public AutonomousCommandGearOne(int dist) {
 		gearOneDistance = dist;
@@ -38,6 +42,12 @@ public class AutonomousCommandGearOne extends Command {
 		Robot.drivetrain.tankDrive(kp*currentError + ki*sum + kd*(currentError - prevError),
 				kp*currentError + ki*sum + kd*(currentError - prevError));
 		prevError = currentError;
+		rate = Robot.encoder.getRate();
+		direction = Robot.encoder.getDirection();
+		distance = Robot.encoder.getDistance();
+		
+		System.out.println("Rate: " + rate + "Direction: " + direction + "Distance: " + distance);
+		
 	}
 
 	@Override
