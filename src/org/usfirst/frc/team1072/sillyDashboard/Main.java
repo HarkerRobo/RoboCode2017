@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1072.sillyDashboard;
 
 import org.usfirst.frc.team1072.shared.Client;
+import org.usfirst.frc.team1072.shared.messages.PortMessage;
 
 /**
  * Provides a custom dashboard to display images from the Raspberry Pi
