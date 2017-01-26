@@ -30,7 +30,7 @@ public class TankDriveCommand extends Command {
     	double sLeft = OI.controller.getY(Hand.kLeft);
 		double sRight = OI.controller.getY(Hand.kRight);
 		System.out.println("Left Speed: " + sLeft + ", Right Speed: " + sRight);
-		Robot.drivetrain.tankDrive(sLeft, sRight);
+//		Robot.drivetrain.tankDrive(sLeft, sRight);
     }
 
     // Make this return true when this Command no longer needs to run execute()
