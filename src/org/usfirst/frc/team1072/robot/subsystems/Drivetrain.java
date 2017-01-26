@@ -3,6 +3,7 @@ package org.usfirst.frc.team1072.robot.subsystems;
 import org.usfirst.frc.team1072.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -11,6 +12,7 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 public class Drivetrain extends Subsystem {
 	
 	private Gyro gyro;
+	private BuiltInAccelerometer accel;
 	private PIDWheel frontLeft;
 	private PIDWheel frontRight;
 	private PIDWheel backLeft;
@@ -27,6 +29,7 @@ public class Drivetrain extends Subsystem {
     
     public Drivetrain(){
     	gyro = new AnalogGyro(RobotMap.Robot.GYRO);
+    	accel = new BuiltInAccelerometer();
     	rightEncoder = new Encoder(RobotMap.Robot.Drive.FR, RobotMap.Robot.Drive.BR);
     	leftEncoder = new Encoder(RobotMap.Robot.Drive.FL, RobotMap.Robot.Drive.BL);
     	frontLeft = new PIDWheel(leftEncoder, RobotMap.Robot.Drive.FL);
