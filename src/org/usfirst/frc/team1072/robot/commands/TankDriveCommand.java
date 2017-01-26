@@ -27,8 +27,9 @@ public class TankDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		double sLeft = OI.cont.getY(Hand.kLeft);
-		double sRight = OI.cont.getY(Hand.kRight);
+    	double sLeft = OI.controller.getY(Hand.kLeft);
+		double sRight = OI.controller.getY(Hand.kRight);
+		System.out.println("Left Speed: " + sLeft + ", Right Speed: " + sRight);
 		Robot.drivetrain.tankDrive(sLeft, sRight);
     }
 
@@ -46,4 +47,5 @@ public class TankDriveCommand extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+    
 }

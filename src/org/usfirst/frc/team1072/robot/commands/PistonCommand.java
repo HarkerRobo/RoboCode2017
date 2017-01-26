@@ -34,7 +34,7 @@ public class PistonCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		if (OI.cont.getXButton()) {
+		if (OI.controller.getXButton()) {
 			if (penetration) {
 				Robot.gearPiston.pullOut();
 			} else {
