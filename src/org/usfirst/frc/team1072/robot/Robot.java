@@ -23,12 +23,9 @@ import org.usfirst.frc.team1072.robot.subsystems.GearPiston;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
-	private int counter;
 	public static Drivetrain drivetrain;
 	public static GearPiston gearPiston;
-	public static int encoderA, encoderB, encoderC;
 	public static Encoder encoder;
 
 	Command autonomousCommand;
@@ -40,18 +37,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		counter++;
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		gearPiston = new GearPiston();
-		encoderA = 0;
-		encoderB = 0;
-		encoderC = 0;
-		encoder = new Encoder(encoderA, encoderB, encoderC);
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		//SmartDashboard.putData("Auto mode", chooser);
-		SmartDashboard.putNumber("Value" + counter, 5.0);
+		//SmartDashboard.putNumber("Value" + counter, 5.0);
 	}
 
 	/**

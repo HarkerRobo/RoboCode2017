@@ -18,17 +18,17 @@ public class AutonomousCommandGearTwo extends Command {
 	
 	public AutonomousCommandGearTwo() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.exampleSubsystem);
-    	Robot.drivetrain.getBackRight().reset();
-    	Robot.drivetrain.getBackLeft().reset();
-    	Robot.drivetrain.getFrontRight().reset();
-    	Robot.drivetrain.getFrontLeft().reset();
-    	Robot.encoder.reset();
+		requires(Robot.drivetrain);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
+    	Robot.drivetrain.getBackRight().reset();
+    	Robot.drivetrain.getBackLeft().reset();
+    	Robot.drivetrain.getFrontRight().reset();
+    	Robot.drivetrain.getFrontLeft().reset();
+    	Robot.encoder.reset();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
