@@ -27,6 +27,14 @@ public class RobotMap {
 			public static final int FL = 0;
 			public static final int BR = 0;
 			public static final int BL = 0;
+			public static final int FRA = 0;
+			public static final int FLA = 0;
+			public static final int BRA = 0;
+			public static final int BLA = 0;
+			public static final int FRB = 0;
+			public static final int FLB = 0;
+			public static final int BRB = 0;
+			public static final int BLB = 0;
 		}
 	}
 }

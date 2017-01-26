@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
 import org.usfirst.frc.team1072.robot.RobotMap;
+import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -17,8 +18,6 @@ public class Drivetrain extends Subsystem {
 	private PIDWheel frontRight;
 	private PIDWheel backLeft;
 	private PIDWheel backRight;
-	private Encoder rightEncoder;
-	private Encoder leftEncoder;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
@@ -30,12 +29,10 @@ public class Drivetrain extends Subsystem {
     public Drivetrain(){
     	gyro = new AnalogGyro(RobotMap.Robot.GYRO);
     	accel = new BuiltInAccelerometer();
-    	rightEncoder = new Encoder(RobotMap.Robot.Drive.FR, RobotMap.Robot.Drive.BR);
-    	leftEncoder = new Encoder(RobotMap.Robot.Drive.FL, RobotMap.Robot.Drive.BL);
-    	frontLeft = new PIDWheel(leftEncoder, RobotMap.Robot.Drive.FL);
-    	frontRight = new PIDWheel(rightEncoder, RobotMap.Robot.Drive.FR);
-    	backLeft = new PIDWheel(leftEncoder, RobotMap.Robot.Drive.BL);
-    	backRight = new PIDWheel(rightEncoder, RobotMap.Robot.Drive.BR);
+    	frontLeft = new PIDWheel(new Encoder(Drive.FLA, Drive.FLB), Drive.FL);
+    	frontRight = new PIDWheel(new Encoder(Drive.FRA, Drive.FRB), RobotMap.Robot.Drive.FR);
+    	backLeft = new PIDWheel(new Encoder(Drive.BLA, Drive.BLB), RobotMap.Robot.Drive.BL);
+    	backRight = new PIDWheel(new Encoder(Drive.BRA, Drive.BRB), RobotMap.Robot.Drive.BR);
     }
     
     /**
