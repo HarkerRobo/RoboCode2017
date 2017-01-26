@@ -1,6 +1,5 @@
-package org.usfirst.frc.team1072.SillyDashboard;
+package org.usfirst.frc.team1072.sillyDashboard;
 
-import org.usfirst.frc.team1072.shared.ImageViewer;
 import org.usfirst.frc.team1072.shared.Client;
 
 /**
