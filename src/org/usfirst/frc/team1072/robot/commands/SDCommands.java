@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1072.robot.commands;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,12 +13,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class SDCommands extends Command {
 	AutonomousCommandGearOne autonomousCommand1;
 	AutonomousCommandGearTwo autonomousCommand2;
+	BufferedImage image;
+	private int port;
+	private String ip;
+	
 	
     public SDCommands() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	autonomousCommand1 = new AutonomousCommandGearOne(0);
     	autonomousCommand2 = new AutonomousCommandGearTwo();
+//    	image  = new BufferedImage(width,height, BufferedImage.TYPE_INT_ARGB);
     }
 
     // Called just before this Command runs the first time
@@ -46,4 +54,9 @@ public class SDCommands extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+    
+//    public Image setImage(BufferedImage image){
+//    	
+//    	
+//    }
 }

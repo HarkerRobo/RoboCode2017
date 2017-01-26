@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 /**
  *
  */
@@ -14,7 +15,7 @@ public class UpdateSDCommand extends Command {
 	private Encoder talon3;
 	private Encoder talon4;
 
-	
+
     public UpdateSDCommand(Encoder talon1, Encoder talon2, Encoder talon3, Encoder talon4) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -27,20 +28,17 @@ public class UpdateSDCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 
-    	sd.putString("title", "Title");  
-    	sd.putNumber("talonspeed", talon1.getRate());
-    	sd.putNumber("talonspeed", talon2.getRate());
-    	sd.putNumber("talonspeed", talon3.getRate());
-    	sd.putNumber("talonspeed", talon4.getRate());
-    	
-
-
+    	sd.putString("title", "Title");
+    	sd.putNumber("talon1speed", talon1.getRate());
+    	sd.putNumber("talon2speed", talon2.getRate());
+    	sd.putNumber("talon3speed", talon3.getRate());
+    	sd.putNumber("talon4speed", talon4.getRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
