@@ -13,10 +13,11 @@ public class PIDWheel extends PIDSubsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+	private static double THRESHOLD = 0.1;
 	private static final double maxa = 0.3;
 	private Talon t; 
 	private Encoder enc;
-	private boolean thin = false;
+	private boolean reversed = false;
 
 	public PIDWheel(Encoder e, int tport) {
 		super(RobotMap.P, RobotMap.I, RobotMap.D);
@@ -36,7 +37,24 @@ public class PIDWheel extends PIDSubsystem {
 		return enc.getDistance();
 	}
 	
-	public void setSpeed(double speed) {
+	public void setSpeed(double speed){
+		//check if speed it out of bounds
+		speed = Math.max(Math.min(speed,  1), -1);
+		//check if speed is within threshold of 0
+		if(Math.abs(speed) < THRESHOLD){
+			speed = 0;
+		}
+		//square speed for better control while preserving sign
+		speed = Math.signum(speed) * Math.pow(speed, 2);
+		//check if reversed
+		if(reversed){
+			speed = -speed;
+		}
+		//set setpoint, I ignore acceleration since we are using PID
+		setSetpoint(speed);
+	}
+	
+	/*public void setSpeed(double speed) {
 		if (Math.abs(this.getSpeed() - speed) > maxa) {	
 			if (getSpeed() - speed > 0) {
 				helperSpeed(maxa + getSpeed());
@@ -50,7 +68,7 @@ public class PIDWheel extends PIDSubsystem {
 	
 	public void helperSpeed (double speed) {
 		if (speed <= 1.0 && speed >= -1.0) {
-			if (thin) {
+			if (reversed) {
 				setSetpoint(-speed);
 			} else {
 				setSetpoint(speed);
@@ -58,22 +76,22 @@ public class PIDWheel extends PIDSubsystem {
 		} else if (speed <= 0.05 && speed >= -0.05) {
 			setSetpoint(0);
 		} else if (speed >= 1.0) {
-			if (thin) {
+			if (reversed) {
 				setSetpoint(-1.0);
 			} else {
 				setSetpoint(1.0);
 			}
 		} else if (speed <= -1.0) {
-			if (thin) {
+			if (reversed) {
 				setSetpoint(1.0);
 			} else {
 				setSetpoint(-1.0);
 			}
 		}
-	}
+	}*/
 	
 	public void setReverse(boolean thing){
-		thin = thing;
+		reversed = thing;
 	}
 	
     public void initDefaultCommand() {
@@ -88,6 +106,6 @@ public class PIDWheel extends PIDSubsystem {
 	
 	@Override
 	protected void usePIDOutput(double output) {
-		helperSpeed(output);
+		t.set(output);
 	}
 }
