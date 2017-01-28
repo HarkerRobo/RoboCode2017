@@ -12,7 +12,7 @@ public class UpdateSDCommand extends Command {
     public UpdateSDCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	sd.
+ 
     }
 
     // Called just before this Command runs the first time
