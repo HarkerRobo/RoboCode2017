@@ -1,7 +1,9 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
 import org.usfirst.frc.team1072.robot.RobotMap;
+import org.usfirst.frc.team1072.robot.RobotMap.PID;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive;
+import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -14,25 +16,18 @@ public class Drivetrain extends Subsystem {
 	
 	private Gyro gyro;
 	private BuiltInAccelerometer accel;
-	private PIDWheel frontLeft;
-	private PIDWheel frontRight;
-	private PIDWheel backLeft;
-	private PIDWheel backRight;
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+	private Wheel frontLeft;
+	private Wheel frontRight;
+	private Wheel backLeft;
+	private Wheel backRight;
     
     public Drivetrain(){
     	gyro = new AnalogGyro(RobotMap.Robot.GYRO);
     	accel = new BuiltInAccelerometer();
-    	frontLeft = new PIDWheel(new Encoder(Drive.FLA, Drive.FLB), Drive.FL);
-    	frontRight = new PIDWheel(new Encoder(Drive.FRA, Drive.FRB), RobotMap.Robot.Drive.FR);
-    	backLeft = new PIDWheel(new Encoder(Drive.BLA, Drive.BLB), RobotMap.Robot.Drive.BL);
-    	backRight = new PIDWheel(new Encoder(Drive.BRA, Drive.BRB), RobotMap.Robot.Drive.BR);
+    	frontLeft = new Wheel(Drive.FL, new Encoder(Drive.FLA, Drive.FLB)/*, PID.Wheel.P, PID.Wheel.I, PID.Wheel.D*/);
+    	frontRight = new Wheel(Drive.FR, new Encoder(Drive.FRA, Drive.FRB)/*, PID.Wheel.P, PID.Wheel.I, PID.Wheel.D*/);
+    	backLeft = new Wheel(Drive.BL, new Encoder(Drive.BLA, Drive.BLB)/*, PID.Wheel.P, PID.Wheel.I, PID.Wheel.D*/);
+    	backRight = new Wheel(Drive.BR, new Encoder(Drive.BRA, Drive.BRB)/*, PID.Wheel.P, PID.Wheel.I, PID.Wheel.D*/);
     }
     
     /**
@@ -70,19 +65,19 @@ public class Drivetrain extends Subsystem {
     		frontRight.setSpeed(rightSpeed);
     }
     
-	public PIDWheel getFrontLeft() {
+	public Wheel getFrontLeft() {
 		return frontLeft;
 	}
 	
-	public PIDWheel getFrontRight() {
+	public Wheel getFrontRight() {
 		return frontRight;
 	}
 	
-	public PIDWheel getBackLeft() {
+	public Wheel getBackLeft() {
 		return backLeft;
 	}
 	
-	public PIDWheel getBackRight() {
+	public Wheel getBackRight() {
 		return backRight;
 	}
 
@@ -99,6 +94,9 @@ public class Drivetrain extends Subsystem {
 	public void setGyro(Gyro gyro) {
 		this.gyro = gyro;
 	}
-	
+		
+    public void initDefaultCommand() {
+        setDefaultCommand(new TankDriveCommand());
+    }
 }
 

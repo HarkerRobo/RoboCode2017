@@ -2,6 +2,7 @@ package org.usfirst.frc.team1072.robot.commands;
 
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
+import org.usfirst.frc.team1072.robot.RobotMap.PID;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutonomousCommandGearOne extends Command {
 
 	double gearOneDistance = 112; // inches
-	double kp = RobotMap.P, ki = RobotMap.I, kd = RobotMap.D;
+	double kp = PID.MoveDist.P, ki = PID.MoveDist.I, kd = PID.MoveDist.D;
 	double sum = 0;
 	double prevError;
 	double currentError;

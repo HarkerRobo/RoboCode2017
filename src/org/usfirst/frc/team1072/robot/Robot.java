@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new Drivetrain();
-		gearPiston = new GearPiston();
+		//gearPiston = new GearPiston();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		//SmartDashboard.putData("Auto mode", chooser);

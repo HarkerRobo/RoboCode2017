@@ -2,6 +2,7 @@ package org.usfirst.frc.team1072.robot.commands;
 
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
+import org.usfirst.frc.team1072.robot.RobotMap.PID;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,7 +13,7 @@ public class AngleTurnCommand extends Command {
 	private double initialAngle;
 	private double angle;
 	private double prevError;
-	double kp = RobotMap.P, ki = RobotMap.I, kd = RobotMap.D;
+	double kp = PID.TurnAngle.P, ki = PID.TurnAngle.I, kd = PID.TurnAngle.D;
 	double sum = 0;
 	double currentError;
 	

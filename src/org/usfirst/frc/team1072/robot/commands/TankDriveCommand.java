@@ -27,10 +27,11 @@ public class TankDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double sLeft = OI.controller.getY(Hand.kLeft);
+    	/*double sLeft = OI.controller.getY(Hand.kLeft);
 		double sRight = OI.controller.getY(Hand.kRight);
 		System.out.println("Left Speed: " + sLeft + ", Right Speed: " + sRight);
-//		Robot.drivetrain.tankDrive(sLeft, sRight);
+		Robot.drivetrain.tankDrive(sLeft, sRight);*/
+    	Robot.drivetrain.tankDrive(OI.controller.getY(Hand.kRight), OI.controller.getY(Hand.kLeft));
     }
 
     // Make this return true when this Command no longer needs to run execute()

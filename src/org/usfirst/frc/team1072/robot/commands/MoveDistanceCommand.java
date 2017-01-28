@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1072.robot.commands;
 import org.usfirst.frc.team1072.robot.*;
+import org.usfirst.frc.team1072.robot.RobotMap.PID;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -7,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class MoveDistanceCommand extends Command {
 	private double distance;
-	double kp = RobotMap.P, ki = RobotMap.I, kd = RobotMap.D;
+	double kp = PID.MoveDist.P, ki = PID.MoveDist.I, kd = PID.MoveDist.D;
 	double sum = 0;
 	double prevError;
 	double currentError;
