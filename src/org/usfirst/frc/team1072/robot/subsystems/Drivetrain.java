@@ -1,14 +1,12 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
 import org.usfirst.frc.team1072.robot.RobotMap;
-import org.usfirst.frc.team1072.robot.RobotMap.PID;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive;
 import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
@@ -24,10 +22,10 @@ public class Drivetrain extends Subsystem {
     public Drivetrain(){
     	gyro = new AnalogGyro(RobotMap.Robot.GYRO);
     	accel = new BuiltInAccelerometer();
-    	frontLeft = new Wheel(Drive.FL, new Encoder(Drive.FLA, Drive.FLB)/*, PID.Wheel.P, PID.Wheel.I, PID.Wheel.D*/);
-    	frontRight = new Wheel(Drive.FR, new Encoder(Drive.FRA, Drive.FRB)/*, PID.Wheel.P, PID.Wheel.I, PID.Wheel.D*/);
-    	backLeft = new Wheel(Drive.BL, new Encoder(Drive.BLA, Drive.BLB)/*, PID.Wheel.P, PID.Wheel.I, PID.Wheel.D*/);
-    	backRight = new Wheel(Drive.BR, new Encoder(Drive.BRA, Drive.BRB)/*, PID.Wheel.P, PID.Wheel.I, PID.Wheel.D*/);
+    	frontLeft = new Wheel(Drive.FL, new Encoder(Drive.FLA, Drive.FLB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	frontRight = new Wheel(Drive.FR, new Encoder(Drive.FRA, Drive.FRB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	backLeft = new Wheel(Drive.BL, new Encoder(Drive.BLA, Drive.BLB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	backRight = new Wheel(Drive.BR, new Encoder(Drive.BRA, Drive.BRB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     }
     
     /**
