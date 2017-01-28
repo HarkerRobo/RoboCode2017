@@ -4,6 +4,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -101,6 +102,10 @@ public class Wheel extends CANTalon {
 	 */
 	public Encoder getEncoder() {
 		return encoder;
+	}
+	
+	public void toSmartDashboard(String name) {
+		SmartDashboard.putNumber("Speed of " + name, getRate());
 	}
 }
 

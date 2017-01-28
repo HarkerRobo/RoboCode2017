@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain extends Subsystem {
 	
@@ -95,6 +96,13 @@ public class Drivetrain extends Subsystem {
 		
     public void initDefaultCommand() {
         setDefaultCommand(new TankDriveCommand());
+    }
+    
+    public void toSmartDashboard() {
+    	frontLeft.toSmartDashboard("Front Left");
+    	frontRight.toSmartDashboard("Front Right");
+    	backLeft.toSmartDashboard("Back Left");
+    	backRight.toSmartDashboard("Back Right");
     }
 }
 

@@ -78,5 +78,4 @@ public class GearPiston extends Subsystem {
 		// TODO Auto-generated method stub
 		setDefaultCommand(new AutonPistonCommand());
 	}
-
 }

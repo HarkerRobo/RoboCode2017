@@ -4,6 +4,7 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDSourceType;
 
@@ -35,7 +36,6 @@ public class PIDWheel extends Wheel {
 	}
 
 	/**
-	 * 
 	 * @see edu.wpi.first.wpilibj.PIDController#enable()
 	 */
 	public void enable() {
@@ -45,5 +45,12 @@ public class PIDWheel extends Wheel {
 	@Override
 	public void setInternal(double speed) {
 		pid.setSetpoint(speed);
+	}
+	
+	public void toSmartDashboard(String name) {
+		SmartDashboard.putNumber("Speed of " + name, getRate());
+		SmartDashboard.putNumber("Proportional constant for " + name, this.getP());
+		SmartDashboard.putNumber("Integral constant for " + name, this.getI());
+		SmartDashboard.putNumber("Derivative constant for" + name, this.getD());
 	}
 }
