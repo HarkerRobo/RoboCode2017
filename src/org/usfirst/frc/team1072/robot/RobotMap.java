@@ -37,18 +37,22 @@ public class RobotMap {
 	public static class Robot {
 		public static final int GYRO = 0;
 		public static class Drive {
-			public static final int FR = 4;
-			public static final int FL = 1;
-			public static final int BR = 2;
-			public static final int BL = 3;
-			public static final int FRA = 0;
-			public static final int FLA = 0;
-			public static final int BRA = 0;
-			public static final int BLA = 0;
-			public static final int FRB = 0;
-			public static final int FLB = 0;
-			public static final int BRB = 0;
-			public static final int BLB = 0;
+			public static class Talons {
+				public static final int FR = 4;
+				public static final int FL = 1;
+				public static final int BR = 2;
+				public static final int BL = 3;
+			}
+			public static class Encoders {
+				public static final int FRA = 0;
+				public static final int FLA = 0;
+				public static final int BRA = 0;
+				public static final int BLA = 0;
+				public static final int FRB = 0;
+				public static final int FLB = 0;
+				public static final int BRB = 0;
+				public static final int BLB = 0;
+			}
 		}
 	}
 }
