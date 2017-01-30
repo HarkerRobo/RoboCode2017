@@ -23,9 +23,9 @@ public class Drivetrain extends Subsystem {
     public Drivetrain(){
     	gyro = new AnalogGyro(RobotMap.Robot.GYRO);
     	accel = new BuiltInAccelerometer();
-    	frontLeft = new Wheel(Drive.FL, new Encoder(Drive.FLA, Drive.FLB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	frontLeft = new Wheel(Drive.FL, new Encoder(Drive.FLA, Drive.FLB), true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	frontRight = new Wheel(Drive.FR, new Encoder(Drive.FRA, Drive.FRB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	backLeft = new Wheel(Drive.BL, new Encoder(Drive.BLA, Drive.BLB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	backLeft = new Wheel(Drive.BL, new Encoder(Drive.BLA, Drive.BLB), true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	backRight = new Wheel(Drive.BR, new Encoder(Drive.BRA, Drive.BRB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     }
     
