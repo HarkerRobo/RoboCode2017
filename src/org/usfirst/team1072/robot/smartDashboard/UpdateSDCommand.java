@@ -11,13 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Ashwin Reddy
  */
 public class UpdateSDCommand extends Command {
-	private SmartDashboard sd;
 
 
     public UpdateSDCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	sd = new SmartDashboard();
+
     	
     }
 
@@ -28,6 +27,7 @@ public class UpdateSDCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("Running");
     	Robot.drivetrain.toSmartDashboard();
     }
 

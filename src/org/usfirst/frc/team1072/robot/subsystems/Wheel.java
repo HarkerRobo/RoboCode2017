@@ -105,7 +105,8 @@ public class Wheel extends CANTalon {
 	}
 	
 	public void toSmartDashboard(String name) {
-		SmartDashboard.putNumber("Speed of " + name, getRate());
+		//SmartDashboard.putNumber("Speed of " + name, getRate());
+		SmartDashboard.putBoolean(name + " reversed: ", isReversed());
 	}
 }
 

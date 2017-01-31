@@ -13,6 +13,7 @@ import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1072.robot.subsystems.GearPiston;
+import org.usfirst.team1072.robot.smartDashboard.UpdateSDCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -104,6 +105,9 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		System.out.println("creating");
+		UpdateSDCommand usd = new UpdateSDCommand();
+		usd.start();
 	}
 
 	/**
@@ -112,6 +116,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		drivetrain.tick();
 	}
 
 	/**
