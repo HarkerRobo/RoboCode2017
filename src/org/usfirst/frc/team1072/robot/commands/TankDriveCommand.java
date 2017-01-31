@@ -14,24 +14,23 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TankDriveCommand extends Command {
 	
+	private static double MAX_ACCEL = 0.05;
+	
 	public TankDriveCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.drivetrain);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	/*double sLeft = OI.controller.getY(Hand.kLeft);
-		double sRight = OI.controller.getY(Hand.kRight);
-		System.out.println("Left Speed: " + sLeft + ", Right Speed: " + sRight);
-		Robot.drivetrain.tankDrive(sLeft, sRight);*/
-    	Robot.drivetrain.tankDrive(OI.controller.getY(Hand.kRight), OI.controller.getY(Hand.kLeft));
+    	double prevL = Robot.drivetrain.leftSpeed();
+    	double prevR = Robot.drivetrain.rightSpeed();
+    	double sLeft = Math.max(Math.min(OI.controller.getY(Hand.kLeft), prevL + MAX_ACCEL), prevL - MAX_ACCEL);
+		double sRight = Math.max(Math.min(OI.controller.getY(Hand.kRight), prevR + MAX_ACCEL), prevR - MAX_ACCEL);
+		Robot.drivetrain.tankDrive(sRight, sLeft);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -95,6 +95,14 @@ public class Drivetrain extends Subsystem {
 	public void setGyro(Gyro gyro) {
 		this.gyro = gyro;
 	}
+	
+	public double rightSpeed(){
+		return (frontRight.getRate() + backRight.getRate())/2;
+	}
+	
+	public double leftSpeed(){
+		return (frontLeft.getRate() + backLeft.getRate())/2;
+	}
 		
     public void initDefaultCommand() {
         setDefaultCommand(new TankDriveCommand());
