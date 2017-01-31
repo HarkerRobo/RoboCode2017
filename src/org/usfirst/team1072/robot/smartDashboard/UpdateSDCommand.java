@@ -1,4 +1,4 @@
-package smartDashboard;
+package org.usfirst.team1072.robot.smartDashboard;
 
 import org.usfirst.frc.team1072.robot.Robot;
 
