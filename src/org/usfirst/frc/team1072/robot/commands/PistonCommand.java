@@ -2,13 +2,19 @@ package org.usfirst.frc.team1072.robot.commands;
 
 import org.usfirst.frc.team1072.robot.OI;
 import org.usfirst.frc.team1072.robot.Robot;
+import org.usfirst.frc.team1072.robot.subsystems.Piston;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class PistonCommand extends Command {
-	
+
+	enum ButtonType {
+		A, B, X, Y;
+	}
+
 	private boolean penetration = false;
-	
+	private boolean prev = false;
+
 	/**
 	 * @return the penetration
 	 */
@@ -23,7 +29,7 @@ public class PistonCommand extends Command {
 		this.penetration = penetration;
 	}
 
-	public PistonCommand() {
+	public PistonCommand(ButtonType type, Piston piston) {
 		requires(Robot.gearPiston);
 	}
 
@@ -34,13 +40,12 @@ public class PistonCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		if (OI.controller.getXButton()) {
-			if (penetration) {
-				Robot.gearPiston.pullOut();
-			} else {
-				Robot.gearPiston.putIn();
-			}
+		if (!prev && OI.controller.getXButton()) {
+			Robot.gearPiston.putIn();
+		} else if(prev && !OI.controller.getXButton()){
+			Robot.gearPiston.pullOut();
 		}
+		prev = OI.controller.getXButton();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -52,7 +57,7 @@ public class PistonCommand extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		
+
 	}
 
 	// Called when another command which requires one or more of the same

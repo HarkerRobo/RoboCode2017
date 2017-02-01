@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team1072.robot.subsystems.GearPiston;
+import org.usfirst.frc.team1072.robot.subsystems.Piston;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static Drivetrain drivetrain;
-	public static GearPiston gearPiston;
+	public static Piston gearPiston;
 	public static Encoder encoder;
 
 	Command autonomousCommand;
