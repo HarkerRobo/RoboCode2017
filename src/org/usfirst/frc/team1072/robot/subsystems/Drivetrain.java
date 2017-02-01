@@ -4,6 +4,7 @@ import org.usfirst.frc.team1072.robot.RobotMap;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
+import org.usfirst.frc.team1072.robot.commands.ArcadeDriveCommand;
 import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -25,10 +26,10 @@ public class Drivetrain extends Subsystem {
     public Drivetrain(){
     	gyro = new AnalogGyro(RobotMap.Robot.GYRO);
     	accel = new BuiltInAccelerometer();
-    	frontLeft = new Wheel(Talons.FL, new Encoder(Encoders.FLA, Encoders.FLB), true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	frontRight = new Wheel(Talons.FR, new Encoder(Encoders.FRA, Encoders.FRB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	backLeft = new Wheel(Talons.BL, new Encoder(Encoders.BLA, Encoders.BLB), true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	backRight = new Wheel(Talons.BR, new Encoder(Encoders.BRA, Encoders.BRB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	frontLeft = new Wheel(Talons.FL, null, /*new Encoder(Encoders.FLA, Encoders.FLB),*/ true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	frontRight = new Wheel(Talons.FR, null/* new Encoder(Encoders.FRA, Encoders.FRB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	backLeft = new Wheel(Talons.BL, null,/* new Encoder(Encoders.BLA, Encoders.BLB),*/ true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	backRight = new Wheel(Talons.BR, null /*new Encoder(Encoders.BRA, Encoders.BRB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     }
     
     /**
@@ -105,7 +106,7 @@ public class Drivetrain extends Subsystem {
 	}
 		
     public void initDefaultCommand() {
-        setDefaultCommand(new TankDriveCommand());
+        setDefaultCommand(new ArcadeDriveCommand());
     }
     
     public void toSmartDashboard() {
