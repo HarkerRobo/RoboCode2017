@@ -17,6 +17,10 @@ public class WinchCommand extends Command{
 		Robot.winch.setSpeed(0);
 
 	}
+	
+	 // Called just before this Command runs the first time
+    protected void initialize() {
+    }
 
 	protected void execute(){
 		if(OI.controller.getTrigger(Hand.kRight)){
@@ -44,6 +48,15 @@ public class WinchCommand extends Command{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	// Called once after isFinished returns true
+    protected void end() {
+    	Robot.winch.setSpeed(0);
+    }
 
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }
 
 }
