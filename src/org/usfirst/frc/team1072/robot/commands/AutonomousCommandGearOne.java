@@ -31,7 +31,6 @@ public class AutonomousCommandGearOne extends Command {
     	Robot.drivetrain.getFrontRight().reset();
     	Robot.drivetrain.getFrontLeft().reset();
     	Robot.encoder.reset();
-		Robot.encoder.reset();
 	}
 
 	@Override

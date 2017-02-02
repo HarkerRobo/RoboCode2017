@@ -1,5 +1,7 @@
 package org.usfirst.frc.team1072.robot;
 
+import edu.wpi.first.wpilibj.Encoder;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -53,6 +55,11 @@ public class RobotMap {
 				public static final int BRB = 0;
 				public static final int BLB = 0;
 			}
+		}
+		public static class Winches {
+			public static int port = 0;
+			public static int EA = 0;
+			public static int EB = 0;
 		}
 	}
 }
