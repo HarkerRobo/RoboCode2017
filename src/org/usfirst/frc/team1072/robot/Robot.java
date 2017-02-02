@@ -14,12 +14,11 @@ import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
 import org.usfirst.frc.team1072.robot.commands.SDCommands;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
-<<<<<<< HEAD
-import org.usfirst.frc.team1072.robot.subsystems.GearPiston;
+
 import org.usfirst.frc.team1072.robot.subsystems.Winch;
-=======
+
 import org.usfirst.frc.team1072.robot.subsystems.Piston;
->>>>>>> origin/master
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
