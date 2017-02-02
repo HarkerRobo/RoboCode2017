@@ -5,13 +5,13 @@ import org.usfirst.frc.team1072.robot.commands.AutonPistonCommand;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class GearPiston extends Subsystem {
+public class Piston extends Subsystem {
 	
 	boolean buttonPressed;
 	int pistonChannel;
 	Solenoid piston;
 
-	public GearPiston() {
+	public Piston() {
 		buttonPressed = false;
 		pistonChannel = 0;
 		piston = new Solenoid(pistonChannel);
