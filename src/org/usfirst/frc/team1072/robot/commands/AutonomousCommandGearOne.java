@@ -22,16 +22,15 @@ public class AutonomousCommandGearOne extends Command {
 		gearOneDistance = dist;
 		prevError = gearOneDistance;
 		requires(Robot.drivetrain);
+	}
+	
+	@Override
+	protected void initialize() {
 		Robot.drivetrain.getBackRight().reset();
     	Robot.drivetrain.getBackLeft().reset();
     	Robot.drivetrain.getFrontRight().reset();
     	Robot.drivetrain.getFrontLeft().reset();
     	Robot.encoder.reset();
-	}
-	
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
 		Robot.encoder.reset();
 	}
 

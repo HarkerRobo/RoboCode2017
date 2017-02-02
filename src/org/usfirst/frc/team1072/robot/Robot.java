@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
+import org.usfirst.frc.team1072.robot.commands.SDCommands;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 <<<<<<< HEAD
@@ -111,6 +112,8 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		SDCommands sdc = new SDCommands();
+		sdc.start();
 	}
 
 	/**
