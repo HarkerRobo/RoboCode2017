@@ -14,6 +14,7 @@ import org.usfirst.frc.team1072.robot.commands.SDCommands;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1072.robot.subsystems.Piston;
+import org.usfirst.team1072.robot.smartDashboard.UpdateSDCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -105,7 +106,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		SDCommands sdc = new SDCommands();
+		UpdateSDCommand sdc = new UpdateSDCommand();
 		sdc.start();
 	}
 
