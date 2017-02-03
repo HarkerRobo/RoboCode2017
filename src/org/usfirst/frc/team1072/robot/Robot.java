@@ -18,6 +18,8 @@ import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1072.robot.subsystems.Winch;
 
 import org.usfirst.frc.team1072.robot.subsystems.Piston;
+import org.usfirst.team1072.robot.smartDashboard.UpdateSDCommand;
+
 
 
 /**
@@ -111,7 +113,7 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		SDCommands sdc = new SDCommands();
+		UpdateSDCommand sdc = new UpdateSDCommand();
 		sdc.start();
 	}
 
