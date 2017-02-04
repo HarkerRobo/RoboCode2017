@@ -2,6 +2,7 @@ package org.usfirst.frc.team1072.robot.commands;
 
 import org.usfirst.frc.team1072.robot.OI;
 import org.usfirst.frc.team1072.robot.Robot;
+import org.usfirst.frc.team1072.robot.XboxWrapper;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,8 +21,8 @@ public class ArcadeDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double x = OI.controller.getX(Hand.kRight);
-    	double y = OI.controller.getY(Hand.kRight);
+    	double x = XboxWrapper.getInstance().getX(Hand.kRight);
+    	double y = XboxWrapper.getInstance().getY(Hand.kRight);
     	Robot.drivetrain.tankDrive(flip*(y + x)/2.0,flip*(y - x)/2.0);
     }
 

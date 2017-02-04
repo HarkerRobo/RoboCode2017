@@ -2,6 +2,7 @@ package org.usfirst.frc.team1072.robot.commands;
 
 import org.usfirst.frc.team1072.robot.OI;
 import org.usfirst.frc.team1072.robot.Robot;
+import org.usfirst.frc.team1072.robot.XboxWrapper;
 import org.usfirst.frc.team1072.robot.subsystems.Piston;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -40,12 +41,12 @@ public class PistonCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		if (!prev && OI.controller.getXButton()) {
+		if (!prev && XboxWrapper.getInstance().getXButton()) {
 			Robot.gearPiston.putIn();
-		} else if(prev && !OI.controller.getXButton()){
+		} else if(prev && !XboxWrapper.getInstance().getXButton()){
 			Robot.gearPiston.pullOut();
 		}
-		prev = OI.controller.getXButton();
+		prev = XboxWrapper.getInstance().getXButton();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

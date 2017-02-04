@@ -2,6 +2,7 @@ package org.usfirst.frc.team1072.robot.commands;
 
 import org.usfirst.frc.team1072.robot.Robot;
 
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -25,7 +26,6 @@ public class EncoderTest extends Command {
     	SmartDashboard.putNumber("BR Encoder Raw", Robot.drivetrain.getBackRight().get());
     	SmartDashboard.putNumber("FL Encoder Raw", Robot.drivetrain.getFrontLeft().get());
     	SmartDashboard.putNumber("BL Encoder Raw", Robot.drivetrain.getBackLeft().get());
-    	
     	SmartDashboard.putNumber("FR Encoder Rate", Robot.drivetrain.getFrontRight().getRate());
     	SmartDashboard.putNumber("BR Encoder Rate", Robot.drivetrain.getBackRight().getRate());
     	SmartDashboard.putNumber("FL Encoder Rate", Robot.drivetrain.getFrontLeft().getRate());
