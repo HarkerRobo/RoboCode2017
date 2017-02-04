@@ -2,7 +2,11 @@ package org.usfirst.team1072.robot.smartDashboard;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import org.freedesktop.gstreamer.Bin;
+import org.freedesktop.gstreamer.Gst;
+import org.freedesktop.gstreamer.Pipeline;
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearOne;
 import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
@@ -23,6 +27,7 @@ public class UpdateSDCommand extends Command {
 	BufferedImage image;
 	private int port;
 	private String ip;
+	private static Pipeline pipe;
 	
     public UpdateSDCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -30,7 +35,13 @@ public class UpdateSDCommand extends Command {
     	sd = new SmartDashboard();
     	autonomousCommand1 = new AutonomousCommandGearOne(0);
     	autonomousCommand2 = new AutonomousCommandGearTwo();
-    	
+    	Gst.init("CameraTest", null);
+    	EventQueue.invokeLater(new Runnable() {
+    		@Override
+    		public void run() {
+    			
+    		}
+    	});
     }
 
     // Called just before this Command runs the first time
