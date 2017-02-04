@@ -30,6 +30,16 @@ import org.usfirst.team1072.robot.smartDashboard.UpdateSDCommand;
  */
 public class Robot extends IterativeRobot {
 
+	public static enum WinchControl {
+		TOGGLE, BUMPERS
+	}
+	
+	public static enum DriveControl {
+		TANK, ARCADE
+	}
+	
+	public static final WinchControl winchControl = WinchControl.TOGGLE;
+	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	public static Piston gearPiston;
@@ -49,6 +59,7 @@ public class Robot extends IterativeRobot {
 		drivetrain = new Drivetrain();
 		winch = new Winch();
 		SmartDashboard.putData("Test Encoders:", new EncoderTest());
+		
 		//gearPiston = new GearPiston();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

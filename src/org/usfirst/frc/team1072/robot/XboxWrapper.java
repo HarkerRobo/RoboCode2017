@@ -3,13 +3,11 @@
  */
 package org.usfirst.frc.team1072.robot;
 
-import org.usfirst.frc.team1072.robot.commands.CancelWhenPressed;
-import org.usfirst.frc.team1072.robot.commands.StartWhenPressed;
-import org.usfirst.frc.team1072.robot.commands.WheneverPressed;
-import org.usfirst.frc.team1072.robot.commands.WhilePressed;
+import java.util.EnumMap;
+import java.util.Map;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -20,8 +18,16 @@ public class XboxWrapper extends XboxController {
 	
 	private static XboxWrapper instance = new XboxWrapper(0);
 
+	private Map<Button, JoystickButton> buttons;
+	
 	public static enum Button {
-		A, B, X, Y, RSTICK, LSTICK, RBUMPER, LBUMPER
+		A(1), B(2), X(3), Y(4), LBUMPER(5), RBUMPER(6), LSTICK(9), RSTICK(10);
+		
+		private int num;
+		
+		private Button(int num){
+			this.num = num;
+		}
 	}
 	
 	public static enum Axis {
@@ -33,6 +39,10 @@ public class XboxWrapper extends XboxController {
 	 */
 	private XboxWrapper(int port) {
 		super(port);
+		buttons = new EnumMap<Button, JoystickButton>(Button.class);
+		for(Button b: Button.values()){
+			buttons.put(b, new JoystickButton(this, b.num));
+		}
 	}
 	
 	public boolean getButton(Button b){
@@ -61,32 +71,24 @@ public class XboxWrapper extends XboxController {
 		}
 	}
 	
-	/*
-	 * runs given command whenever button is pressed
-	 */
-	public Command whilePressed(Button b, Command c){
-		return new WhilePressed(b, c);
+	public void cancelWhenPressed(Button b, Command c){
+		buttons.get(b).cancelWhenPressed(c);
 	}
 	
-	/*
-	 * runs given command once, starting when button is pressed
-	 */
-	public Command startWhenPressed(Button b, Command c){
-		return new StartWhenPressed(b, c);
+	public void toggleWhenPressed(Button b, Command c){
+		buttons.get(b).toggleWhenPressed(c);
 	}
 	
-	/*
-	 * cancels given command as soon as button is pressed
-	 */
-	public Command cancelWhenPressed(Button b, Command c){
-		return new CancelWhenPressed(b, c);
+	public void whenPressed(Button b, Command c){
+		buttons.get(b).whenPressed(c);
 	}
 	
-	/*
-	 * runs given command each time button is pressed
-	 */
-	public Command wheneverPressed(Button b, Command c){
-		return new WheneverPressed(b, c);
+	public void whenReleased(Button b, Command c){
+		buttons.get(b).whenReleased(c);
+	}
+	
+	public void whileHeld(Button b, Command c){
+		buttons.get(b).whileHeld(c);
 	}
 	
 	public static XboxWrapper getInstance(){

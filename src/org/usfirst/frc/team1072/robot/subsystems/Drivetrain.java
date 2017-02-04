@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
+import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
@@ -35,34 +36,6 @@ public class Drivetrain extends Subsystem {
     	backLeft = new Wheel(Talons.BL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	backRight = new Wheel(Talons.BR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     }
-    
-    /**
-	 * @param frontLeft the frontLeft to set
-	 */
-	public void setFrontLeft(PIDWheel frontLeft) {
-		this.frontLeft = frontLeft;
-	}
-
-	/**
-	 * @param frontRight the frontRight to set
-	 */
-	public void setFrontRight(PIDWheel frontRight) {
-		this.frontRight = frontRight;
-	}
-
-	/**
-	 * @param backLeft the backLeft to set
-	 */
-	public void setBackLeft(PIDWheel backLeft) {
-		this.backLeft = backLeft;
-	}
-
-	/**
-	 * @param backRight the backRight to set
-	 */
-	public void setBackRight(PIDWheel backRight) {
-		this.backRight = backRight;
-	}
 
 	public void tankDrive(double rightSpeed, double leftSpeed) {
     		frontLeft.setSpeed(leftSpeed);
@@ -110,7 +83,14 @@ public class Drivetrain extends Subsystem {
 	}
 		
     public void initDefaultCommand() {
-        setDefaultCommand(new TankDriveCommand());
+    	switch(Robot.driveControl){
+			case ARCADE:
+				setDefaultCommand(new ArcadeDriveCommand());
+			case TANK:
+				setDefaultCommand(new TankDriveCommand());
+			default:
+				System.err.println("No drive control");
+    	}
     }
     
     public void toSmartDashboard() {
@@ -119,5 +99,6 @@ public class Drivetrain extends Subsystem {
     	backLeft.toSmartDashboard("Back Left");
     	backRight.toSmartDashboard("Back Right");
     }
+    
 }
 

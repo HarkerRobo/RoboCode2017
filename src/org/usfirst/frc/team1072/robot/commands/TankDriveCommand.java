@@ -3,6 +3,7 @@ package org.usfirst.frc.team1072.robot.commands;
 import org.usfirst.frc.team1072.robot.OI;
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
+import org.usfirst.frc.team1072.robot.XboxWrapper;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -26,8 +27,8 @@ public class TankDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double sRight = Robot.oi.controller.getY(Hand.kRight);
-    	double sLeft = Robot.oi.controller.getY(Hand.kLeft);
+    	double sRight = XboxWrapper.getInstance().getY(Hand.kRight);
+    	double sLeft = XboxWrapper.getInstance().getY(Hand.kLeft);
 		Robot.drivetrain.tankDrive(sRight, sLeft);
     }
 

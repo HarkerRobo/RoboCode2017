@@ -1,9 +1,13 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
+import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Winches;
+import org.usfirst.frc.team1072.robot.XboxWrapper;
+import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
 import org.usfirst.frc.team1072.robot.commands.BumperWinchCommand;
 import org.usfirst.frc.team1072.robot.commands.WinchCommand;
+import org.usfirst.frc.team1072.robot.commands.WinchToggleCommand;
 
 import com.ctre.CANTalon;
 
@@ -55,7 +59,15 @@ public class Winch extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new BumperWinchCommand());
+		switch(Robot.winchControl){
+			case BUMPERS:
+				setDefaultCommand(new BumperWinchCommand());
+			case TOGGLE:
+				XboxWrapper.getInstance().toggleWhenPressed(Button.A, new WinchToggleCommand(1));
+				XboxWrapper.getInstance().toggleWhenPressed(Button.A, new WinchToggleCommand(-1));
+			default:
+				System.err.println("No winch control");
+		}
 	}
 
 	/**

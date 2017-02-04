@@ -1,12 +1,7 @@
 package org.usfirst.frc.team1072.robot.commands;
 
-import org.usfirst.frc.team1072.robot.OI;
 import org.usfirst.frc.team1072.robot.Robot;
-import org.usfirst.frc.team1072.robot.RobotMap;
-import org.usfirst.frc.team1072.robot.subsystems.Winch;
-
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
+import org.usfirst.frc.team1072.robot.XboxWrapper;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class WinchCommand extends Command{
@@ -23,7 +18,7 @@ public class WinchCommand extends Command{
     }
 
 	protected void execute(){
-		if (OI.controller.getAButton()) {
+		if (XboxWrapper.getInstance().getAButton()) {
 			isOn = !isOn;
 		}
 		System.out.println("IsOn: " + isOn);

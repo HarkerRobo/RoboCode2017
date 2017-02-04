@@ -2,6 +2,7 @@ package org.usfirst.frc.team1072.robot.commands;
 
 import org.usfirst.frc.team1072.robot.OI;
 import org.usfirst.frc.team1072.robot.Robot;
+import org.usfirst.frc.team1072.robot.XboxWrapper;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,8 +23,8 @@ public class BumperWinchCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean right = OI.controller.getBumper(Hand.kRight);
-    	boolean left = OI.controller.getBumper(Hand.kLeft);
+    	boolean right = XboxWrapper.getInstance().getBumper(Hand.kRight);
+    	boolean left = XboxWrapper.getInstance().getBumper(Hand.kLeft);
     	if(right == left){
     		Robot.winch.setSpeed(0);
     	} else if(right){
