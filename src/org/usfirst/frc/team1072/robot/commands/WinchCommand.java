@@ -10,38 +10,30 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class WinchCommand extends Command{
-	private boolean right = false;
-	private boolean left = false;
-
-	public WinchCommand(int port, Encoder encoder){
+	private boolean prev;
+	private double prevSpeed;
+	
+	public WinchCommand(){
 		requires(Robot.winch);
-		
-
 	}
 	
 	 // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.winch.setSpeed(0);
+    	prev = false;
+    	prevSpeed = 0;
     }
 
 	protected void execute(){
-		if(right&&left){
-			Robot.winch.setSpeed(0);
-			right = false;
-			left = false;
+		boolean current = OI.controller.getAButton();
+		if(!prev && current){
+			prevSpeed = 1 - prevSpeed;
+			Robot.winch.setSpeed(prevSpeed);
 		}
-		else if(left){
-			Robot.winch.setSpeed(-1);
-			left = true;
-		}
-		else if(right){
-			Robot.winch.setSpeed(1);
-			right = true;
-		}
+		prev = current;
 	}
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	

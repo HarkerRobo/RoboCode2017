@@ -55,7 +55,7 @@ public class Winch extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new WinchCommand(port, encoder));
+		setDefaultCommand(new WinchCommand());
 	}
 
 	/**
