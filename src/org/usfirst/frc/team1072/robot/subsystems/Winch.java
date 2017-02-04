@@ -2,6 +2,7 @@ package org.usfirst.frc.team1072.robot.subsystems;
 
 import org.usfirst.frc.team1072.robot.RobotMap;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Winches;
+import org.usfirst.frc.team1072.robot.commands.BumperWinchCommand;
 import org.usfirst.frc.team1072.robot.commands.WinchCommand;
 
 import com.ctre.CANTalon;
@@ -54,7 +55,7 @@ public class Winch extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new WinchCommand());
+		setDefaultCommand(new BumperWinchCommand());
 	}
 
 	/**
