@@ -6,6 +6,9 @@ import org.usfirst.frc.team1072.robot.RobotMap;
 =======
 import org.usfirst.frc.team1072.robot.RobotMap.PID;
 import org.usfirst.frc.team1072.robot.RobotMap.PID.Wheel;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
@@ -103,6 +106,11 @@ public class Drivetrain extends Subsystem {
     	frontRight.toSmartDashboard("Front Right");
     	backLeft.toSmartDashboard("Back Left");
     	backRight.toSmartDashboard("Back Right");
+    }
+    
+    public void toSmartDashboard() {
+//    	SmartDashboard.putNumber("Front Right Speed", frontRight.getRate());
+    	frontRight.getRate();
     }
     
     public void toSmartDashboard() {
