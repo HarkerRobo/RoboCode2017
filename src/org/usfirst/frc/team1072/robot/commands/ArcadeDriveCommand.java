@@ -22,7 +22,7 @@ public class ArcadeDriveCommand extends Command {
     protected void execute() {
     	double x = OI.controller.getX(Hand.kRight);
     	double y = OI.controller.getY(Hand.kRight);
-    	Robot.drivetrain.tankDrive(flip*y*(1-x/2),flip*y*(1+x/2));
+    	Robot.drivetrain.tankDrive(flip*(y + x)/2.0,flip*(y - x)/2.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

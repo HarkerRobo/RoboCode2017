@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain extends Subsystem {
-	
+
 	private Gyro gyro;
 	private BuiltInAccelerometer accel;
 	private Encoder leftEnc;
@@ -24,19 +24,19 @@ public class Drivetrain extends Subsystem {
 	private Wheel frontRight;
 	private Wheel backLeft;
 	private Wheel backRight;
-    
-    public Drivetrain(){
-    	gyro = new AnalogGyro(RobotMap.Robot.GYRO);
-    	accel = new BuiltInAccelerometer();
-    	leftEnc = new Encoder(Encoders.LA, Encoders.LB);
-    	rightEnc = new Encoder(Encoders.RA, Encoders.RB);
-    	frontLeft = new Wheel(Talons.FL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	frontRight = new Wheel(Talons.FR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	backLeft = new Wheel(Talons.BL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	backRight = new Wheel(Talons.BR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    }
-    
-    /**
+
+	public Drivetrain(){
+		gyro = new AnalogGyro(RobotMap.Robot.GYRO);
+		accel = new BuiltInAccelerometer();
+		leftEnc = new Encoder(Encoders.LA, Encoders.LB);
+		rightEnc = new Encoder(Encoders.RA, Encoders.RB);
+		frontLeft = new Wheel(Talons.FL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+		frontRight = new Wheel(Talons.FR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+		backLeft = new Wheel(Talons.BL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+		backRight = new Wheel(Talons.BR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+	}
+
+	/**
 	 * @param frontLeft the frontLeft to set
 	 */
 	public void setFrontLeft(PIDWheel frontLeft) {
@@ -65,24 +65,24 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void tankDrive(double rightSpeed, double leftSpeed) {
-    		frontLeft.setSpeed(leftSpeed);
-    		backLeft.setSpeed(leftSpeed);
-    		backRight.setSpeed(rightSpeed);
-    		frontRight.setSpeed(rightSpeed);
-    }
-    
+		frontLeft.setSpeed(leftSpeed);
+		backLeft.setSpeed(leftSpeed);
+		backRight.setSpeed(rightSpeed);
+		frontRight.setSpeed(rightSpeed);
+	}
+
 	public Wheel getFrontLeft() {
 		return frontLeft;
 	}
-	
+
 	public Wheel getFrontRight() {
 		return frontRight;
 	}
-	
+
 	public Wheel getBackLeft() {
 		return backLeft;
 	}
-	
+
 	public Wheel getBackRight() {
 		return backRight;
 	}
@@ -100,24 +100,24 @@ public class Drivetrain extends Subsystem {
 	public void setGyro(Gyro gyro) {
 		this.gyro = gyro;
 	}
-	
+
 	public double rightSpeed(){
 		return (frontRight.getRate() + backRight.getRate())/2;
 	}
-	
+
 	public double leftSpeed(){
 		return (frontLeft.getRate() + backLeft.getRate())/2;
 	}
-		
-    public void initDefaultCommand() {
-        setDefaultCommand(new TankDriveCommand());
-    }
-    
-    public void toSmartDashboard() {
-    	frontLeft.toSmartDashboard("Front Left");
-    	frontRight.toSmartDashboard("Front Right");
-    	backLeft.toSmartDashboard("Back Left");
-    	backRight.toSmartDashboard("Back Right");
-    }
+
+	public void initDefaultCommand() {
+		setDefaultCommand(new TankDriveCommand());
+	}
+
+	public void toSmartDashboard() {
+		frontLeft.toSmartDashboard("Front Left");
+		frontRight.toSmartDashboard("Front Right");
+		backLeft.toSmartDashboard("Back Left");
+		backRight.toSmartDashboard("Back Right");
+	}
 }
 
