@@ -47,18 +47,10 @@ public class PIDWheel extends Wheel {
 		pid.setSetpoint(speed);
 	}
 	
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 	public void toSmartDashboard(String name) {
 		SmartDashboard.putNumber("Speed of " + name, getRate());
 		SmartDashboard.putNumber("Proportional constant for " + name, this.getP());
 		SmartDashboard.putNumber("Integral constant for " + name, this.getI());
 		SmartDashboard.putNumber("Derivative constant for" + name, this.getD());
 	}
-=======
-	
->>>>>>> Stashed changes
-=======
-	
->>>>>>> Stashed changes
 }
