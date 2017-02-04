@@ -47,6 +47,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new Drivetrain();
+		winch = new Winch();
 		SmartDashboard.putData("Test Encoders:", new EncoderTest());
 		//gearPiston = new GearPiston();
 		//chooser.addDefault("Default Auto", new ExampleCommand());

@@ -68,7 +68,9 @@ public class Wheel extends CANTalon {
 	 * @see edu.wpi.first.wpilibj.Encoder#getRate()
 	 */
 	public double getRate() {
-		return encoder.getRate();
+		return get();
+		//if (encoder == null) { return 0; }
+		//return encoder.getRate();
 	}
 
 	public void initDefaultCommand() {

@@ -38,5 +38,7 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 	public static XboxController controller = new XboxController(RobotMap.XBOX);
-	
+	public OI() {
+		
+	}
 }

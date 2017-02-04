@@ -26,10 +26,8 @@ public class TankDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double prevL = Robot.drivetrain.leftSpeed();
-    	double prevR = Robot.drivetrain.rightSpeed();
-    	double sLeft = Math.max(Math.min(OI.controller.getY(Hand.kLeft), prevL + MAX_ACCEL), prevL - MAX_ACCEL);
-		double sRight = Math.max(Math.min(OI.controller.getY(Hand.kRight), prevR + MAX_ACCEL), prevR - MAX_ACCEL);
+    	double sRight = Robot.oi.controller.getY(Hand.kRight);
+    	double sLeft = Robot.oi.controller.getY(Hand.kLeft);
 		Robot.drivetrain.tankDrive(sRight, sLeft);
     }
 

@@ -10,8 +10,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class WinchCommand extends Command{
-	private boolean prev;
-	private double prevSpeed;
+	private boolean isOn;
 	
 	public WinchCommand(){
 		requires(Robot.winch);
@@ -20,17 +19,16 @@ public class WinchCommand extends Command{
 	 // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.winch.setSpeed(0);
-    	prev = false;
-    	prevSpeed = 0;
+    	isOn = false;
     }
 
 	protected void execute(){
-		boolean current = OI.controller.getAButton();
-		if(!prev && current){
-			prevSpeed = 1 - prevSpeed;
-			Robot.winch.setSpeed(prevSpeed);
+		if (OI.controller.getAButton()) {
+			isOn = !isOn;
 		}
-		prev = current;
+		System.out.println("IsOn: " + isOn);
+		
+		Robot.winch.setSpeed((isOn) ? -1 : 0);
 	}
 	@Override
 	protected boolean isFinished() {
@@ -39,7 +37,7 @@ public class WinchCommand extends Command{
 	
 	// Called once after isFinished returns true
     protected void end() {
-    	Robot.winch.setSpeed(0);
+    	
     }
 
     // Called when another command which requires one or more of the same

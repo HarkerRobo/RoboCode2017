@@ -18,6 +18,8 @@ public class Drivetrain extends Subsystem {
 	
 	private Gyro gyro;
 	private BuiltInAccelerometer accel;
+	private Encoder leftEnc;
+	private Encoder rightEnc;
 	private Wheel frontLeft;
 	private Wheel frontRight;
 	private Wheel backLeft;
@@ -26,10 +28,12 @@ public class Drivetrain extends Subsystem {
     public Drivetrain(){
     	gyro = new AnalogGyro(RobotMap.Robot.GYRO);
     	accel = new BuiltInAccelerometer();
-    	frontLeft = new Wheel(Talons.FL, null, /*new Encoder(Encoders.FLA, Encoders.FLB),*/ true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	frontRight = new Wheel(Talons.FR, null/* new Encoder(Encoders.FRA, Encoders.FRB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	backLeft = new Wheel(Talons.BL, null,/* new Encoder(Encoders.BLA, Encoders.BLB),*/ true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	backRight = new Wheel(Talons.BR, null /*new Encoder(Encoders.BRA, Encoders.BRB)/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	leftEnc = new Encoder(Encoders.LA, Encoders.LB);
+    	rightEnc = new Encoder(Encoders.RA, Encoders.RB);
+    	frontLeft = new Wheel(Talons.FL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	frontRight = new Wheel(Talons.FR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	backLeft = new Wheel(Talons.BL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	backRight = new Wheel(Talons.BR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     }
     
     /**
@@ -106,7 +110,7 @@ public class Drivetrain extends Subsystem {
 	}
 		
     public void initDefaultCommand() {
-        setDefaultCommand(new ArcadeDriveCommand());
+        setDefaultCommand(new TankDriveCommand());
     }
     
     public void toSmartDashboard() {

@@ -16,10 +16,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Winch extends Subsystem {
 	
 	private Wheel wheel;
-	private Encoder encoder = new Encoder(Winches.EA, Winches.EB);
 	private int port = Winches.port;
 	public Winch(){
-		wheel = new Wheel(port, encoder);
+		wheel = new Wheel(port, null);
 	}
 
 	/**

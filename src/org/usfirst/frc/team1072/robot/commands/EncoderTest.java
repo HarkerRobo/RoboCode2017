@@ -10,8 +10,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class EncoderTest extends Command {
 
-	
     public EncoderTest() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -20,10 +21,15 @@ public class EncoderTest extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("FREncoder", Robot.drivetrain.getFrontRight().getRate());
-    	SmartDashboard.putNumber("FLEncoder", Robot.drivetrain.getFrontLeft().getRate());
-    	SmartDashboard.putNumber("BREncoder", Robot.drivetrain.getBackRight().getRate());
-    	SmartDashboard.putNumber("BLEncoder", Robot.drivetrain.getBackLeft().getRate());
+    	SmartDashboard.putNumber("FR Encoder Raw", Robot.drivetrain.getFrontRight().get());
+    	SmartDashboard.putNumber("BR Encoder Raw", Robot.drivetrain.getBackRight().get());
+    	SmartDashboard.putNumber("FL Encoder Raw", Robot.drivetrain.getFrontLeft().get());
+    	SmartDashboard.putNumber("BL Encoder Raw", Robot.drivetrain.getBackLeft().get());
+    	
+    	SmartDashboard.putNumber("FR Encoder Rate", Robot.drivetrain.getFrontRight().getRate());
+    	SmartDashboard.putNumber("BR Encoder Rate", Robot.drivetrain.getBackRight().getRate());
+    	SmartDashboard.putNumber("FL Encoder Rate", Robot.drivetrain.getFrontLeft().getRate());
+    	SmartDashboard.putNumber("BL Encoder Rate", Robot.drivetrain.getBackLeft().getRate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
