@@ -32,10 +32,13 @@ import org.freedesktop.gstreamer.Caps;
 import org.freedesktop.gstreamer.FlowReturn;
 import org.freedesktop.gstreamer.Sample;
 
-class SimpleVideoComponent extends javax.swing.JComponent {
+import edu.wpi.first.smartdashboard.gui.*;
+import edu.wpi.first.smartdashboard.properties.Property;
+
+class SimpleVideoComponent extends StaticWidget {
 
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private BufferedImage currentImage = null;
@@ -81,14 +84,14 @@ class SimpleVideoComponent extends javax.swing.JComponent {
         resourceTimer = new Timer(250, resourceReaper);
 
         //
-        // Don't use a layout manager - the output component will positioned within this 
+        // Don't use a layout manager - the output component will positioned within this
         // component according to the aspect ratio and scaling mode
         //
         setLayout(null);
         add(renderComponent);
 
         //
-        // Listen for the child changing its preferred size to the size of the 
+        // Listen for the child changing its preferred size to the size of the
         // video stream.
         //
         renderComponent.addPropertyChangeListener("preferredSize", new PropertyChangeListener() {
@@ -136,7 +139,7 @@ class SimpleVideoComponent extends javax.swing.JComponent {
             child.setBounds(0, 0, width, height);
         } else if (scaledHeight < height) {
             //
-            // Output window is taller than the image is when scaled, so move the 
+            // Output window is taller than the image is when scaled, so move the
             // video component to sit vertically in the centre of the VideoComponent.
             //
             final int y = (height - scaledHeight) / 2;
@@ -228,7 +231,7 @@ class SimpleVideoComponent extends javax.swing.JComponent {
                 volatileImage = gc.createCompatibleVolatileImage(w, h);
                 volatileImage.setAccelerationPriority(1.0f);
             }
-            // 
+            //
             // Now paint the BufferedImage into the accelerated image
             //
             Graphics2D g = volatileImage.createGraphics();
@@ -402,4 +405,14 @@ class SimpleVideoComponent extends javax.swing.JComponent {
         }
 
     }
+
+	@Override
+	public void propertyChanged(Property prop) {
+		
+	}
+
+	@Override
+	public void init() {
+		new SimpleVideoComponent();
+	}
 }

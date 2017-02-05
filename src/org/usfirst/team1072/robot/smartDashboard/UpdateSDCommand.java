@@ -39,6 +39,8 @@ public class UpdateSDCommand extends Command {
     	EventQueue.invokeLater(new Runnable() {
     		@Override
     		public void run() {
+//    			SmartDashboard.putData(value);
+    			System.out.println("Message from update constructor");
     			
     		}
     	});
