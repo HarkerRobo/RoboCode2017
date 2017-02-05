@@ -45,6 +45,7 @@ public class Robot extends IterativeRobot {
 	public static Piston gearPiston;
 	public static Encoder encoder;
 	public static Winch winch;
+	public static RaspiNetworker raspi;
 
 	Command autonomousCommand;
 	//SendableChooser<Command> chooser = new SendableChooser<>();
@@ -58,8 +59,9 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		winch = new Winch();
+		raspi = new RaspiNetworker();
+		raspi.start();
 		SmartDashboard.putData("Test Encoders:", new EncoderTest());
-		
 		//gearPiston = new GearPiston();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

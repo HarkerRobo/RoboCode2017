@@ -20,6 +20,21 @@ import org.json.JSONObject;
  *
  */
 public class RaspiNetworker extends Thread {
+	//Message types
+	public static final String TYPE_START_STREAM = "start";
+	public static final String TYPE_STOP_STREAM = "stop";
+	public static final String TYPE_ERROR = "error";
+	public static final String TYPE_RESULTS = "results";
+
+	//Fields
+	public static final String FIELD_TYPE = "type";
+	public static final String FIELD_PORT = "port";
+	public static final String FIELD_HOST = "host";
+	public static final String FIELD_ISO = "iso";
+	public static final String FIELD_SS = "shutterspeed";
+	public static final String FIELD_ERROR = "message";
+	public static final String FIELD_CORNERS = "corners";
+	
 	public static final String ip = "10.10.72.43";
 	public static final int port = 3000;
 	private Socket socket;
@@ -47,6 +62,7 @@ public class RaspiNetworker extends Thread {
 				for(JSONListener l: listeners){
 					l.recieve(obj);
 				}
+				System.out.println("Recieved JSON Object: " + obj.toString());
 			} catch(JSONException e) {
 				e.printStackTrace();
 			} catch(IOException e) {
