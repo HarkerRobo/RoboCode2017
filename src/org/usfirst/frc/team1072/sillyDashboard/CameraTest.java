@@ -18,7 +18,7 @@ public class CameraTest {
      * @param args the command line arguments
      */
     
-    private static Pipeline pipe;
+	 private static Pipeline pipe;
     
     public static void main(String[] args) {
 
