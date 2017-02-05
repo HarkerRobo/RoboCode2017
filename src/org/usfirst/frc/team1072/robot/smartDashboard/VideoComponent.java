@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * version 3 along with this work.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.usfirst.team1072.robot.smartDashboard;
+package org.usfirst.frc.team1072.robot.smartDashboard;
 
 import java.awt.Color;
 import java.awt.Component;

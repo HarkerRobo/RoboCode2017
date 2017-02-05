@@ -31,12 +31,15 @@ public class Main {
     private static int shutterspeed = 2000;
 
 	public static RaspiNetworker raspinet;
+	private static RaspiListener raspilistener;
 
     /**
      * main method for silly dashboard
      */
 	public static void main(String[] args) {
+		raspilistener = new RaspiListener();
 		raspinet = new RaspiNetworker();
+		raspinet.addListener(raspilistener);
 		raspinet.run();
 		raspinet.send(new JSONObject());
 		Gst.init("RaspiCamera", args);

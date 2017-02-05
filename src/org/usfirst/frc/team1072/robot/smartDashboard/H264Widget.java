@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.usfirst.team1072.robot.smartDashboard;
+package org.usfirst.frc.team1072.robot.smartDashboard;
 
 import java.awt.Graphics;
 
