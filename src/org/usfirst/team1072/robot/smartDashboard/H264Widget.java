@@ -38,7 +38,7 @@ public class H264Widget extends StaticWidget {
 	@Override
 	public void init() {
 		Gst.init("DashboardStreamer", new String[0]);
-		SimpleVideoComponent vc = new SimpleVideoComponent();
+		VideoComponent vc = new VideoComponent();
         Bin bin = Bin.launch("udpsrc port=5001 ! application/x-rtp, payload=96 ! rtph264depay ! avdec_h264 ! videoconvert", true);
         pipe = new Pipeline();
         pipe.addMany(bin, vc.getElement());
