@@ -22,10 +22,10 @@ public class EncoderTest extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("FR Encoder Raw", Robot.drivetrain.getFrontRight().get());
-    	SmartDashboard.putNumber("BR Encoder Raw", Robot.drivetrain.getBackRight().get());
-    	SmartDashboard.putNumber("FL Encoder Raw", Robot.drivetrain.getFrontLeft().get());
-    	SmartDashboard.putNumber("BL Encoder Raw", Robot.drivetrain.getBackLeft().get());
+    	//SmartDashboard.putNumber("FR Encoder Raw", Robot.drivetrain.getFrontRight().get());
+    	//SmartDashboard.putNumber("BR Encoder Raw", Robot.drivetrain.getBackRight().get());
+    	//SmartDashboard.putNumber("FL Encoder Raw", Robot.drivetrain.getFrontLeft().get());
+    	//SmartDashboard.putNumber("BL Encoder Raw", Robot.drivetrain.getBackLeft().get());
     	SmartDashboard.putNumber("FR Encoder Rate", Robot.drivetrain.getFrontRight().getRate());
     	SmartDashboard.putNumber("BR Encoder Rate", Robot.drivetrain.getBackRight().getRate());
     	SmartDashboard.putNumber("FL Encoder Rate", Robot.drivetrain.getFrontLeft().getRate());

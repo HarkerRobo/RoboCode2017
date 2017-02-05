@@ -31,6 +31,8 @@ public class Drivetrain extends Subsystem {
     	accel = new BuiltInAccelerometer();
     	leftEnc = new Encoder(Encoders.LA, Encoders.LB);
     	rightEnc = new Encoder(Encoders.RA, Encoders.RB);
+    	leftEnc.setDistancePerPulse(6 * Math.PI);
+    	rightEnc.setDistancePerPulse(6 * Math.PI);
     	frontLeft = new Wheel(Talons.FL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	frontRight = new Wheel(Talons.FR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	backLeft = new Wheel(Talons.BL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
