@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1072.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -45,6 +46,8 @@ public class Robot extends IterativeRobot {
 	public static Piston gearPiston;
 	public static Encoder encoder;
 	public static Winch winch;
+	public static RaspiNetworker raspi;
+	public static Compressor compress;
 
 	Command autonomousCommand;
 	//SendableChooser<Command> chooser = new SendableChooser<>();
@@ -58,8 +61,11 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		winch = new Winch();
+		raspi = new RaspiNetworker();
+		compress = new Compressor(0);
+		compress.setClosedLoopControl(true);
+		raspi.start();
 		SmartDashboard.putData("Test Encoders:", new EncoderTest());
-		
 		//gearPiston = new GearPiston();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

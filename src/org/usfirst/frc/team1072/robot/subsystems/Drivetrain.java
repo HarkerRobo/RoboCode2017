@@ -2,6 +2,8 @@ package org.usfirst.frc.team1072.robot.subsystems;
 
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
+import org.usfirst.frc.team1072.robot.RobotMap.PID;
+import org.usfirst.frc.team1072.robot.RobotMap.PID.Wheels;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
