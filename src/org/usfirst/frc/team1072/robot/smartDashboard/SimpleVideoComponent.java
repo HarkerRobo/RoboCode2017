@@ -54,6 +54,70 @@ class SimpleVideoComponent extends StaticWidget {
     private final boolean useVolatile;
 
     /**
+     * Creates a new instance of GstVideoComponent
+     */
+    public SimpleVideoComponent() {
+        this(new AppSink("GstVideoComponent"));
+    }
+
+    /**
+     * Creates a new instance of GstVideoComponent
+     */
+    public SimpleVideoComponent(AppSink appsink) {
+        this.videosink = appsink;
+        videosink.set("emit-signals", true);
+        videosink.connect(new AppSinkListener());
+        StringBuilder caps = new StringBuilder("video/x-raw,pixel-aspect-ratio=1/1,");
+        // JNA creates ByteBuffer using native byte order, set masks according to that.
+        if (ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN) {
+            caps.append("format=BGRx");
+        } else {
+            caps.append("format=xRGB");
+        }
+        videosink.setCaps(new Caps(caps.toString()));
+
+        useVolatile = true;
+
+        // Kick off a timer to free up the volatile image if there have been no recent updates
+        // (e.g. the player is paused)
+        //
+        resourceTimer = new Timer(250, resourceReaper);
+
+        //
+        // Don't use a layout manager - the output component will positioned within this
+        // component according to the aspect ratio and scaling mode
+        //
+        setLayout(null);
+        add(renderComponent);
+
+        //
+        // Listen for the child changing its preferred size to the size of the
+        // video stream.
+        //
+        renderComponent.addPropertyChangeListener("preferredSize", new PropertyChangeListener() {
+
+            public void propertyChange(PropertyChangeEvent evt) {
+                setPreferredSize(renderComponent.getPreferredSize());
+                scaleVideoOutput();
+            }
+        });
+        //
+        // Scale the video output in response to this component being resized
+        //
+        addComponentListener(new ComponentAdapter() {
+
+            @Override
+            public void componentResized(ComponentEvent arg0) {
+                scaleVideoOutput();
+            }
+
+        });
+        renderComponent.setBounds(getBounds());
+        setOpaque(true);
+        setBackground(Color.BLACK);
+    }
+
+    /**
      * Scales the video output component according to its aspect ratio
      */
     private void scaleVideoOutput() {
@@ -344,61 +408,11 @@ class SimpleVideoComponent extends StaticWidget {
 
 	@Override
 	public void propertyChanged(Property prop) {
-
+		
 	}
 
 	@Override
 	public void init() {
-		this.videosink = new AppSink("GstVideoComponent");
-        videosink.set("emit-signals", true);
-        videosink.connect(new AppSinkListener());
-        StringBuilder caps = new StringBuilder("video/x-raw,pixel-aspect-ratio=1/1,");
-        // JNA creates ByteBuffer using native byte order, set masks according to that.
-        if (ByteOrder.nativeOrder() == ByteOrder.LITTLE_ENDIAN) {
-            caps.append("format=BGRx");
-        } else {
-            caps.append("format=xRGB");
-        }
-        videosink.setCaps(new Caps(caps.toString()));
-
-        useVolatile = true;
-
-        // Kick off a timer to free up the volatile image if there have been no recent updates
-        // (e.g. the player is paused)
-        //
-        resourceTimer = new Timer(250, resourceReaper);
-
-        //
-        // Don't use a layout manager - the output component will positioned within this
-        // component according to the aspect ratio and scaling mode
-        //
-        setLayout(null);
-        add(renderComponent);
-
-        //
-        // Listen for the child changing its preferred size to the size of the
-        // video stream.
-        //
-        renderComponent.addPropertyChangeListener("preferredSize", new PropertyChangeListener() {
-
-            public void propertyChange(PropertyChangeEvent evt) {
-                setPreferredSize(renderComponent.getPreferredSize());
-                scaleVideoOutput();
-            }
-        });
-        //
-        // Scale the video output in response to this component being resized
-        //
-        addComponentListener(new ComponentAdapter() {
-
-            @Override
-            public void componentResized(ComponentEvent arg0) {
-                scaleVideoOutput();
-            }
-
-        });
-        renderComponent.setBounds(getBounds());
-        setOpaque(true);
-        setBackground(Color.BLACK);
+		new SimpleVideoComponent();
 	}
 }
