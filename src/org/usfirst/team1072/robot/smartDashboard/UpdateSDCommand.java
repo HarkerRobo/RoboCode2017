@@ -28,7 +28,7 @@ public class UpdateSDCommand extends Command {
 	private int port;
 	private String ip;
 	private static Pipeline pipe;
-	
+
     public UpdateSDCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -41,7 +41,7 @@ public class UpdateSDCommand extends Command {
     		public void run() {
 //    			SmartDashboard.putData(value);
     			System.out.println("Message from update constructor");
-    			
+    			// SimpleVideoComponent vc = new SimpleVideoComponent();
     		}
     	});
     }
@@ -73,6 +73,6 @@ public class UpdateSDCommand extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
-    
-   
+
+
 }
