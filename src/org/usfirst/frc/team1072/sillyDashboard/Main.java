@@ -2,6 +2,8 @@ package org.usfirst.frc.team1072.sillyDashboard;
 
 
 import org.usfirst.frc.team1072.shared.Networking;
+import org.usfirst.frc.team1072.shared.messages.PortMessage;
+
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -17,16 +19,16 @@ import org.usfirst.frc.team1072.robot.RaspiNetworker.JSONListener;
 /**
  * Main provides a GUI for viewing Raspberry Pi Camera Stream
  * using Gstreamer
- * @author Ashwin Reddy
+ * @author ashwinreddy
  * @version Feb 5 2017
  *
  */
 public class Main {
 	private static final int PORT = 5001;
 	private static Pipeline pipe;
-	private static int width = 640;
-	private static int height = 480;
-    private static String title = "Prof. Reddy's Wonderful Silly Dashboard Copy+Paste Program";
+	private static final int WIDTH = 640;
+	private static final int HEIGHT = 480;
+    private static final String TITLE = "Prof. Reddy's Wonderful Silly Dashboard Copy+Paste Program";
     private static int iso = 500;
     private static int shutterspeed = 2000;
 
@@ -39,9 +41,12 @@ public class Main {
 	public static void main(String[] args) {
 		raspilistener = new RaspiListener();
 		raspinet = new RaspiNetworker();
+		
 		raspinet.addListener(raspilistener);
 		raspinet.run();
 		raspinet.send(new JSONObject());
+		
+		
 		Gst.init("RaspiCamera", args);
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -52,9 +57,9 @@ public class Main {
                 pipe.addMany(bin, vc.getElement());
                 Pipeline.linkMany(bin, vc.getElement());
 
-                JFrame f = new JFrame(title);
+                JFrame f = new JFrame(TITLE);
                 f.add(vc);
-                vc.setPreferredSize(new Dimension(width, height));
+                vc.setPreferredSize(new Dimension(WIDTH, HEIGHT));
                 f.pack();
                 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -62,27 +67,7 @@ public class Main {
                 f.setVisible(true);
             }
         });
-		raspinet.send(createStartStreamMessage(iso, shutterspeed));
-	}
-    /**
-     * Generates a start stream message
-     * @param  int iso          camera sensivity
-     * @param  int shutterspeed  speed of camera shutter
-     * @return    JSON object with relevant data
-     */
-	public static JSONObject createStartStreamMessage(int iso, int shutterspeed)
-	{
-		try {
-			JSONObject message = new JSONObject();
-			message.put("type", "start");
-			message.put("port", PORT);
-			message.put("host", InetAddress.getLocalHost());
-			message.put("iso", iso);
-			message.put("shutterspeed", shutterspeed);
-			return message;
-		} catch (UnknownHostException e) {
-			System.out.println(e);
-			return null;
-		}
+        
+		raspinet.send((new PortMessage(PORT, iso, shutterspeed)).generateMessage());
 	}
 }
