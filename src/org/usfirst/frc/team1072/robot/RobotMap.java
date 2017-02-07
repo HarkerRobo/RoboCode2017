@@ -56,4 +56,9 @@ public class RobotMap {
 			public static int port = 5;
 		}
 	}
+	public class Gears {
+		public static final int SHIFT = 1;
+		public static final int CLOSE = 2;
+		public static final int PUSH = 5; // 5 extends push, 2 retracts
+	}
 }

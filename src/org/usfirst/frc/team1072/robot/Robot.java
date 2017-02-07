@@ -11,14 +11,19 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1072.robot.RobotMap.Gears;
+import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
 import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
 import org.usfirst.frc.team1072.robot.commands.EncoderTest;
 import org.usfirst.frc.team1072.robot.commands.SDCommands;
+import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1072.robot.subsystems.Winch;
+//import org.usfirst.team1072.robot.smartDashboard.H264Widget;
 import org.usfirst.frc.team1072.robot.subsystems.Piston;
-import org.usfirst.team1072.robot.smartDashboard.UpdateSDCommand;
+import org.usfirst.frc.team1072.robot.subsystems.SolenoidSubsystem;
+//import org.usfirst.team1072.robot.smartDashboard.UpdateSDCommand;
 
 
 
@@ -39,15 +44,18 @@ public class Robot extends IterativeRobot {
 		TANK, ARCADE
 	}
 	
-	public static final WinchControl winchControl = WinchControl.TOGGLE;
+	public static final WinchControl winchControl = WinchControl.BUMPERS;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	public static Piston gearPiston;
 	public static Encoder encoder;
 	public static Winch winch;
-	public static RaspiNetworker raspi;
+	//public static RaspiNetworker raspi;
 	public static Compressor compress;
+	public static SolenoidSubsystem pusher;
+	public static SolenoidSubsystem closer;
+	public static SolenoidSubsystem shifter;
 
 	Command autonomousCommand;
 	//SendableChooser<Command> chooser = new SendableChooser<>();
@@ -61,10 +69,17 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		winch = new Winch();
-		raspi = new RaspiNetworker();
-		compress = new Compressor(0);
-		compress.setClosedLoopControl(true);
-		raspi.start();
+		SolenoidSubsystem pusher1 = new SolenoidSubsystem(1, Button.A);//bottomin
+		SolenoidSubsystem closer1 = new SolenoidSubsystem(2, Button.B);
+		SolenoidSubsystem shifter1 = new SolenoidSubsystem(3, Button.X);
+		pusher = new SolenoidSubsystem(4, Button.Y);
+		closer = new SolenoidSubsystem(5, Button.LSTICK);
+		shifter = new SolenoidSubsystem(6, Button.RSTICK);
+		//raspi = new RaspiNetworker();
+		//compress = new Compressor(0);
+		//compress.setClosedLoopControl(true);
+		//raspi.start();
+		//SmartDashboard.putData("H264", new H264Widget());
 		SmartDashboard.putData("Test Encoders:", new EncoderTest());
 		//gearPiston = new GearPiston();
 		//chooser.addDefault("Default Auto", new ExampleCommand());

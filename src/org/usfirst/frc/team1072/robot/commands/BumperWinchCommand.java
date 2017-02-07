@@ -27,9 +27,9 @@ public class BumperWinchCommand extends Command {
     	if(right == left){
     		Robot.winch.setSpeed(0);
     	} else if(right){
-    		Robot.winch.setSpeed(1);
+    		Robot.winch.setSpeed(.05);
     	} else if(left){
-    		Robot.winch.setSpeed(-1);
+    		Robot.winch.setSpeed(-.05);
     	}
     }
 
