@@ -35,8 +35,8 @@ public class RaspiNetworker extends Thread {
 	public static final String FIELD_ERROR = "message";
 	public static final String FIELD_CORNERS = "corners";
 	
-	public static final String ip = "10.10.72.43";
-	public static final int port = 3000;
+	public static final String ip = "192.168.1.28";//"10.10.72.43";
+	public static final int port = 6000;
 	private Socket socket;
 	private BufferedReader in;
 	private PrintWriter out;
@@ -73,6 +73,7 @@ public class RaspiNetworker extends Thread {
 	
 	public void send(JSONObject obj){
 		out.println(obj.toString());
+		out.flush();
 	}
 	
 	public void addListener(JSONListener l){
