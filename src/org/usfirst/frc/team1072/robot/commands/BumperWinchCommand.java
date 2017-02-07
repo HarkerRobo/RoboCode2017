@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class BumperWinchCommand extends Command {
+	
+	private static final double MAX_SPEED = .1;
 
     public BumperWinchCommand() {
         requires(Robot.winch);
@@ -24,13 +26,10 @@ public class BumperWinchCommand extends Command {
     protected void execute() {
     	boolean right = XboxWrapper.getInstance().getBumper(Hand.kRight);
     	boolean left = XboxWrapper.getInstance().getBumper(Hand.kLeft);
-    	if(right == left){
-    		Robot.winch.setSpeed(0);
-    	} else if(right){
-    		Robot.winch.setSpeed(.05);
-    	} else if(left){
-    		Robot.winch.setSpeed(-.05);
-    	}
+    	System.out.println("Right: " + right + " Left: " + left);
+    	double speed = (right ? MAX_SPEED : 0) + (left ? -MAX_SPEED : 0);
+    	System.out.println("Speed: " + speed);
+    	Robot.winch.setSpeed(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

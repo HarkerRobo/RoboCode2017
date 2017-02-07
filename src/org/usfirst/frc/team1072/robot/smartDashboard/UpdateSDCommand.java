@@ -53,6 +53,7 @@ public class UpdateSDCommand extends Command {
     protected void execute() {
     	SmartDashboard.putData(Scheduler.getInstance());
     	Robot.drivetrain.toSmartDashboard();
+    	Robot.winch.toSmartDashboard("Winch");
     }
 
     // Make this return true when this Command no longer needs to run execute()

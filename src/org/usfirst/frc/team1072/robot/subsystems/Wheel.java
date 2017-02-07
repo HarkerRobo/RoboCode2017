@@ -91,7 +91,6 @@ public class Wheel extends CANTalon {
 	public void setReversed(boolean reversed) {
 		this.reversed = reversed;
 	}
-
 	/**
 	 * @return the threshold
 	 */

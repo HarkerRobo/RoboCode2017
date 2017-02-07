@@ -20,10 +20,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Winch extends Subsystem {
 	
-	private Wheel wheel;
+	//private Wheel wheel;
+	private CANTalon winchTalon;
 	private int port = Winches.port;
 	public Winch(){
-		wheel = new Wheel(port, null);
+		winchTalon = new CANTalon(port);
+		//wheel = new Wheel(port, null);
 	}
 
 	/**
@@ -31,7 +33,8 @@ public class Winch extends Subsystem {
 	 * @see com.ctre.CANTalon#set(double)
 	 */
 	public void setSpeed(double speed) {
-		wheel.setSpeed(speed);
+		winchTalon.set(speed);
+		//wheel.setSpeed(speed);
 	}
 
 	/**
@@ -39,7 +42,7 @@ public class Winch extends Subsystem {
 	 * @see edu.wpi.first.wpilibj.Encoder#reset()
 	 */
 	public void reset() {
-		wheel.reset();
+		//wheel.reset();
 	}
 
 	/**
@@ -47,7 +50,8 @@ public class Winch extends Subsystem {
 	 * @see edu.wpi.first.wpilibj.Encoder#getDistance()
 	 */
 	public double getDistance() {
-		return wheel.getDistance();
+		return 0;
+		//return wheel.getDistance();
 	}
 
 	/**
@@ -55,7 +59,8 @@ public class Winch extends Subsystem {
 	 * @see edu.wpi.first.wpilibj.Encoder#getRate()
 	 */
 	public double getRate() {
-		return wheel.getRate();
+		return 0;
+		//return wheel.getRate();
 	}
 
 	public void initDefaultCommand() {
@@ -63,8 +68,7 @@ public class Winch extends Subsystem {
 			case BUMPERS:
 				setDefaultCommand(new BumperWinchCommand());
 			case TOGGLE:
-				XboxWrapper.getInstance().toggleWhenPressed(Button.A, new WinchToggleCommand(0.05));
-				XboxWrapper.getInstance().toggleWhenPressed(Button.A, new WinchToggleCommand(-0.05));
+				XboxWrapper.getInstance().toggleWhenPressed(Button.A, new WinchToggleCommand(-1));
 			default:
 				System.err.println("No winch control");
 		}
@@ -74,32 +78,36 @@ public class Winch extends Subsystem {
 	 * @return the reversed
 	 */
 	public boolean isReversed() {
-		return wheel.isReversed();
+		return false;
+		//return wheel.isReversed();
 	}
 
 	/**
 	 * @param reversed the reversed to set
 	 */
 	public void setReversed(boolean reversed) {
-		wheel.setReversed(reversed);
+		//wheel.setReversed(reversed);
 	}
 
 	/**
 	 * @return the threshold
 	 */
 	public static double getThreshold() {
-		return Wheel.getThreshold();
+		return 0;
+		//return Wheel.getThreshold();
 	}
 
 	/**
 	 * @return the encoder
 	 */
 	public Encoder getEncoder() {
-		return wheel.getEncoder();
+		return null;
+		//return wheel.getEncoder();
 	}
 
 	public void toSmartDashboard(String name) {
 		SmartDashboard.putNumber("Speed of " + name, getRate());
+//		SmartDashboard.putNumber("Current of " + name, wheel.getOutputCurrent());
 	}
 }
 
