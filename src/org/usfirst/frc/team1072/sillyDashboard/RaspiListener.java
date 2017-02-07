@@ -13,7 +13,7 @@ import org.json.JSONArray;
  * @version Feb 5 2017
  */
 public class RaspiListener implements RaspiNetworker.JSONListener {
-	private ArrayList<Double> points;
+	private ArrayList<Integer> points;
 
     /**
      * Receives JSON and processes it as a 3D array
@@ -21,7 +21,7 @@ public class RaspiListener implements RaspiNetworker.JSONListener {
      */
 	@Override
 	public void recieve(JSONObject obj) {
-        // TODO: make this code less terrible
+        // TODO: make this code less terrible, maybe use an enhanced for loop?
 		JSONArray results = obj.getJSONArray("results");
 		System.out.println(results.toString());
 		for(int i = 0; i < results.length(); i++) {
@@ -29,7 +29,7 @@ public class RaspiListener implements RaspiNetworker.JSONListener {
 			for(int j = 0; j < arr.length(); j++) {
                 JSONArray arr2 = arr.getJSONArray(j);
                 for(int k = 0; k < arr2.length(); k++) {
-                   points.add(arr2.getDouble(k));
+                   points.add(arr2.getInt(k));
                 }
 			}
 		}
