@@ -100,6 +100,7 @@ public class Winch extends Subsystem {
 
 	public void toSmartDashboard(String name) {
 		SmartDashboard.putNumber("Speed of " + name, getRate());
+		SmartDashboard.putNumber("Current of " + name, wheel.getOutputCurrent());
 	}
 }
 
