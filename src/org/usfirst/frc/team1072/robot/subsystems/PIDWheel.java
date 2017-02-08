@@ -49,22 +49,28 @@ public class PIDWheel extends Wheel {
 	
 	public void toSmartDashboard(String name) {
 		SmartDashboard.putNumber("Speed of " + name, getRate());
-		double ic = SmartDashboard.getNumber("Integral constant" + name);
-		double dc = SmartDashboard.getNumber("Derivative constant" + name);
-		double prc= SmartDashboard.getNumber("Proportional constant" + name);
-		if(ic>1 || ic<0){
+		double ic = SmartDashboard.getNumber("Integral constant" + name,0);
+		double dc = SmartDashboard.getNumber("Derivative constant" + name,0);
+		double prc= SmartDashboard.getNumber("Proportional constant" + name,0);
+		if(ic<0){
 			SmartDashboard.putNumber("Integral constant for " + name, this.getI());
 			ic = pid.getI();
 		}
-		if(dc>1 || dc<0){
+		if(dc<0){
 			SmartDashboard.putNumber("Derivative constant for" + name, this.getD());
 			dc = pid.getD();
 		}
-		if(prc>1 || prc<0){
+		if(prc<0){
 			SmartDashboard.putNumber("Proportional constant for " + name, this.getP());
 			prc = pid.getP();
 		}
-		pid.setPID(prc, ic, dc);
+		if (ic != pid.getI() || dc != pid.getD() || prc != pid.getP()) {
+			pid.reset();
+			pid.setPID(prc, ic, dc);
+			pid.enable();
+		}
 		
 	}
+	
+	
 }

@@ -19,6 +19,7 @@ import org.usfirst.frc.team1072.robot.commands.SDCommands;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team1072.robot.subsystems.PIDWheel;
 import org.usfirst.frc.team1072.robot.subsystems.Winch;
 //import org.usfirst.team1072.robot.smartDashboard.H264Widget;
 import org.usfirst.frc.team1072.robot.subsystems.Piston;
