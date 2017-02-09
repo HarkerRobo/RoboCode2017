@@ -3,8 +3,6 @@ package org.usfirst.frc.team1072.robot.subsystems;
 import org.usfirst.frc.team1072.robot.XboxWrapper;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
 import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,11 +12,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class SolenoidSubsystem extends Subsystem {
 
-    private DoubleSolenoid sol;
+    private Solenoid sol;
     private Button trigger;
     
-    public SolenoidSubsystem(int channelF, int channelR, Button trigger){
-    	sol = new DoubleSolenoid(channelF, channelR);
+    public SolenoidSubsystem(int channel, Button trigger){
+    	sol = new Solenoid(channel);
     	this.trigger = trigger;
     }
 
@@ -26,11 +24,11 @@ public class SolenoidSubsystem extends Subsystem {
         XboxWrapper.getInstance().whenPressed(trigger, new TriggerSolenoidCommand(this));
     }
 
-	public DoubleSolenoid getSol() {
+	public Solenoid getSol() {
 		return sol;
 	}
 
-	public void setSol(DoubleSolenoid sol) {
+	public void setSol(Solenoid sol) {
 		this.sol = sol;
 	}
 	public void toSmartDashboard(String name){

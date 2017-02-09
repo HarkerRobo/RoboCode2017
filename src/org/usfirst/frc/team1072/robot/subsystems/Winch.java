@@ -68,7 +68,7 @@ public class Winch extends Subsystem {
 			case BUMPERS:
 				setDefaultCommand(new BumperWinchCommand());
 			case TOGGLE:
-				XboxWrapper.getInstance().toggleWhenPressed(Button.A, new WinchToggleCommand(-1));
+				//XboxWrapper.getInstance().toggleWhenPressed(Button.A, new WinchToggleCommand(-1));
 			default:
 				System.err.println("No winch control");
 		}
