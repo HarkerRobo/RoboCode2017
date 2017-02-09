@@ -1,10 +1,8 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
 import org.usfirst.frc.team1072.robot.XboxWrapper;
-
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
 import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
-
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
