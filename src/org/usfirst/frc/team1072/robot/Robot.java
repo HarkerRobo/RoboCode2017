@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
 		TANK, ARCADE
 	}
 	
-	public static final WinchControl winchControl = WinchControl.BUMPERS;
+	public static final WinchControl winchControl = WinchControl.TOGGLE;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
 	public static Drivetrain drivetrain;
@@ -70,12 +70,12 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		winch = new Winch();
-		/*SolenoidSubsystem pusher1 = new SolenoidSubsystem(1, Button.A);//bottomin
-		SolenoidSubsystem closer1 = new SolenoidSubsystem(2, Button.B);
-		SolenoidSubsystem shifter1 = new SolenoidSubsystem(3, Button.X);
-		pusher = new SolenoidSubsystem(4, Button.Y);
-		closer = new SolenoidSubsystem(5, Button.LSTICK);
-		shifter = new SolenoidSubsystem(6, Button.RSTICK);*/
+		SolenoidSubsystem pusher1 = new SolenoidSubsystem(RobotMap.Gears.PUSHER_F, RobotMap.Gears.PUSHER_R, Button.Y);//gearshiftright
+		SolenoidSubsystem closer1 = new SolenoidSubsystem(RobotMap.Gears.CLOSER_F, RobotMap.Gears.CLOSER_R, Button.B);//pullandpush
+		SolenoidSubsystem shifter1 = new SolenoidSubsystem(RobotMap.Gears.SHIFTER_F, RobotMap.Gears.SHIFTER_R, Button.X);
+		//pusher = new SolenoidSubsystem(4, Button.Y);
+		//closer = new SolenoidSubsystem(5, Button.LSTICK);
+		//shifter = new SolenoidSubsystem(6, Button.RSTICK);//gearshiftleft
 		//raspi = new RaspiNetworker();
 		compress = new Compressor(0);
 		compress.setClosedLoopControl(true);
