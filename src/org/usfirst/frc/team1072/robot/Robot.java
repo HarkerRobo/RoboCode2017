@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
 		TANK, ARCADE
 	}
 	
-	public static final WinchControl winchControl = WinchControl.TOGGLE;
+	public static final WinchControl winchControl = WinchControl.BUMPERS;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
 	public static Drivetrain drivetrain;
@@ -77,8 +77,8 @@ public class Robot extends IterativeRobot {
 		closer = new SolenoidSubsystem(5, Button.LSTICK);
 		shifter = new SolenoidSubsystem(6, Button.RSTICK);*/
 		//raspi = new RaspiNetworker();
-		//compress = new Compressor(0);
-		//compress.setClosedLoopControl(true);
+		compress = new Compressor(0);
+		compress.setClosedLoopControl(true);
 		//raspi.start();
 		//SmartDashboard.putData("H264", new H264Widget());
 		SmartDashboard.putData("Test Encoders:", new EncoderTest());
