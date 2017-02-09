@@ -57,8 +57,11 @@ public class RobotMap {
 		}
 	}
 	public class Gears {
-		public static final int SHIFT = 1;
-		public static final int CLOSE = 2;
-		public static final int PUSH = 5; // 5 extends push, 2 retracts
+		public static final int SHIFTER_F = 1;
+		public static final int SHIFTER_R = 6;
+		public static final int PUSHER_F = 2;
+		public static final int PUSHER_R = 5;
+		public static final int CLOSER_F = 3;
+		public static final int CLOSER_R = 4;
 	}
 }

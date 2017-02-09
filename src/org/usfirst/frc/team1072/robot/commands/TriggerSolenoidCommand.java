@@ -2,6 +2,7 @@ package org.usfirst.frc.team1072.robot.commands;
 
 import org.usfirst.frc.team1072.robot.subsystems.SolenoidSubsystem;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 /**
@@ -19,7 +20,15 @@ public class TriggerSolenoidCommand extends InstantCommand {
 
     // Called once when the command executes
     protected void initialize() {
-    	sol.getSol().set(!sol.getSol().get());
+    	DoubleSolenoid.Value currentState = sol.getSol().get();
+    	DoubleSolenoid.Value newState;
+    	if (currentState == DoubleSolenoid.Value.kForward)
+    		newState = DoubleSolenoid.Value.kReverse;
+    	else if (currentState == DoubleSolenoid.Value.kReverse)
+    		newState = DoubleSolenoid.Value.kForward;
+    	else
+    		newState = DoubleSolenoid.Value.kForward; //Default if solenoid is in kOff
+    	sol.getSol().set(newState);
     }
 
 }
