@@ -3,7 +3,6 @@ package org.usfirst.frc.team1072.robot.commands;
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
