@@ -66,8 +66,6 @@ public class AutonomousCommandGear3 extends Command{
 		return 60;
 	}
 
-
-
 	public void moveFirstStretch(){
 		sum += prevError;
 		currentError = initDistance - Robot.encoder.getDistance();
