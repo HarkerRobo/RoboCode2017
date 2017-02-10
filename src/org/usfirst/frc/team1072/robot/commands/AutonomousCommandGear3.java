@@ -15,59 +15,59 @@ public class AutonomousCommandGear3 extends Command{
 	static double triangleHeight = hexToField - boilerDiag - robotWidth; // long part of triangle
 	static double triangleWidth = Math.sqrt(3)*triangleHeight; // short part of triangle
 	static double initDistance = widthOfField - robotHeight - triangleWidth; // initial drive distance
-	
+
 	double initialTurnAngle = initAngle();
 	double adjustAngle  = 0;
 	double correctAngle;
-	
+
 	//PID stuff
 	double kp = PID.MoveDist.P, ki = PID.MoveDist.I, kd = PID.MoveDist.D;
 	double sum = 0;
 	double prevError;
 	double currentError;
-	
+
 	double rate;
 	boolean direction;
 	double distance;
-	
+
 	protected void initialize(){
 		Robot.drivetrain.getBackRight().reset();
-    	Robot.drivetrain.getBackLeft().reset();
-    	Robot.drivetrain.getFrontRight().reset();
-    	Robot.drivetrain.getFrontLeft().reset();
-    	Robot.encoder.reset();
-    	
-    	moveFirstStretch();
+		Robot.drivetrain.getBackLeft().reset();
+		Robot.drivetrain.getFrontRight().reset();
+		Robot.drivetrain.getFrontLeft().reset();
+		Robot.encoder.reset();
+
+		moveFirstStretch();
 		AngleTurnCommand ATC = new AngleTurnCommand(initAngle());
 		Robot.drivetrain.getBackRight().set(1);
-    	Robot.drivetrain.getBackLeft().set(1);
-    	Robot.drivetrain.getFrontRight().set(1);
-    	Robot.drivetrain.getFrontLeft().set(1);
-    	
+		Robot.drivetrain.getBackLeft().set(1);
+		Robot.drivetrain.getFrontRight().set(1);
+		Robot.drivetrain.getFrontLeft().set(1);
+
 	}
 	protected void execute(){
 		if(isDone()||currentSpike()){
 			Robot.drivetrain.getBackRight().set(0);
-	    	Robot.drivetrain.getBackLeft().set(0);
-	    	Robot.drivetrain.getFrontRight().set(0);
-	    	Robot.drivetrain.getFrontLeft().set(0);
-	    	return;
+			Robot.drivetrain.getBackLeft().set(0);
+			Robot.drivetrain.getFrontRight().set(0);
+			Robot.drivetrain.getFrontLeft().set(0);
+			return;
 		}
-		
-		
+
+
 	}
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	public double initAngle(){
 		//vision will find correct angle
 		return 60;
 	}
-	
-	
-	
+
+
+
 	public void moveFirstStretch(){
 		sum += prevError;
 		currentError = initDistance - Robot.encoder.getDistance();
