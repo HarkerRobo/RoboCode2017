@@ -9,10 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ArcadeDriveCommand extends Command {
 	
-	private int flip;
-	
 	public ArcadeDriveCommand() {
-		flip = 1;
 		requires(Robot.drivetrain);
 	}
 
@@ -23,7 +20,13 @@ public class ArcadeDriveCommand extends Command {
     protected void execute() {
     	double x = XboxWrapper.getInstance().getX(Hand.kRight);
     	double y = XboxWrapper.getInstance().getY(Hand.kRight);
-    	Robot.drivetrain.tankDrive(flip*(y + x)/2.0,flip*(y - x)/2.0);
+    	double mag = Math.sqrt(x * x + y * y);
+    	if(mag > 1)
+    	{
+    		x /= mag;
+    		y /= mag;
+    	}
+    	Robot.drivetrain.tankDrive((y * Math.abs(y) + x * Math.abs(x)), (y * Math.abs(y) - x * Math.abs(x)));
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,18 +37,6 @@ public class ArcadeDriveCommand extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.drivetrain.tankDrive(0, 0);
-    }
-    
-    public void setFlip(boolean b){
-    	if (b == true) {
-    		flip = -1;
-    	} else {
-    		flip = 1;
-    	}
-    }
-    
-    public boolean getFlip(){
-    	return flip == -1;
     }
 
 }
