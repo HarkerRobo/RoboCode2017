@@ -21,7 +21,6 @@ public class UpdateSDCommand extends Command {
 	private SmartDashboard sd;
 	AutonomousCommandGearOne autonomousCommand1;
 	AutonomousCommandGearTwo autonomousCommand2;
-	
 	BufferedImage image;
 	private int port;
 	private String ip;
@@ -31,7 +30,6 @@ public class UpdateSDCommand extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	sd = new SmartDashboard();
-    	
     	autonomousCommand1 = new AutonomousCommandGearOne(0);
     	autonomousCommand2 = new AutonomousCommandGearTwo();
     	/*Gst.init("CameraTest", null);
@@ -49,7 +47,6 @@ public class UpdateSDCommand extends Command {
     protected void initialize() {
     	SmartDashboard.putData("Autonomous Command Gear 1", autonomousCommand1);
     	SmartDashboard.putData("Autonomous Command Gear 2", autonomousCommand2);
-    	SmartDashboard.putBoolean("Is Compressor Enabled",Robot.compress.enabled());
     }
 
     // Called repeatedly when this Command is scheduled to run

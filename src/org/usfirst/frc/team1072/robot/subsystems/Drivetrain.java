@@ -102,9 +102,6 @@ public class Drivetrain extends Subsystem {
     	frontRight.toSmartDashboard("Front Right");
     	backLeft.toSmartDashboard("Back Left");
     	backRight.toSmartDashboard("Back Right");
-    	SmartDashboard.putNumber("Acceleration in X",accel.getX());
-    	SmartDashboard.putNumber("Acceleration in Y",accel.getY());
-    	SmartDashboard.putNumber("Acceleration in Z",accel.getZ());
     }
 }
 
