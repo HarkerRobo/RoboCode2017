@@ -15,6 +15,7 @@ public class AutonomousCommandGear3 extends Command{
 	static double triangleHeight = hexToField - boilerDiag - robotWidth; // long part of triangle
 	static double triangleWidth = Math.sqrt(3)*triangleHeight; // short part of triangle
 	static double initDistance = widthOfField - robotHeight - triangleWidth; // initial drive distance
+	
 
 	double initialTurnAngle = initAngle();
 	double adjustAngle  = 0;

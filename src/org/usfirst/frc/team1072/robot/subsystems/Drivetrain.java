@@ -63,6 +63,13 @@ public class Drivetrain extends Subsystem {
 	public Wheel getBackRight() {
 		return backRight;
 	}
+	
+	public void setRobotSpeed(double vel) {
+		this.getFrontLeft().setSpeed(vel);
+		this.getFrontRight().setSpeed(vel);
+		this.getBackLeft().setSpeed(vel);
+		this.getBackRight().setSpeed(vel);
+	}
 
 	/**
 	 * @return the gyro
