@@ -70,7 +70,7 @@ public class Wheel extends CANTalon {
 	public double getRate() {
 		//return get();
 		if (encoder == null) { return 0; }
-		return encoder.getRate();
+		return reversed ? -encoder.getRate() : encoder.getRate();
 	}
 
 	public void initDefaultCommand() {

@@ -55,8 +55,6 @@ public class Robot extends IterativeRobot {
 	public static Winch winch;
 	//public static RaspiNetworker raspi;
 	public static Compressor compress;
-	public static SolenoidSubsystem pusher;
-	public static SolenoidSubsystem closer;
 	public static SolenoidSubsystem shifter;
 	public static GearPusher push;
 
@@ -75,7 +73,7 @@ public class Robot extends IterativeRobot {
 		//SolenoidSubsystem pusher1 = new SolenoidSubsystem(RobotMap.Gears.PUSHER_F, RobotMap.Gears.PUSHER_R, Button.Y);//gearshiftright
 		//SolenoidSubsystem closer1 = new SolenoidSubsystem(RobotMap.Gears.CLOSER_F, RobotMap.Gears.CLOSER_R, Button.B);//pullandpush
 		push = new GearPusher(Button.Y, Button.B);
-		SolenoidSubsystem shifter1 = new SolenoidSubsystem(RobotMap.Gears.SHIFTER_F, RobotMap.Gears.SHIFTER_R, Button.X);
+		shifter = new SolenoidSubsystem(RobotMap.Gears.SHIFTER_F, RobotMap.Gears.SHIFTER_R, Button.X);
 		//pusher = new SolenoidSubsystem(4, Button.Y);
 		//closer = new SolenoidSubsystem(5, Button.LSTICK);
 		//shifter = new SolenoidSubsystem(6, Button.RSTICK);//gearshiftleft
@@ -84,7 +82,7 @@ public class Robot extends IterativeRobot {
 		compress.setClosedLoopControl(true);
 		//raspi.start();
 		//SmartDashboard.putData("H264", new H264Widget());
-		SmartDashboard.putData("Test Encoders:", new EncoderTest());
+		//SmartDashboard.putData("Test Encoders:", new EncoderTest());
 		//gearPiston = new GearPiston();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -159,8 +157,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		System.out.println("Left Speed: " + Robot.drivetrain.leftSpeed());
-		System.out.println("Right sped: " + Robot.drivetrain.rightSpeed());
 		Scheduler.getInstance().run();
 	}
 
