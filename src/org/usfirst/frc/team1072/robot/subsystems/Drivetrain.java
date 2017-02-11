@@ -97,10 +97,13 @@ public class Drivetrain extends Subsystem {
     	switch(Robot.driveControl){
 			case ARCADE:
 				setDefaultCommand(new ArcadeDriveCommand());
+				break;
 			case TANK:
 				setDefaultCommand(new TankDriveCommand());
+				break;
 			default:
 				System.err.println("No drive control");
+				break;
     	}
     }
     
