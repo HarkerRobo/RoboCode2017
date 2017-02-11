@@ -68,15 +68,9 @@ public class Wheel extends CANTalon {
 	 * @see edu.wpi.first.wpilibj.Encoder#getRate()
 	 */
 	public double getRate() {
-		//return get();
 		if (encoder == null) { return 0; }
-		return encoder.getRate();
+		return reversed ? -encoder.getRate() : encoder.getRate();
 	}
-
-	public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
 
 	/**
 	 * @return the reversed
@@ -107,8 +101,6 @@ public class Wheel extends CANTalon {
 	
 	public void toSmartDashboard(String name) {
 		SmartDashboard.putNumber("Speed of " + name, getRate());
-		System.out.println("Speed of " + name + ": " + getRate());
-		//SmartDashboard.putNumber("Current of " + name, getOutputCurrent());
 	}
 }
 

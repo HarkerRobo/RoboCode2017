@@ -19,6 +19,7 @@ import org.usfirst.frc.team1072.robot.commands.SDCommands;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team1072.robot.subsystems.GearPusher;
 import org.usfirst.frc.team1072.robot.subsystems.Winch;
 //import org.usfirst.team1072.robot.smartDashboard.H264Widget;
 import org.usfirst.frc.team1072.robot.subsystems.Piston;
@@ -53,8 +54,7 @@ public class Robot extends IterativeRobot {
 	public static Winch winch;
 	//public static RaspiNetworker raspi;
 	public static Compressor compress;
-	public static SolenoidSubsystem pusher;
-	public static SolenoidSubsystem closer;
+	public static GearPusher push;
 	public static SolenoidSubsystem shifter;
 
 	Command autonomousCommand;
@@ -69,6 +69,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		winch = new Winch();
+		push = new GearPusher(Button.X, Button.Y);
+		shifter = new SolenoidSubsystem(Gears.SHIFTER_F, Gears.SHIFTER_R, Button.B);
 		/*SolenoidSubsystem pusher1 = new SolenoidSubsystem(1, Button.A);//bottomin
 		SolenoidSubsystem closer1 = new SolenoidSubsystem(2, Button.B);
 		SolenoidSubsystem shifter1 = new SolenoidSubsystem(3, Button.X);
