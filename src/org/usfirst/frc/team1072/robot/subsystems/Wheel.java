@@ -3,7 +3,6 @@ package org.usfirst.frc.team1072.robot.subsystems;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -11,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Wheel extends CANTalon {
 
+	private static final double MAX_RATE = 40000;
 	private static final double THRESHOLD = 0.05;
 	private boolean reversed = false;
     private Encoder encoder;
@@ -68,15 +68,13 @@ public class Wheel extends CANTalon {
 	 * @see edu.wpi.first.wpilibj.Encoder#getRate()
 	 */
 	public double getRate() {
-		//return get();
 		if (encoder == null) { return 0; }
-		return reversed ? encoder.getRate() : -encoder.getRate();
+		double rate = reversed ? encoder.getRate() : -encoder.getRate();
+		if(Math.abs(rate) > MAX_RATE){
+			rate = Math.signum(rate) * MAX_RATE;
+		}
+		return rate;
 	}
-
-	public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
 
 	/**
 	 * @return the reversed
