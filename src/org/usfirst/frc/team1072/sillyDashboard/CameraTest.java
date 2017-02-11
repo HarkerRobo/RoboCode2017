@@ -1,3 +1,5 @@
+package org.usfirst.frc.team1072.sillyDashboard;
+
 
 
 
@@ -18,7 +20,7 @@ public class CameraTest {
      * @param args the command line arguments
      */
     
-	 private static Pipeline pipe;
+	private static Pipeline pipe;
     
     public static void main(String[] args) {
 
@@ -31,7 +33,7 @@ public class CameraTest {
                 Bin bin = Bin.launch("udpsrc port=5001 ! application/x-rtp, payload=96 ! rtph264depay ! avdec_h264 ! videoconvert", true);
                 pipe = new Pipeline();
                 pipe.addMany(bin, vc.getElement());
-                Pipeline.linkMany(bin, vc.getElement());           
+                Pipeline.linkMany(bin, vc.getElement());       
 
                 JFrame f = new JFrame("Camera Test");
                 f.add(vc);
