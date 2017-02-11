@@ -20,13 +20,8 @@ public class ArcadeDriveCommand extends Command {
     protected void execute() {
     	double x = XboxWrapper.getInstance().getX(Hand.kRight);
     	double y = XboxWrapper.getInstance().getY(Hand.kRight);
-    	double mag = Math.sqrt(x * x + y * y);
-    	if(mag > 1)
-    	{
-    		x /= mag;
-    		y /= mag;
-    	}
-    	Robot.drivetrain.tankDrive((y * Math.abs(y) + x * Math.abs(x)), (y * Math.abs(y) - x * Math.abs(x)));
+    	double k = Math.max(1.0, Math.max(Math.abs(y+x), Math.abs(y-x)));
+    	Robot.drivetrain.tankDrive((y-x)/k, (y +x)/k);
     }
 
     // Make this return true when this Command no longer needs to run execute()
