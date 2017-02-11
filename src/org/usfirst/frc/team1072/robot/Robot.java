@@ -20,7 +20,6 @@ import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1072.robot.subsystems.GearPusher;
-import org.usfirst.frc.team1072.robot.subsystems.PIDWheel;
 import org.usfirst.frc.team1072.robot.subsystems.Winch;
 //import org.usfirst.team1072.robot.smartDashboard.H264Widget;
 import org.usfirst.frc.team1072.robot.subsystems.Piston;
@@ -46,7 +45,7 @@ public class Robot extends IterativeRobot {
 		TANK, ARCADE
 	}
 	
-	public static final WinchControl winchControl = WinchControl.BUMPERS;
+	public static final WinchControl winchControl = WinchControl.TOGGLE;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
 	public static Drivetrain drivetrain;
@@ -55,8 +54,8 @@ public class Robot extends IterativeRobot {
 	public static Winch winch;
 	//public static RaspiNetworker raspi;
 	public static Compressor compress;
-	public static SolenoidSubsystem shifter;
 	public static GearPusher push;
+	public static SolenoidSubsystem shifter;
 
 	Command autonomousCommand;
 	//SendableChooser<Command> chooser = new SendableChooser<>();
@@ -70,13 +69,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		winch = new Winch();
-		//SolenoidSubsystem pusher1 = new SolenoidSubsystem(RobotMap.Gears.PUSHER_F, RobotMap.Gears.PUSHER_R, Button.Y);//gearshiftright
-		//SolenoidSubsystem closer1 = new SolenoidSubsystem(RobotMap.Gears.CLOSER_F, RobotMap.Gears.CLOSER_R, Button.B);//pullandpush
-		push = new GearPusher(Button.Y, Button.B);
-		shifter = new SolenoidSubsystem(RobotMap.Gears.SHIFTER_F, RobotMap.Gears.SHIFTER_R, Button.X);
-		//pusher = new SolenoidSubsystem(4, Button.Y);
-		//closer = new SolenoidSubsystem(5, Button.LSTICK);
-		//shifter = new SolenoidSubsystem(6, Button.RSTICK);//gearshiftleft
+		push = new GearPusher(Button.X, Button.Y);
+		shifter = new SolenoidSubsystem(Gears.SHIFTER_F, Gears.SHIFTER_R, Button.B);
 		//raspi = new RaspiNetworker();
 		compress = new Compressor(0);
 		compress.setClosedLoopControl(true);

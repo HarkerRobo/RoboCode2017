@@ -9,7 +9,10 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ArcadeDriveCommand extends Command {
 	
+	private int flip;
+	
 	public ArcadeDriveCommand() {
+		flip = 1;
 		requires(Robot.drivetrain);
 	}
 
@@ -32,6 +35,18 @@ public class ArcadeDriveCommand extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.drivetrain.tankDrive(0, 0);
+    }
+    
+    public void setFlip(boolean b){
+    	if (b == true) {
+    		flip = -1;
+    	} else {
+    		flip = 1;
+    	}
+    }
+    
+    public boolean getFlip(){
+    	return flip == -1;
     }
 
 }

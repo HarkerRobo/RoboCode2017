@@ -17,6 +17,7 @@ public class AngleTurnCommand extends Command {
 	double kp = PID.TurnAngle.P, ki = PID.TurnAngle.I, kd = PID.TurnAngle.D;
 	double sum = 0;
 	double currentError;
+	double errMargin = 1;
 	
 	public AngleTurnCommand(double angle){
     		this.angle = angle;
@@ -40,7 +41,7 @@ public class AngleTurnCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return (Robot.drivetrain.getGyro().getAngle() - initialAngle) >= angle;
+    	return noError((Robot.drivetrain.getGyro().getAngle() - initialAngle) - angle);
     }
 
     // Called once after isFinished returns true
@@ -51,5 +52,13 @@ public class AngleTurnCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    }
+    
+    private boolean noError(double err) {
+    	if (err <= errMargin && err >= -errMargin) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 }

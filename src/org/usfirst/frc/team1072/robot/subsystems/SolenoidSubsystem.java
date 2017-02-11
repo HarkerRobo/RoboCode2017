@@ -30,13 +30,9 @@ public class SolenoidSubsystem extends Subsystem {
 		return sol;
 	}
 
-	public void setSol(DoubleSolenoid sol) {
-		this.sol = sol;
-	}
 	public void toSmartDashboard(String name){
-		SmartDashboard.putString("Solenoid"+name,  getSol().toString());
+		SmartDashboard.putData("Solenoid " + name,  sol);
 	}
-	
     
 }
 

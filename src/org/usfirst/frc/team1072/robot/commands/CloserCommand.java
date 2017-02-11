@@ -8,17 +8,18 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class CloseCommand extends InstantCommand {
+public class CloserCommand extends InstantCommand {
 
-    public CloseCommand() {
+    public CloserCommand() {
         requires(Robot.push);
     }
 
     // Called once when the command executes
     protected void initialize() {
-    	Robot.push.getClose().set(Robot.push.getClose().get().equals(Value.kForward) ? Value.kReverse : Value.kForward);
     	if(Robot.push.getClose().get().equals(Value.kForward)){
-    		System.out.println("Should be forward");
+    		Robot.push.getClose().set(Value.kReverse);
+    	} else {
+    		Robot.push.getClose().set(Value.kForward);
     	}
     }
 

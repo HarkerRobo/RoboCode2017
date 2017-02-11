@@ -4,8 +4,9 @@ import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
 import org.usfirst.frc.team1072.robot.XboxWrapper;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
-import org.usfirst.frc.team1072.robot.commands.CloseCommand;
+import org.usfirst.frc.team1072.robot.commands.CloserCommand;
 import org.usfirst.frc.team1072.robot.commands.PusherCommand;
+import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -30,7 +31,7 @@ public class GearPusher extends Subsystem {
 
     public void initDefaultCommand() {
         XboxWrapper.getInstance().whenPressed(bpush, new PusherCommand());
-        XboxWrapper.getInstance().whenPressed(bclose, new CloseCommand());
+        XboxWrapper.getInstance().whenPressed(bclose, new CloserCommand());
     }
 
 	public DoubleSolenoid getPush() {
@@ -42,8 +43,8 @@ public class GearPusher extends Subsystem {
 	}
 	public void toSmartDashboard()
     {
-    	SmartDashboard.putString("push: position",getPush().get().toString());
-    	SmartDashboard.putString("close: position",getClose().get().toString());
+    	SmartDashboard.putData("Pusher Solenoid", push);
+    	SmartDashboard.putData("Closer Solenoid", close);
     	
     }
     

@@ -64,4 +64,18 @@ public class RobotMap {
 		public static final int CLOSER_F = 3;
 		public static final int CLOSER_R = 4;
 	}
+	public class Distances {
+		public static final double robotHeight = 7.125 ; // half robot height
+		public static final double robotWidth = 15; // half robot width
+		public static final double hexToField = 162; // center of hexagon to edge of field
+		public static final double boilerDiag = 36.75; // half of the boiler diagonal
+		public static final double widthOfField  = 289.24;
+		public static final double triangleHeight = hexToField - boilerDiag - robotWidth; // long part of triangle
+		public static final double triangleWidth = 1.732*triangleHeight; // short part of triangle
+		public static final double initDistance = widthOfField - robotHeight - triangleWidth; // initial drive distance
+		public static final double perpGearDistance = (101/6.0);
+		public static final double normalCurrent = 20; //normal value for talon SRX current
+		public static final double spikeCurrent = 60; //min value for current spike
+		public static final double velocityToGetCurrentSpike = 40;
+	}
 }
