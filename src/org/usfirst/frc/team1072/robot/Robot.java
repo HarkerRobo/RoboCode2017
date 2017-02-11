@@ -159,6 +159,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		System.out.println("Left Speed: " + Robot.drivetrain.leftSpeed());
+		System.out.println("Right sped: " + Robot.drivetrain.rightSpeed());
 		Scheduler.getInstance().run();
 	}
 
