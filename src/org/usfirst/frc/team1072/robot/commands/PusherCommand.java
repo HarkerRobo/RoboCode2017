@@ -18,7 +18,7 @@ public class PusherCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.push.getClose().set(prev ? Value.kForward : Value.kReverse);
+    	Robot.push.getClose().set(prev ? Value.kOff : Value.kReverse);
     	setTimeout(0.5);
     }
 
@@ -34,7 +34,7 @@ public class PusherCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.push.getPush().set(prev ? Value.kOff : Value.kForward);
+    	Robot.push.getPush().set(prev ? Value.kReverse : Value.kForward);
     	prev = !prev;
     }
 

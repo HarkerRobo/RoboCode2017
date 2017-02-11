@@ -17,6 +17,9 @@ public class CloseCommand extends InstantCommand {
     // Called once when the command executes
     protected void initialize() {
     	Robot.push.getClose().set(Robot.push.getClose().get().equals(Value.kForward) ? Value.kReverse : Value.kForward);
+    	if(Robot.push.getClose().get().equals(Value.kForward)){
+    		System.out.println("Should be forward");
+    	}
     }
 
 }
