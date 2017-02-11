@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Wheel extends CANTalon {
 
-	private static final double MAX_RATE = 40000;
+	private static final double MAX_RATE = 35000;
 	private static final double THRESHOLD = 0.05;
 	private boolean reversed = false;
     private Encoder encoder;
@@ -104,7 +104,7 @@ public class Wheel extends CANTalon {
 	}
 	
 	public void toSmartDashboard(String name) {
-		SmartDashboard.putNumber("Speed of " + name, getRate());
+		//SmartDashboard.putNumber("Speed of " + name, getRate());
 		//.out.println("Speed of " + name + ": " + getRate());
 		//SmartDashboard.putNumber("Current of " + name, getOutputCurrent());
 	}

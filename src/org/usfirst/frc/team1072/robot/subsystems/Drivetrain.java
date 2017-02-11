@@ -105,6 +105,8 @@ public class Drivetrain extends Subsystem {
     	SmartDashboard.putNumber("Acceleration in X",accel.getX());
     	SmartDashboard.putNumber("Acceleration in Y",accel.getY());
     	SmartDashboard.putNumber("Acceleration in Z",accel.getZ());
+    	SmartDashboard.putNumber("Left Speed", frontLeft.getRate());
+    	SmartDashboard.putNumber("Right Speed", frontRight.getRate());
     }
 }
 
