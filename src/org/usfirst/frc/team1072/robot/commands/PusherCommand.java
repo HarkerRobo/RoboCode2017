@@ -4,6 +4,7 @@ import org.usfirst.frc.team1072.robot.Robot;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -42,4 +43,6 @@ public class PusherCommand extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+    
+    
 }
