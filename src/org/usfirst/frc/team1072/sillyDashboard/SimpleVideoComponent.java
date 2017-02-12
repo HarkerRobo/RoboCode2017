@@ -17,7 +17,7 @@
  * version 3 along with this work.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
+package org.usfirst.frc.team1072.sillyDashboard;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
