@@ -53,8 +53,10 @@ public class UpdateSDCommand extends Command {
     	Robot.drivetrain.toSmartDashboard();
     	Robot.winch.toSmartDashboard("Winch");
     	Robot.push.toSmartDashboard();
+    	Robot.shifter.toSmartDashboard("Shifter Solenoid");
     	SmartDashboard.putNumber("GyroAngle",Robot.drivetrain.getGyro().getAngle());
     	SmartDashboard.putNumber("GyroRate", Robot.drivetrain.getGyro().getRate());
+    	SmartDashboard.putBoolean("Is Compressor Enabled", Robot.compress.enabled());
     }
 
     // Make this return true when this Command no longer needs to run execute()

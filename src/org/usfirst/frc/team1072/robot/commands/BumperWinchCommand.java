@@ -26,7 +26,7 @@ public class BumperWinchCommand extends Command {
     protected void execute() {
     	boolean right = XboxWrapper.getInstance().getBumper(Hand.kRight);
     	boolean left = XboxWrapper.getInstance().getBumper(Hand.kLeft);
-    	double speed = (right ? MAX_SPEED : 0) + (left ? -MAX_SPEED : 0);
+    	double speed = (right ? -MAX_SPEED : 0) + (left ? -MAX_SPEED : 0);
     	Robot.winch.setSpeed(speed);
     }
 

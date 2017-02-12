@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1072.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -15,7 +16,7 @@ import org.usfirst.frc.team1072.robot.RobotMap.Gears;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
 import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
 import org.usfirst.frc.team1072.robot.commands.EncoderTest;
-import org.usfirst.frc.team1072.robot.commands.SDCommands;
+import org.usfirst.frc.team1072.robot.commands.SlowModeCommand;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
@@ -45,8 +46,8 @@ public class Robot extends IterativeRobot {
 		TANK, ARCADE
 	}
 	
-	public static final WinchControl winchControl = WinchControl.TOGGLE;
-	public static final DriveControl driveControl = DriveControl.TANK;
+	public static final WinchControl winchControl = WinchControl.BUMPERS;
+	public static final DriveControl driveControl = DriveControl.ARCADE;
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	public static Piston gearPiston;
@@ -74,6 +75,7 @@ public class Robot extends IterativeRobot {
 		//raspi = new RaspiNetworker();
 		compress = new Compressor(0);
 		compress.setClosedLoopControl(true);
+		CameraServer.getInstance().startAutomaticCapture();
 		//raspi.start();
 		//SmartDashboard.putData("H264", new H264Widget());
 		//SmartDashboard.putData("Test Encoders:", new EncoderTest());
@@ -144,6 +146,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		UpdateSDCommand sdc = new UpdateSDCommand();
 		sdc.start();
+		XboxWrapper.getInstance().whenPressed(Button.A, new SlowModeCommand());
 	}
 
 	/**
