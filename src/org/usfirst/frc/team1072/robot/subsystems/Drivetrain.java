@@ -10,6 +10,7 @@ import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
 import org.usfirst.frc.team1072.robot.commands.ArcadeDriveCommand;
 import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
@@ -19,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain extends Subsystem {
 
-	private Gyro gyro;
+	private ADXRS450_Gyro gyro;
 	private BuiltInAccelerometer accel;
 	private Encoder leftEnc;
 	private Encoder rightEnc;
@@ -27,9 +28,10 @@ public class Drivetrain extends Subsystem {
 	private Wheel frontRight;
 	private Wheel backLeft;
 	private Wheel backRight;
+	private boolean slow;
     
     public Drivetrain(){
-    	gyro = new AnalogGyro(RobotMap.Robot.GYRO);
+    	gyro = new ADXRS450_Gyro();
     	accel = new BuiltInAccelerometer();
     	leftEnc = new Encoder(Encoders.LA, Encoders.LB);
     	rightEnc = new Encoder(Encoders.RA, Encoders.RB);
@@ -39,9 +41,16 @@ public class Drivetrain extends Subsystem {
     	frontRight = new Wheel(Talons.FR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	backLeft = new Wheel(Talons.BL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	backRight = new Wheel(Talons.BR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	slow = true;
+    	
+    	gyro.calibrate();
     }
 
 	public void tankDrive(double rightSpeed, double leftSpeed) {
+		if(slow){
+			leftSpeed *= 0.5;
+			rightSpeed *= 0.5;
+		}
 		frontLeft.setSpeed(leftSpeed);
 		backLeft.setSpeed(leftSpeed);
 		backRight.setSpeed(rightSpeed);
@@ -65,6 +74,9 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void setRobotSpeed(double vel) {
+		if(slow){
+			vel *= 0.5;
+		}
 		this.getFrontLeft().setSpeed(vel);
 		this.getFrontRight().setSpeed(vel);
 		this.getBackLeft().setSpeed(vel);
@@ -76,13 +88,6 @@ public class Drivetrain extends Subsystem {
 	 */
 	public Gyro getGyro() {
 		return gyro;
-	}
-
-	/**
-	 * @param gyro the gyro to set
-	 */
-	public void setGyro(Gyro gyro) {
-		this.gyro = gyro;
 	}
 
 	public double rightSpeed(){
@@ -97,10 +102,13 @@ public class Drivetrain extends Subsystem {
     	switch(Robot.driveControl){
 			case ARCADE:
 				setDefaultCommand(new ArcadeDriveCommand());
+				break;
 			case TANK:
 				setDefaultCommand(new TankDriveCommand());
+				break;
 			default:
 				System.err.println("No drive control");
+				break;
     	}
     }
     
@@ -109,6 +117,21 @@ public class Drivetrain extends Subsystem {
     	frontRight.toSmartDashboard("Front Right");
     	backLeft.toSmartDashboard("Back Left");
     	backRight.toSmartDashboard("Back Right");
+    	SmartDashboard.putNumber("Acceleration in X",accel.getX());
+    	SmartDashboard.putNumber("Acceleration in Y",accel.getY());
+    	SmartDashboard.putNumber("Acceleration in Z",accel.getZ());
+    	SmartDashboard.putNumber("Left Speed", frontLeft.getRate());
+    	SmartDashboard.putNumber("Right Speed", backRight.getRate());
+    	SmartDashboard.putBoolean("Slow Mode", slow);
     }
+
+	public boolean isSlow() {
+		return slow;
+	}
+
+	public void setSlow(boolean slow) {
+		this.slow = slow;
+	}
+    
 }
 

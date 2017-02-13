@@ -46,10 +46,10 @@ public class RobotMap {
 				public static final int BL = 3;
 			}
 			public static class Encoders {
-				public static final int LA = 0;
-				public static final int LB = 1;
-				public static final int RA = 2;
-				public static final int RB = 3;
+				public static final int LA = 8;
+				public static final int LB = 9;
+				public static final int RA = 6;
+				public static final int RB = 7;
 			}
 		}
 		public static class Winches {

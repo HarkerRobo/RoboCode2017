@@ -53,6 +53,4 @@ public class PusherCommand extends Command {
 	protected void interrupted() {
 		
 	}
-	
-	
 }

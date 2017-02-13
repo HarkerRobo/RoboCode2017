@@ -3,7 +3,6 @@ package org.usfirst.frc.team1072.robot.subsystems;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -11,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Wheel extends CANTalon {
 
+	private static final double MAX_RATE = 35000;
 	private static final double THRESHOLD = 0.05;
 	private boolean reversed = false;
     private Encoder encoder;
@@ -69,7 +69,11 @@ public class Wheel extends CANTalon {
 	 */
 	public double getRate() {
 		if (encoder == null) { return 0; }
-		return reversed ? -encoder.getRate() : encoder.getRate();
+		double rate = reversed ? encoder.getRate() : -encoder.getRate();
+		if(Math.abs(rate) > MAX_RATE){
+			rate = Math.signum(rate) * MAX_RATE;
+		}
+		return rate;
 	}
 
 	/**
@@ -100,7 +104,7 @@ public class Wheel extends CANTalon {
 	}
 	
 	public void toSmartDashboard(String name) {
-		SmartDashboard.putNumber("Speed of " + name, getRate());
+		
 	}
 }
 

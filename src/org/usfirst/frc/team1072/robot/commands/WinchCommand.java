@@ -21,8 +21,6 @@ public class WinchCommand extends Command{
 		if (XboxWrapper.getInstance().getAButton()) {
 			isOn = !isOn;
 		}
-		System.out.println("IsOn: " + isOn);
-		
 		Robot.winch.setSpeed((isOn) ? -1 : 0);
 	}
 	@Override

@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1072.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -15,7 +16,7 @@ import org.usfirst.frc.team1072.robot.RobotMap.Gears;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
 import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
 import org.usfirst.frc.team1072.robot.commands.EncoderTest;
-import org.usfirst.frc.team1072.robot.commands.SDCommands;
+import org.usfirst.frc.team1072.robot.commands.SlowModeCommand;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
@@ -71,18 +72,13 @@ public class Robot extends IterativeRobot {
 		winch = new Winch();
 		push = new GearPusher(Button.X, Button.Y);
 		shifter = new SolenoidSubsystem(Gears.SHIFTER_F, Gears.SHIFTER_R, Button.B);
-		/*SolenoidSubsystem pusher1 = new SolenoidSubsystem(1, Button.A);//bottomin
-		SolenoidSubsystem closer1 = new SolenoidSubsystem(2, Button.B);
-		SolenoidSubsystem shifter1 = new SolenoidSubsystem(3, Button.X);
-		pusher = new SolenoidSubsystem(4, Button.Y);
-		closer = new SolenoidSubsystem(5, Button.LSTICK);
-		shifter = new SolenoidSubsystem(6, Button.RSTICK);*/
 		//raspi = new RaspiNetworker();
-		//compress = new Compressor(0);
-		//compress.setClosedLoopControl(true);
+		compress = new Compressor(0);
+		compress.setClosedLoopControl(true);
+		CameraServer.getInstance().startAutomaticCapture();
 		//raspi.start();
 		//SmartDashboard.putData("H264", new H264Widget());
-		SmartDashboard.putData("Test Encoders:", new EncoderTest());
+		//SmartDashboard.putData("Test Encoders:", new EncoderTest());
 		//gearPiston = new GearPiston();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -150,6 +146,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		UpdateSDCommand sdc = new UpdateSDCommand();
 		sdc.start();
+		XboxWrapper.getInstance().whenPressed(Button.A, new SlowModeCommand());
 	}
 
 	/**
