@@ -23,55 +23,40 @@ public class UpdateSDCommand extends Command {
 	BufferedImage image;
 	private int port;
 	private String ip;
-	//private static Pipeline pipe;
 
     public UpdateSDCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	autonomousCommand1 = new AutonomousCommandGearOne(0);
     	autonomousCommand2 = new AutonomousCommandGearTwo();
-    	/*Gst.init("CameraTest", null);
-    	EventQueue.invokeLater(new Runnable() {
-    		@Override
-    		public void run() {
-//    			SmartDashboard.putData(value);
-    			System.out.println("Message from update constructor");
-    			// SimpleVideoComponent vc = new SimpleVideoComponent();
-    		}
-    	});*/
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
     	SmartDashboard.putData("Autonomous Command Gear 1", autonomousCommand1);
     	SmartDashboard.putData("Autonomous Command Gear 2", autonomousCommand2);
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//Commands
     	SmartDashboard.putData(Scheduler.getInstance());
+    	//Subsystems
     	Robot.drivetrain.toSmartDashboard();
     	Robot.winch.toSmartDashboard("Winch");
     	Robot.push.toSmartDashboard();
     	Robot.shifter.toSmartDashboard("Shifter Solenoid");
+    	//Misc
     	SmartDashboard.putNumber("GyroAngle",Robot.drivetrain.getGyro().getAngle());
     	SmartDashboard.putNumber("GyroRate", Robot.drivetrain.getGyro().getRate());
     	SmartDashboard.putBoolean("Is Compressor Enabled", Robot.compress.enabled());
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
     	SmartDashboard.putString("Autonomous Command Gear 1", "no longer running");
     	SmartDashboard.putString("Autonomous Command Gear 2", "no longer running");
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
     }
 
