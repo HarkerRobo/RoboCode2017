@@ -17,8 +17,9 @@ public class PusherCommand extends Command {
 	
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		if(Robot.push.getPush().get().equals(Value.kReverse) && Robot.push.getClose().get().equals(Value.kForward)){
+		if(!Robot.push.getPush().get().equals(Value.kForward) && !Robot.push.getClose().get().equals(Value.kReverse)){
 			Robot.push.getClose().set(Value.kReverse);
+			System.out.println("Closed closer");
 			setTimeout(0.5);
 		} else {
 			setTimeout(0);

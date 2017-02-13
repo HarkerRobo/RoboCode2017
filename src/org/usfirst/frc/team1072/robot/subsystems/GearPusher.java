@@ -9,6 +9,7 @@ import org.usfirst.frc.team1072.robot.commands.PusherCommand;
 import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -43,9 +44,10 @@ public class GearPusher extends Subsystem {
 	}
 	public void toSmartDashboard()
     {
-    	SmartDashboard.putData("Pusher Solenoid", push);
-    	SmartDashboard.putData("Closer Solenoid", close);
-    	
+    	//SmartDashboard.putData("Pusher Solenoid", push);
+    	//SmartDashboard.putData("Closer Solenoid", close);
+    	SmartDashboard.putBoolean("Pusher out", push.get().equals(Value.kForward));
+    	SmartDashboard.putBoolean("Closer out", close.get().equals(Value.kForward));
     }
     
     
