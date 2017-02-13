@@ -59,8 +59,8 @@ public class RobotMap {
 	public class Gears {
 		public static final int SHIFTER_F = 1;
 		public static final int SHIFTER_R = 6;
-		public static final int PUSHER_F = 5;
-		public static final int PUSHER_R = 2;
+		public static final int PUSHER_F = 2;
+		public static final int PUSHER_R = 5;
 		public static final int CLOSER_F = 3;
 		public static final int CLOSER_R = 4;
 	}
