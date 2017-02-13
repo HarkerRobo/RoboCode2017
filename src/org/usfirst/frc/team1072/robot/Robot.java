@@ -47,7 +47,7 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public static final WinchControl winchControl = WinchControl.BUMPERS;
-	public static final DriveControl driveControl = DriveControl.ARCADE;
+	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	public static Piston gearPiston;

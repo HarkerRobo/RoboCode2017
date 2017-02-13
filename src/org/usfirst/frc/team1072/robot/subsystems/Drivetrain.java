@@ -10,6 +10,7 @@ import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
 import org.usfirst.frc.team1072.robot.commands.ArcadeDriveCommand;
 import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
@@ -19,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Drivetrain extends Subsystem {
 
-	private Gyro gyro;
+	private ADXRS450_Gyro gyro;
 	private BuiltInAccelerometer accel;
 	private Encoder leftEnc;
 	private Encoder rightEnc;
@@ -30,7 +31,7 @@ public class Drivetrain extends Subsystem {
 	private boolean slow;
     
     public Drivetrain(){
-    	gyro = new AnalogGyro(RobotMap.Robot.GYRO);
+    	gyro = new ADXRS450_Gyro();
     	accel = new BuiltInAccelerometer();
     	leftEnc = new Encoder(Encoders.LA, Encoders.LB);
     	rightEnc = new Encoder(Encoders.RA, Encoders.RB);
@@ -41,6 +42,8 @@ public class Drivetrain extends Subsystem {
     	backLeft = new Wheel(Talons.BL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	backRight = new Wheel(Talons.BR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	slow = true;
+    	
+    	gyro.calibrate();
     }
 
 	public void tankDrive(double rightSpeed, double leftSpeed) {
@@ -85,13 +88,6 @@ public class Drivetrain extends Subsystem {
 	 */
 	public Gyro getGyro() {
 		return gyro;
-	}
-
-	/**
-	 * @param gyro the gyro to set
-	 */
-	public void setGyro(Gyro gyro) {
-		this.gyro = gyro;
 	}
 
 	public double rightSpeed(){
