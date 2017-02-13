@@ -61,8 +61,8 @@ public class RobotMap {
 		public static final int SHIFTER_R = 6;
 		public static final int PUSHER_F = 2;
 		public static final int PUSHER_R = 5;
-		public static final int CLOSER_F = 3;
-		public static final int CLOSER_R = 4;
+		public static final int CLOSER_F = 4;
+		public static final int CLOSER_R = 3;
 	}
 	public class Distances {
 		public static final double robotHeight = 7.125 ; // half robot height

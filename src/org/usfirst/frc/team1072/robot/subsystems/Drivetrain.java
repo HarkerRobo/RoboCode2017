@@ -7,13 +7,17 @@ import org.usfirst.frc.team1072.robot.RobotMap.PID.Wheels;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
+import org.usfirst.frc.team1072.robot.XboxWrapper;
+import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
 import org.usfirst.frc.team1072.robot.commands.ArcadeDriveCommand;
+import org.usfirst.frc.team1072.robot.commands.DriveCommand;
 import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -35,12 +39,18 @@ public class Drivetrain extends Subsystem {
     	accel = new BuiltInAccelerometer();
     	leftEnc = new Encoder(Encoders.LA, Encoders.LB);
     	rightEnc = new Encoder(Encoders.RA, Encoders.RB);
-    	leftEnc.setDistancePerPulse(6 * Math.PI);
-    	rightEnc.setDistancePerPulse(6 * Math.PI);
-    	frontLeft = new Wheel(Talons.FL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	frontRight = new Wheel(Talons.FR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	backLeft = new Wheel(Talons.BL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
-    	backRight = new Wheel(Talons.BR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
+    	leftEnc.setPIDSourceType(PIDSourceType.kRate);
+    	rightEnc.setPIDSourceType(PIDSourceType.kRate);
+    	//leftEnc.setDistancePerPulse(6 * Math.PI);
+    	//rightEnc.setDistancePerPulse(6 * Math.PI);
+    	frontLeft = new PIDWheel(Talons.FL, leftEnc, true, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D);
+    	frontRight = new PIDWheel(Talons.FR, rightEnc, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D);
+    	backLeft = new PIDWheel(Talons.BL, leftEnc, true, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D);
+    	backRight = new PIDWheel(Talons.BR, rightEnc, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D);
+    	frontLeft.enable();
+    	frontRight.enable();
+    	backLeft.enable();
+    	backRight.enable();
     	slow = true;
     	
     	gyro.calibrate();
@@ -105,6 +115,9 @@ public class Drivetrain extends Subsystem {
 				break;
 			case TANK:
 				setDefaultCommand(new TankDriveCommand());
+				break;
+			case PIDTEST:
+				XboxWrapper.getInstance().toggleWhenPressed(Button.RSTICK, new DriveCommand(0.1, 0.1));
 				break;
 			default:
 				System.err.println("No drive control");

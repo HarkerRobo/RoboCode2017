@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public static enum DriveControl {
-		TANK, ARCADE
+		TANK, ARCADE, PIDTEST
 	}
 	
 	public static final WinchControl winchControl = WinchControl.BUMPERS;
@@ -75,7 +75,7 @@ public class Robot extends IterativeRobot {
 		//raspi = new RaspiNetworker();
 		compress = new Compressor(0);
 		compress.setClosedLoopControl(true);
-		CameraServer.getInstance().startAutomaticCapture();
+		//CameraServer.getInstance().startAutomaticCapture();
 		//raspi.start();
 		//SmartDashboard.putData("H264", new H264Widget());
 		//SmartDashboard.putData("Test Encoders:", new EncoderTest());

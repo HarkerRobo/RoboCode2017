@@ -3,6 +3,9 @@
  */
 package org.usfirst.frc.team1072.robot.subsystems;
 
+import org.usfirst.frc.team1072.robot.RobotMap;
+import org.usfirst.frc.team1072.robot.RobotMap.PID;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.PIDController;
@@ -15,6 +18,14 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 public class PIDWheel extends Wheel {
 	
 	private PIDController pid;
+	
+	public PIDWheel(int port, Encoder encoder){
+		this(port, encoder, false);
+	}
+	
+	public PIDWheel(int port, Encoder encoder, boolean reversed){
+		this(port, encoder, reversed, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D);
+	}
 	
 	/**
 	 * @param port
@@ -48,8 +59,8 @@ public class PIDWheel extends Wheel {
 	}
 	
 	public void toSmartDashboard(String name) {
-		SmartDashboard.putNumber("Speed of " + name, getRate());
-		double ic = SmartDashboard.getNumber("Integral constant" + name);
+		//SmartDashboard.putNumber("Speed of " + name, getRate());
+		/*double ic = SmartDashboard.getNumber("Integral constant" + name);
 		double dc = SmartDashboard.getNumber("Derivative constant" + name);
 		double prc= SmartDashboard.getNumber("Proportional constant" + name);
 		if(ic>1 || ic<0){
@@ -65,6 +76,6 @@ public class PIDWheel extends Wheel {
 			prc = pid.getP();
 		}
 		pid.setPID(prc, ic, dc);
-		
+		*/
 	}
 }
