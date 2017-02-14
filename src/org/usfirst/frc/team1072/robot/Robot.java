@@ -21,6 +21,7 @@ import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1072.robot.subsystems.GearPusher;
+import org.usfirst.frc.team1072.robot.subsystems.Shifter;
 import org.usfirst.frc.team1072.robot.subsystems.Winch;
 //import org.usfirst.team1072.robot.smartDashboard.H264Widget;
 import org.usfirst.frc.team1072.robot.subsystems.Piston;
@@ -70,8 +71,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new Drivetrain();
 		winch = new Winch();
-		push = new GearPusher(Button.X, Button.Y);
-		shifter = new SolenoidSubsystem(Gears.SHIFTER_F, Gears.SHIFTER_R, Button.B);
+		push = new GearPusher();
+		shifter = new Shifter();
 		//raspi = new RaspiNetworker();
 		compress = new Compressor(0);
 		compress.setClosedLoopControl(true);

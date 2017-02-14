@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1072.robot.commands;
 
+import org.usfirst.frc.team1072.robot.Controls;
 import org.usfirst.frc.team1072.robot.OI;
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
@@ -15,8 +16,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TankDriveCommand extends Command {
 	
-	private static double MAX_ACCEL = 0.05;
-	
 	public TankDriveCommand() {
     	requires(Robot.drivetrain);
     }
@@ -27,8 +26,8 @@ public class TankDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double sRight = XboxWrapper.getInstance().getY(Hand.kRight);
-    	double sLeft = XboxWrapper.getInstance().getY(Hand.kLeft);
+    	double sLeft = XboxWrapper.getInstance().getAxis(Controls.TANK_LEFT);
+    	double sRight = XboxWrapper.getInstance().getAxis(Controls.TANK_RIGHT);
 		Robot.drivetrain.tankDrive(sRight, sLeft);
     }
 

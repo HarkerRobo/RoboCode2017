@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
+import org.usfirst.frc.team1072.robot.Controls;
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
 import org.usfirst.frc.team1072.robot.RobotMap.PID;
@@ -112,7 +113,7 @@ public class Drivetrain extends Subsystem {
 				setDefaultCommand(new TankDriveCommand());
 				break;
 			case PIDTEST:
-				XboxWrapper.getInstance().toggleWhenPressed(Button.RSTICK, new DriveCommand(0.1, 0.1));
+				XboxWrapper.getInstance().toggleWhenPressed(Controls.PID_TEST, new DriveCommand(0.1, 0.1));
 				break;
 			default:
 				System.err.println("No drive control");
