@@ -93,7 +93,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		
+		drivetrain.getLeftEnc().reset();
+		drivetrain.getRightEnc().reset();
 	}
 
 	@Override

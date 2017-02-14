@@ -38,8 +38,10 @@ public class Drivetrain extends Subsystem {
     	accel = new BuiltInAccelerometer();
     	leftEnc = new Encoder(Encoders.LA, Encoders.LB);
     	rightEnc = new Encoder(Encoders.RA, Encoders.RB);
-    	leftEnc.setDistancePerPulse(6 * Math.PI);
-    	rightEnc.setDistancePerPulse(6 * Math.PI);
+    	leftEnc.setDistancePerPulse(0.110087234303968548662280932146080546444);
+    	rightEnc.setDistancePerPulse(0.110087234303968548662280932146080546444);
+    	leftEnc.reset();
+    	rightEnc.reset();
     	frontLeft = new Wheel(Talons.FL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	frontRight = new Wheel(Talons.FR, rightEnc/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
     	backLeft = new Wheel(Talons.BL, leftEnc, true/*, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D*/);
@@ -126,10 +128,20 @@ public class Drivetrain extends Subsystem {
     	SmartDashboard.putNumber("Acceleration in X",accel.getX());
     	SmartDashboard.putNumber("Acceleration in Y",accel.getY());
     	SmartDashboard.putNumber("Acceleration in Z",accel.getZ());
-    	SmartDashboard.putNumber("Left Speed", frontLeft.getRate());
-    	SmartDashboard.putNumber("Right Speed", backRight.getRate());
+    	SmartDashboard.putNumber("Left Speed", leftEnc.getRate());
+    	SmartDashboard.putNumber("Right Speed", rightEnc.getRate());
+    	SmartDashboard.putNumber("Left Distance", leftEnc.getDistance());
+    	SmartDashboard.putNumber("Right Distance", rightEnc.getDistance());
     	SmartDashboard.putBoolean("Slow Mode", slow);
     }
+
+	public Encoder getLeftEnc() {
+		return leftEnc;
+	}
+
+	public Encoder getRightEnc() {
+		return rightEnc;
+	}
 
 	public boolean isSlow() {
 		return slow;
