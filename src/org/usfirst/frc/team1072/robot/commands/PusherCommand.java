@@ -34,9 +34,9 @@ public class PusherCommand extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		if(isTimedOut()){
-			if(Robot.push.getPush().get().equals(Value.kForward)){
-				Robot.push.getPush().set(Value.kReverse);
-				setTimeout(0.5);
+			if(Robot.push.getPush().get().equals(Value.kReverse)){
+				Robot.push.getPush().set(Value.kForward);
+				setTimeout(1.0);
 			} else {
 				return true;
 			}
