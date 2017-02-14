@@ -17,6 +17,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 /**
  * @author joelmanning
  *
@@ -49,11 +50,11 @@ public class RaspiNetworker extends Thread {
 	}
 
 	public RaspiNetworker(String ip, int port) {
+		listeners = new ArrayList<JSONListener>();
 		try {
 			socket = new Socket(ip, port);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
-			listeners = new ArrayList<JSONListener>();
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
