@@ -66,6 +66,11 @@ public class Drivetrain extends Subsystem {
 		return right;
 	}
 	
+	public void drive(double leftSpeed, double rightSpeed){
+		left.drive(leftSpeed);
+		right.drive(rightSpeed);
+	}
+	
 	public class TrainSide {
 		
 		private static final double THRESHOLD = 0.05;
