@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team1072.robot;
 
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder;
@@ -10,7 +12,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.f
+rst.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1072.robot.RobotMap.Gears;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
@@ -59,6 +62,8 @@ public class Robot extends IterativeRobot {
 	public static Compressor compress;
 	public static GearPusher push;
 	public static SolenoidSubsystem shifter;
+	public static ADXRS450_Gyro gyro;
+	public static BuiltInAccelerometer accel;
 
 	Command autonomousCommand;
 	//SendableChooser<Command> chooser = new SendableChooser<>();
@@ -74,6 +79,8 @@ public class Robot extends IterativeRobot {
 		winch = new Winch();
 		push = new GearPusher();
 		shifter = new Shifter();
+		gyro = new ADXRS450_Gyro();
+		accel = new BuiltInAccelerometer();
 		//raspi = new RaspiNetworker();
 		compress = new Compressor(0);
 		compress.setClosedLoopControl(true);
