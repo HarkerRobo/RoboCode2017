@@ -1,62 +1,117 @@
+/**
+ * 
+ */
 package org.usfirst.frc.team1072.robot.subsystems;
 
 import org.usfirst.frc.team1072.robot.RobotMap.PID;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
-import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDOutput;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 
-public class PIDDrivetrain extends Subsystem {
-
-	private ADXRS450_Gyro gyro;
-	private BuiltInAccelerometer accel;
-	private PIDSide left;
-	private PIDSide right;
+/**
+ * @author joelmanning
+ *
+ */
+public class PIDDrivetrain extends Drivetrain {
 	
-	public PIDDrivetrain(){
-		gyro = new ADXRS450_Gyro();
-		accel = new BuiltInAccelerometer();
-		left = new PIDSide(Talons.FL, Talons.BL, Encoders.LA, Encoders.LB, false, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D);
-		right = new PIDSide(Talons.FR, Talons.BR, Encoders.RA, Encoders.RB, true, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D);
+	public static final double MAX_SPEED = 30000;
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.usfirst.frc.team1072.robot.subsystems.Drivetrain#initializeSides()
+	 */
+	@Override
+	protected void initializeSides() {
+		left = new PIDTrainSide(Talons.FL, Talons.BL, Encoders.LA, Encoders.LB,
+				true, true, false);
+		right = new PIDTrainSide(Talons.FR, Talons.BR, Encoders.RA,
+				Encoders.RB, false, false, true);
 	}
+	
+	class PIDTrainSide extends TrainSide implements PIDSource, PIDOutput {
+		
+		private PIDController pid;
+		
+		/**
+		 * @param frontChannel
+		 * @param backChannel
+		 * @param encoderA
+		 * @param encoderB
+		 * @param frontReversed
+		 * @param backReversed
+		 * @param encoderReversed
+		 */
+		public PIDTrainSide(int frontChannel, int backChannel, int encoderA,
+				int encoderB, boolean frontReversed, boolean backReversed,
+				boolean encoderReversed) {
+			super(frontChannel, backChannel, encoderA, encoderB, frontReversed,
+					backReversed, encoderReversed);
+			pid = new PIDController(PID.Wheels.P, PID.Wheels.I, PID.Wheels.D, this, this);
+			pid.setInputRange(-40000, 40000);
+			pid.setOutputRange(-1, 1);
+		}
+		
+		/**
+		 * @param frontChannel
+		 * @param backChannel
+		 * @param encoderA
+		 * @param encoderB
+		 */
+		public PIDTrainSide(int frontChannel, int backChannel, int encoderA,
+				int encoderB) {
+			this(frontChannel, backChannel, encoderA, encoderB, false, false, false);
+		}
+		
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * org.usfirst.frc.team1072.robot.subsystems.TrainSide#drive(double)
+		 */
+		@Override
+		public void drive(double speed) {
+			// TODO Auto-generated method stub
+			super.drive(speed);
+		}
 
-    public void initDefaultCommand() {
-        setDefaultCommand(new TankDriveCommand());
-    }
-    
-    public void tankDrive(double leftSpeed, double rightSpeed){
-    	left.setSpeed(leftSpeed);
-    	right.setSpeed(rightSpeed);
-    }
-    
-    public void enable(){
-    	gyro.calibrate();
-    	left.enable();
-    	right.enable();
-    }
+		/* (non-Javadoc)
+		 * @see edu.wpi.first.wpilibj.PIDOutput#pidWrite(double)
+		 */
+		@Override
+		public void pidWrite(double output) {
+			rawDrive(output);
+		}
 
-	public void reset() {
-		gyro.reset();
+		/* (non-Javadoc)
+		 * @see edu.wpi.first.wpilibj.PIDSource#setPIDSourceType(edu.wpi.first.wpilibj.PIDSourceType)
+		 */
+		@Override
+		public void setPIDSourceType(PIDSourceType pidSource) {
+			encoder.setPIDSourceType(pidSource);
+		}
+
+		/* (non-Javadoc)
+		 * @see edu.wpi.first.wpilibj.PIDSource#getPIDSourceType()
+		 */
+		@Override
+		public PIDSourceType getPIDSourceType() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		/* (non-Javadoc)
+		 * @see edu.wpi.first.wpilibj.PIDSource#pidGet()
+		 */
+		@Override
+		public double pidGet() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 	}
-
-	public double getAngle() {
-		return gyro.getAngle();
-	}
-
-	public double getX() {
-		return accel.getX();
-	}
-
-	public double getY() {
-		return accel.getY();
-	}
-
-	public double getZ() {
-		return accel.getZ();
-	}
-    
 }
-

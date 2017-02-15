@@ -18,7 +18,7 @@ import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
 import org.usfirst.frc.team1072.robot.commands.EncoderTest;
 import org.usfirst.frc.team1072.robot.commands.SlowModeCommand;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
-import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
+import org.usfirst.frc.team1072.robot.subsystems.OldDrivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1072.robot.subsystems.GearPusher;
 import org.usfirst.frc.team1072.robot.subsystems.Shifter;
@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
 	public static final WinchControl winchControl = WinchControl.BUMPERS;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
-	public static Drivetrain drivetrain;
+	public static OldDrivetrain drivetrain;
 	public static Piston gearPiston;
 	public static Encoder encoder;
 	public static Winch winch;
@@ -69,7 +69,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		drivetrain = new Drivetrain();
+		drivetrain = new OldDrivetrain();
 		winch = new Winch();
 		push = new GearPusher();
 		shifter = new Shifter();
