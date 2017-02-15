@@ -28,7 +28,7 @@ public class TankDriveCommand extends Command {
     protected void execute() {
     	double sLeft = XboxWrapper.getInstance().getAxis(Controls.TANK_LEFT);
     	double sRight = XboxWrapper.getInstance().getAxis(Controls.TANK_RIGHT);
-		Robot.drivetrain.tankDrive(sRight, sLeft);
+		Robot.drivetrain.drive(sRight, sLeft);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,7 +38,7 @@ public class TankDriveCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.tankDrive(0, 0);
+    	Robot.drivetrain.drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same

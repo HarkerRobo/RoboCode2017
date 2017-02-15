@@ -12,15 +12,15 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.f
-rst.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 import org.usfirst.frc.team1072.robot.RobotMap.Gears;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
 import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
-import org.usfirst.frc.team1072.robot.commands.EncoderTest;
 import org.usfirst.frc.team1072.robot.commands.SlowModeCommand;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
+import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.OldDrivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1072.robot.subsystems.GearPusher;
@@ -54,9 +54,8 @@ public class Robot extends IterativeRobot {
 	public static final WinchControl winchControl = WinchControl.BUMPERS;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
-	public static PIDDrivetrain drivetrain;
+	public static Drivetrain drivetrain;
 	public static Piston gearPiston;
-	public static Encoder encoder;
 	public static Winch winch;
 	//public static RaspiNetworker raspi;
 	public static Compressor compress;

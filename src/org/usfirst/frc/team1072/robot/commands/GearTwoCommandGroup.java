@@ -10,7 +10,7 @@ public class GearTwoCommandGroup extends CommandGroup {
 	double gearTwoAngle = 120.0;
 	
 	public GearTwoCommandGroup() {
-		double startAngle = Robot.drivetrain.getGyro().getAngle();
+		double startAngle = Robot.gyro.getAngle();
 		addSequential(new MoveDistanceCommand(gearTwoDistance));
 		addSequential(new AngleTurnCommand(gearTwoAngle - Robot.drivetrain.getGyro().getAngle() + startAngle));
 	}

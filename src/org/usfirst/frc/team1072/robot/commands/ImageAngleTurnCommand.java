@@ -29,7 +29,7 @@ public class ImageAngleTurnCommand extends Command {
 //		gearY = ImageProcessing.getGearY();
 		sum += prevError;
 		currentError = imWidth/2 - gearX;
-		Robot.drivetrain.tankDrive(kp*currentError + ki*sum + kd*(currentError - prevError),
+		Robot.drivetrain.drive(kp*currentError + ki*sum + kd*(currentError - prevError),
 				-(kp*currentError + ki*sum + kd*(currentError - prevError)));
 		prevError = currentError;
 	}

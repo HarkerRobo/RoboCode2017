@@ -10,6 +10,7 @@ import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -71,6 +72,11 @@ public class Drivetrain extends Subsystem {
 		right.drive(rightSpeed);
 	}
 	
+	public void toSmartDashboard(){
+		left.toSmartDashboard("Left");
+		right.toSmartDashboard("Right");
+	}
+	
 	public class TrainSide {
 		
 		private static final double THRESHOLD = 0.05;
@@ -88,6 +94,14 @@ public class Drivetrain extends Subsystem {
 			this(frontChannel, backChannel, encoderA, encoderB, false, false, false);
 		}
 		
+		/**
+		 * @param string
+		 */
+		public void toSmartDashboard(String name) {
+			SmartDashboard.putNumber(name + " Speed", getRate());
+			SmartDashboard.putNumber(name + " Distance", getDistance());
+		}
+
 		public TrainSide(int frontChannel, int backChannel, int encoderA,
 				int encoderB, boolean frontReversed, boolean backReversed, boolean encoderReversed) {
 			encoder = new Encoder(encoderA, encoderB);

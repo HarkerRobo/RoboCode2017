@@ -15,7 +15,8 @@ public class SlowModeCommand extends InstantCommand {
 
     // Called once when the command executes
     protected void initialize() {
-    	Robot.drivetrain.setSlow(!Robot.drivetrain.isSlow());
+    	Robot.drivetrain.getLeft().setCoefficient(0.5/Robot.drivetrain.getLeft().getCoefficient());
+    	Robot.drivetrain.getRight().setCoefficient(0.5/Robot.drivetrain.getRight().getCoefficient());
     }
 
 }

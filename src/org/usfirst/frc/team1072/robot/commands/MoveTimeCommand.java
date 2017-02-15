@@ -22,7 +22,7 @@ public class MoveTimeCommand extends TimedCommand {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    		Robot.drivetrain.tankDrive(speed, speed);
+    		Robot.drivetrain.drive(speed, speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,7 +36,7 @@ public class MoveTimeCommand extends TimedCommand {
 
     // Called once after isFinished returns true
     protected void end() {
-    		Robot.drivetrain.tankDrive(0, 0);
+    		Robot.drivetrain.drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
