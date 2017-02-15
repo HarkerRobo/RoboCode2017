@@ -21,25 +21,31 @@ public class AutonomousGear3CommandGroup extends CommandGroup {
 	public static double normalCurrent = 20; //normal value for talon SRX current
 	public static double spikeCurrent = 60; //min value for current spike
 	public static double velocityToGetCurrentSpike = 40;
-	
+
 	private int tapeWidthLeft, tapeWidthRight; 
 	
-    public AutonomousGear3CommandGroup() {
-    	addSequential(new MoveDistanceCommand(initDistance));
-    	addSequential(new AngleTurnCommand(60));
-    	addSequential(new MoveDistanceCommand(perpGearDistance));
-    	while (!currentSpike()) {
-    		Robot.drivetrain.drive(velocityToGetCurrentSpike, velocityToGetCurrentSpike);
-    	}
-    	Robot.drivetrain.drive(0, 0);
-    	//Release gear here, drive back
-    }
-    
-    public boolean currentSpike() {
-    	if (Robot.drivetrain.getLeft().getAverageOutputCurrent() >= spikeCurrent) {
-    		return true;
-    	}
-    	return false;
-    }
-    
+	private boolean reversed = false;
+
+	public AutonomousGear3CommandGroup() {
+		addSequential(new MoveDistanceCommand(initDistance));
+		addSequential(new AngleTurnCommand(reversed ? -1 : 1 * 60));
+		addSequential(new MoveDistanceCommand(perpGearDistance));
+		while (!currentSpike()) {
+			Robot.drivetrain.drive(velocityToGetCurrentSpike, velocityToGetCurrentSpike);
+		}
+		Robot.drivetrain.drive(0, 0);
+		//Release gear here, drive back
+	}
+
+	public void setReversed(boolean _reversed){
+		reversed = _reversed;
+	}
+	
+	public boolean currentSpike() {
+		if (Robot.drivetrain.getLeft().getAverageOutputCurrent() >= spikeCurrent) {
+			return true;
+		}
+		return false;
+	}
+
 }
