@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutonPistonCommand extends Command {
 	
 	private double gearDistance = 10; // inches
+	double errMargin = 0.1;
 
 	@Override
 	protected void initialize() {
@@ -16,7 +17,7 @@ public class AutonPistonCommand extends Command {
 
 	@Override
 	protected void execute() {
-		if ((Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2 >= gearDistance) {
+		if (noError((Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2 - gearDistance)) {
 			Robot.gearPiston.putIn();
 		}
 	}
@@ -38,5 +39,13 @@ public class AutonPistonCommand extends Command {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private boolean noError(double err) {
+    	if (err <= errMargin && err >= -errMargin) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
 
 }
