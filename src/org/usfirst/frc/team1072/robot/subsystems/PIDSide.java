@@ -65,9 +65,9 @@ public class PIDSide implements PIDSource, PIDOutput{
 	public double pidGet() {
 		switch(sourceType){
 			case kRate:
-				return encoder.getRate();
+				return getRate();
 			case kDisplacement:
-				return encoder.getDistance();
+				return getDistance();
 			default:
 				return 0;
 		}
@@ -85,5 +85,13 @@ public class PIDSide implements PIDSource, PIDOutput{
 			speed = -speed;
 		}
 		pid.setSetpoint(speed);
+	}
+	
+	public double getRate(){
+		return reversed ? -encoder.getRate() : encoder.getRate();
+	}
+	
+	public double getDistance(){
+		return reversed ? -encoder.getDistance() : encoder.getDistance();
 	}
 }

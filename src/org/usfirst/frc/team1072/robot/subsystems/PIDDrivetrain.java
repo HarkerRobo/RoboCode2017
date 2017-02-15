@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
+import org.usfirst.frc.team1072.robot.RobotMap.PID;
+import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
+import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
 import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -12,6 +15,13 @@ public class PIDDrivetrain extends Subsystem {
 	private BuiltInAccelerometer accel;
 	private PIDSide left;
 	private PIDSide right;
+	
+	public PIDDrivetrain(){
+		gyro = new ADXRS450_Gyro();
+		accel = new BuiltInAccelerometer();
+		left = new PIDSide(Talons.FL, Talons.BL, Encoders.LA, Encoders.LB, false, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D);
+		right = new PIDSide(Talons.FR, Talons.BR, Encoders.RA, Encoders.RB, true, PID.Wheels.P, PID.Wheels.I, PID.Wheels.D);
+	}
 
     public void initDefaultCommand() {
         setDefaultCommand(new TankDriveCommand());
