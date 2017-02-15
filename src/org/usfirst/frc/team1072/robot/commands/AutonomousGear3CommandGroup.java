@@ -26,7 +26,7 @@ public class AutonomousGear3CommandGroup extends CommandGroup {
 	
     public AutonomousGear3CommandGroup() {
     	addSequential(new MoveDistanceCommand(initDistance));
-    	addSequential(new AngleTurnCommand(300)); // assuming that the robot turns clockwise
+    	addSequential(new AngleTurnCommand(60));
     	addSequential(new MoveDistanceCommand(perpGearDistance));
     	while (!currentSpike()) {
     		Robot.drivetrain.drive(velocityToGetCurrentSpike, velocityToGetCurrentSpike);
