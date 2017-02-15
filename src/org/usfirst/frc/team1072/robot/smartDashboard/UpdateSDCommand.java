@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import org.usfirst.frc.team1072.robot.Robot;
-import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
+import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGear2;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,13 +17,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Ashwin Reddy
  */
 public class UpdateSDCommand extends Command {
-	AutonomousCommandGearTwo autonomousCommand2;
+	AutonomousCommandGear2 autonomousCommand2;
 	BufferedImage image;
 	private int port;
 	private String ip;
 
     public UpdateSDCommand() {
-    	autonomousCommand2 = new AutonomousCommandGearTwo();
+    	autonomousCommand2 = new AutonomousCommandGear2();
     }
 
     protected void initialize() {

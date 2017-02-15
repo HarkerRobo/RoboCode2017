@@ -9,7 +9,7 @@ import org.usfirst.frc.team1072.robot.RobotMap.PID;
 /**
  *
  */
-public class AutonomousCommandGearTwo extends Command {
+public class AutonomousCommandGear2 extends Command {
 	
 	double gearTwoDistance = 187.8; // inches
 	double kp = PID.MoveDist.P, ki = PID.MoveDist.I, kd = PID.MoveDist.D;
@@ -17,7 +17,7 @@ public class AutonomousCommandGearTwo extends Command {
 	double prevError = gearTwoDistance;
 	double currentError;
 	
-	public AutonomousCommandGearTwo() {
+	public AutonomousCommandGear2() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.drivetrain);
 	}
