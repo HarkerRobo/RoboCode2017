@@ -3,7 +3,7 @@ package org.usfirst.frc.team1072.robot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 
-import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
+import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGear2;
 
 /**
  * This class is the glue that binds the controls on the physical operator
