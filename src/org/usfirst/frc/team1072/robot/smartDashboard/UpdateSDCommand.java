@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import org.usfirst.frc.team1072.robot.Robot;
-import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearOne;
 import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGearTwo;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -18,19 +17,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author Ashwin Reddy
  */
 public class UpdateSDCommand extends Command {
-	AutonomousCommandGearOne autonomousCommand1;
 	AutonomousCommandGearTwo autonomousCommand2;
 	BufferedImage image;
 	private int port;
 	private String ip;
 
     public UpdateSDCommand() {
-    	autonomousCommand1 = new AutonomousCommandGearOne(0);
     	autonomousCommand2 = new AutonomousCommandGearTwo();
     }
 
     protected void initialize() {
-    	SmartDashboard.putData("Autonomous Command Gear 1", autonomousCommand1);
     	SmartDashboard.putData("Autonomous Command Gear 2", autonomousCommand2);
     }
 
@@ -53,7 +49,6 @@ public class UpdateSDCommand extends Command {
     }
 
     protected void end() {
-    	SmartDashboard.putString("Autonomous Command Gear 1", "no longer running");
     	SmartDashboard.putString("Autonomous Command Gear 2", "no longer running");
     }
 
