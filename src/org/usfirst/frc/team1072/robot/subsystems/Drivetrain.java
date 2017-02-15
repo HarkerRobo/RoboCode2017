@@ -88,6 +88,7 @@ class TrainSide {
 			int encoderB, boolean frontReversed, boolean backReversed, boolean encoderReversed) {
 		encoder = new Encoder(encoderA, encoderB);
 		encoder.setReverseDirection(encoderReversed);
+    	encoder.setDistancePerPulse(0.110087234303968548662280932146080546444);
 		initializeTalons(frontChannel, backChannel);
 		this.frontReversed = frontReversed;
 		this.backReversed = backReversed;

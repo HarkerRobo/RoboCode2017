@@ -53,7 +53,7 @@ public class PIDDrivetrain extends Drivetrain {
 			super(frontChannel, backChannel, encoderA, encoderB, frontReversed,
 					backReversed, encoderReversed);
 			pid = new PIDController(PID.Wheels.P, PID.Wheels.I, PID.Wheels.D, this, this);
-			pid.setInputRange(-40000, 40000);
+			pid.setInputRange(-MAX_SPEED, MAX_SPEED);
 			pid.setOutputRange(-1, 1);
 		}
 		
@@ -76,8 +76,7 @@ public class PIDDrivetrain extends Drivetrain {
 		 */
 		@Override
 		public void drive(double speed) {
-			// TODO Auto-generated method stub
-			super.drive(speed);
+			pid.setSetpoint(speedAdjustments(speed) * MAX_SPEED);
 		}
 
 		/* (non-Javadoc)
@@ -101,8 +100,7 @@ public class PIDDrivetrain extends Drivetrain {
 		 */
 		@Override
 		public PIDSourceType getPIDSourceType() {
-			// TODO Auto-generated method stub
-			return null;
+			return encoder.getPIDSourceType();
 		}
 
 		/* (non-Javadoc)
@@ -110,8 +108,7 @@ public class PIDDrivetrain extends Drivetrain {
 		 */
 		@Override
 		public double pidGet() {
-			// TODO Auto-generated method stub
-			return 0;
+			return encoder.pidGet();
 		}
 	}
 }
