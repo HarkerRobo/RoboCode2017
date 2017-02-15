@@ -21,6 +21,7 @@ import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.OldDrivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1072.robot.subsystems.GearPusher;
+import org.usfirst.frc.team1072.robot.subsystems.PIDDrivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.Shifter;
 import org.usfirst.frc.team1072.robot.subsystems.Winch;
 //import org.usfirst.team1072.robot.smartDashboard.H264Widget;
@@ -50,7 +51,7 @@ public class Robot extends IterativeRobot {
 	public static final WinchControl winchControl = WinchControl.BUMPERS;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
-	public static OldDrivetrain drivetrain;
+	public static PIDDrivetrain drivetrain;
 	public static Piston gearPiston;
 	public static Encoder encoder;
 	public static Winch winch;
@@ -69,7 +70,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		drivetrain = new OldDrivetrain();
+		drivetrain = new PIDDrivetrain();
 		winch = new Winch();
 		push = new GearPusher();
 		shifter = new Shifter();
@@ -94,8 +95,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		drivetrain.getLeftEnc().reset();
-		drivetrain.getRightEnc().reset();
+		drivetrain.getLeft().reset();
+		drivetrain.getRight().reset();
 	}
 
 	@Override

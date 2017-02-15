@@ -8,6 +8,7 @@ import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
 
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDInterface;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
@@ -19,6 +20,11 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 public class PIDDrivetrain extends Drivetrain {
 	
 	public static final double MAX_SPEED = 150;
+	
+	public void enable(){
+		((PIDTrainSide) left).enable();
+		((PIDTrainSide) right).enable();
+	}
 	
 	/*
 	 * (non-Javadoc)
@@ -34,7 +40,7 @@ public class PIDDrivetrain extends Drivetrain {
 				Encoders.RB, false, false, true);
 	}
 	
-	class PIDTrainSide extends TrainSide implements PIDSource, PIDOutput {
+	public class PIDTrainSide extends TrainSide implements PIDSource, PIDOutput {
 		
 		private PIDController pid;
 		
@@ -110,5 +116,14 @@ public class PIDDrivetrain extends Drivetrain {
 		public double pidGet() {
 			return encoder.pidGet();
 		}
+
+		/**
+		 * 
+		 * @see edu.wpi.first.wpilibj.PIDController#enable()
+		 */
+		public void enable() {
+			pid.enable();
+		}
+		
 	}
 }
