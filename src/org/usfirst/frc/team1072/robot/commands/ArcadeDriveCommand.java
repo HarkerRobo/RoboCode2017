@@ -24,7 +24,7 @@ public class ArcadeDriveCommand extends Command {
     	double x = XboxWrapper.getInstance().getX(Hand.kRight);
     	double y = XboxWrapper.getInstance().getY(Hand.kRight);
     	double k = Math.max(1.0, Math.max(Math.abs(y+x), Math.abs(y-x)));
-    	Robot.drivetrain.tankDrive((y - flip * x * Math.abs(x))/k, (y + flip * x * Math.abs(x))/k);
+    	Robot.drivetrain.drive((y - flip * x * Math.abs(x))/k, (y + flip * x * Math.abs(x))/k);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -34,7 +34,7 @@ public class ArcadeDriveCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.tankDrive(0, 0);
+    	Robot.drivetrain.drive(0, 0);
     }
     
     public void setFlip(boolean b){

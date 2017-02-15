@@ -25,10 +25,8 @@ public class AutonomousCommandGearTwo extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-    	Robot.drivetrain.getBackRight().reset();
-    	Robot.drivetrain.getBackLeft().reset();
-    	Robot.drivetrain.getFrontRight().reset();
-    	Robot.drivetrain.getFrontLeft().reset();
+    	Robot.drivetrain.getRight().reset();
+    	Robot.drivetrain.getLeft().reset();
     	Robot.encoder.reset();
 	}
 
@@ -37,7 +35,7 @@ public class AutonomousCommandGearTwo extends Command {
 	protected void execute() {
 		sum += prevError;
 		currentError = gearTwoDistance - Robot.encoder.getDistance();
-		Robot.drivetrain.tankDrive(kp*currentError + ki*sum + kd*(currentError - prevError),
+		Robot.drivetrain.drive(kp*currentError + ki*sum + kd*(currentError - prevError),
 				kp*currentError + ki*sum + kd*(currentError - prevError));
 		prevError = currentError;
 	}
@@ -55,7 +53,7 @@ public class AutonomousCommandGearTwo extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		Robot.drivetrain.tankDrive(0, 0);
+		Robot.drivetrain.drive(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same

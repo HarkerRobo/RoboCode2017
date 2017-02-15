@@ -32,26 +32,18 @@ public class AutonomousCommandGear3 extends Command{
 	double distance;
 
 	protected void initialize(){
-		Robot.drivetrain.getBackRight().reset();
-		Robot.drivetrain.getBackLeft().reset();
-		Robot.drivetrain.getFrontRight().reset();
-		Robot.drivetrain.getFrontLeft().reset();
+		Robot.drivetrain.getRight().reset();
+		Robot.drivetrain.getLeft().reset();
 		Robot.encoder.reset();
 
 		moveFirstStretch();
 		AngleTurnCommand ATC = new AngleTurnCommand(initAngle());
-		Robot.drivetrain.getBackRight().set(1);
-		Robot.drivetrain.getBackLeft().set(1);
-		Robot.drivetrain.getFrontRight().set(1);
-		Robot.drivetrain.getFrontLeft().set(1);
+		Robot.drivetrain.drive(1, 1);
 
 	}
 	protected void execute(){
 		if(isDone()||currentSpike()){
-			Robot.drivetrain.getBackRight().set(0);
-			Robot.drivetrain.getBackLeft().set(0);
-			Robot.drivetrain.getFrontRight().set(0);
-			Robot.drivetrain.getFrontLeft().set(0);
+			Robot.drivetrain.drive(0, 0);
 			return;
 		}
 
@@ -70,7 +62,7 @@ public class AutonomousCommandGear3 extends Command{
 	public void moveFirstStretch(){
 		sum += prevError;
 		currentError = initDistance - Robot.encoder.getDistance();
-		Robot.drivetrain.tankDrive(kp*currentError + ki*sum + kd*(currentError - prevError),
+		Robot.drivetrain.drive(kp*currentError + ki*sum + kd*(currentError - prevError),
 				kp*currentError + ki*sum + kd*(currentError - prevError));
 		prevError = currentError;
 	}

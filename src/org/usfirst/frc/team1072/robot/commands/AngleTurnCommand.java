@@ -22,7 +22,7 @@ public class AngleTurnCommand extends Command {
 	public AngleTurnCommand(double angle){
     		this.angle = angle;
     		prevError = angle;
-    		initialAngle = Robot.drivetrain.getGyro().getAngle();
+    		initialAngle = Robot.gyro.getAngle();
     }
 
     // Called just before this Command runs the first time
@@ -33,20 +33,20 @@ public class AngleTurnCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	sum += prevError;
-		currentError = angle - (Robot.drivetrain.getGyro().getAngle() - initialAngle);
-		Robot.drivetrain.tankDrive(kp*currentError + ki*sum + kd*(currentError - prevError),
+		currentError = angle - (Robot.gyro.getAngle() - initialAngle);
+		Robot.drivetrain.drive(kp*currentError + ki*sum + kd*(currentError - prevError),
 				-(kp*currentError + ki*sum + kd*(currentError - prevError)));
 		prevError = currentError;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return noError((Robot.drivetrain.getGyro().getAngle() - initialAngle) - angle);
+    	return noError((Robot.gyro.getAngle() - initialAngle) - angle);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.tankDrive(0, 0);
+    	Robot.drivetrain.drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
