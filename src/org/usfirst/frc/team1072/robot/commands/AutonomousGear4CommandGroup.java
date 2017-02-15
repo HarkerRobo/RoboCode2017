@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutonomousGear3CommandGroup extends CommandGroup {
+public class AutonomousGear4CommandGroup extends CommandGroup {
 	public static double robotHeight = 7.125 ; // half robot height
 	public static double robotWidth = 15; // half robot width
 	public static double hexToField = 162; // center of hexagon to edge of field
@@ -24,9 +24,9 @@ public class AutonomousGear3CommandGroup extends CommandGroup {
 	
 	private int tapeWidthLeft, tapeWidthRight; 
 	
-    public AutonomousGear3CommandGroup() {
+    public AutonomousGear4CommandGroup() {
     	addSequential(new MoveDistanceCommand(initDistance));
-    	addSequential(new AngleTurnCommand(300)); // assuming that the robot turns clockwise
+    	addSequential(new AngleTurnCommand(60));
     	addSequential(new MoveDistanceCommand(perpGearDistance));
     	while (!currentSpike()) {
     		Robot.drivetrain.setRobotSpeed(velocityToGetCurrentSpike);
