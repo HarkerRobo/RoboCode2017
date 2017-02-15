@@ -111,6 +111,7 @@ public class Drivetrain extends Subsystem {
 			this.frontReversed = frontReversed;
 			this.backReversed = backReversed;
 			this.encoderReversed = encoderReversed;
+			this.coefficient = Controls.coefficient;
 		}
 		
 		protected void initializeTalons(int frontChannel, int backChannel) {

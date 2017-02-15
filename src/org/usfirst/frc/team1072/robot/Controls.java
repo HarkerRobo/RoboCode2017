@@ -30,4 +30,6 @@ public class Controls {
 	public static final Button PUSHER = Button.X;
 	public static final Button CLOSER = Button.Y;
 	public static final Button SHIFTER = Button.B;
+	
+	public static final double coefficient = 1.0;
 }

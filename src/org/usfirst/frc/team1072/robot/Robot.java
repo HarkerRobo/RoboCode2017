@@ -54,7 +54,7 @@ public class Robot extends IterativeRobot {
 	public static final WinchControl winchControl = WinchControl.BUMPERS;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
-	public static Drivetrain drivetrain;
+	public static PIDDrivetrain drivetrain;
 	public static Piston gearPiston;
 	public static Winch winch;
 	//public static RaspiNetworker raspi;
@@ -103,6 +103,7 @@ public class Robot extends IterativeRobot {
 	public void disabledInit() {
 		drivetrain.getLeft().reset();
 		drivetrain.getRight().reset();
+		drivetrain.disable();
 	}
 
 	@Override
@@ -112,9 +113,9 @@ public class Robot extends IterativeRobot {
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
+	 * between different autks with the Java SmartDashboard. If you prefer the
+	 * LabVIEW Dashboaonomous modes using the dashboard. The sendable
+	 * chooser code worrd, remove all of the chooser code and uncomment the
 	 * getString code to get the auto name from the text box below the Gyro
 	 *
 	 * You can add additional auto modes by adding additional commands to the
@@ -156,6 +157,7 @@ public class Robot extends IterativeRobot {
 		UpdateSDCommand sdc = new UpdateSDCommand();
 		sdc.start();
 		XboxWrapper.getInstance().whenPressed(Button.A, new SlowModeCommand());
+		Robot.drivetrain.enable();
 	}
 
 	/**

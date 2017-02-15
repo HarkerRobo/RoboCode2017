@@ -3,6 +3,7 @@ package org.usfirst.frc.team1072.robot.subsystems;
 import org.usfirst.frc.team1072.robot.RobotMap.PID;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
+import org.usfirst.frc.team1072.robot.subsystems.PIDDrivetrain.PIDTrainSide;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDInterface;
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class PIDDrivetrain extends Drivetrain {
 	
-	public static final double MAX_SPEED = 150;
+	public static final double MAX_SPEED = 160;
 	
 	public void enable(){
 		((PIDTrainSide) left).enable();
@@ -36,6 +37,11 @@ public class PIDDrivetrain extends Drivetrain {
 				true, true, false);
 		right = new PIDTrainSide(Talons.FR, Talons.BR, Encoders.RA,
 				Encoders.RB, false, false, true);
+	}
+	
+	public void disable() {
+		((PIDTrainSide) left).disable();
+		((PIDTrainSide) right).disable();
 	}
 	
 	public class PIDTrainSide extends TrainSide implements PIDSource, PIDOutput {
@@ -58,6 +64,7 @@ public class PIDDrivetrain extends Drivetrain {
 			pid = new PIDController(PID.Wheels.P, PID.Wheels.I, PID.Wheels.D, this, this);
 			pid.setInputRange(-MAX_SPEED, MAX_SPEED);
 			pid.setOutputRange(-1, 1);
+			this.setPIDSourceType(PIDSourceType.kRate);
 		}
 		
 		/**
@@ -80,6 +87,7 @@ public class PIDDrivetrain extends Drivetrain {
 		@Override
 		public void drive(double speed) {
 			pid.setSetpoint(speedAdjustments(speed) * MAX_SPEED);
+//			System.out.println("setpoint: " + pid.getSetpoint());
 		}
 
 		/* (non-Javadoc)
@@ -88,6 +96,7 @@ public class PIDDrivetrain extends Drivetrain {
 		@Override
 		public void pidWrite(double output) {
 			rawDrive(output);
+			System.out.println("pidoutput: " + output);
 		}
 
 		/* (non-Javadoc)
@@ -111,6 +120,7 @@ public class PIDDrivetrain extends Drivetrain {
 		 */
 		@Override
 		public double pidGet() {
+			System.out.println("pidGet: " + encoder.pidGet());
 			return encoder.pidGet();
 		}
 
@@ -128,6 +138,10 @@ public class PIDDrivetrain extends Drivetrain {
 			double _I = SmartDashboard.getNumber(name + "I Constant", pid.getI());
 			double _D = SmartDashboard.getNumber(name + "D Constant", pid.getD());
 			pid.setPID(_P, _I, _D);
+		}
+		
+		public void disable() {
+			pid.disable();
 		}
 		
 	}

@@ -29,6 +29,7 @@ public class TankDriveCommand extends Command {
     	double sLeft = XboxWrapper.getInstance().getAxis(Controls.TANK_LEFT);
     	double sRight = XboxWrapper.getInstance().getAxis(Controls.TANK_RIGHT);
 		Robot.drivetrain.drive(sRight, sLeft);
+//		System.out.println("left: " + sLeft + ", right: " + sRight);
     }
 
     // Make this return true when this Command no longer needs to run execute()
