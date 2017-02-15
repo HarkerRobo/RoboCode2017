@@ -5,7 +5,7 @@ import org.usfirst.frc.team1072.robot.RobotMap.PID;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *@author cravuri
  */
 public class MoveDistanceCommand extends Command {
 	private double distance;
