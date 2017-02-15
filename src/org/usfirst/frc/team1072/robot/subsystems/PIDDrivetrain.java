@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  */
 public class PIDDrivetrain extends Drivetrain {
 	
-	public static final double MAX_SPEED = 30000;
+	public static final double MAX_SPEED = 150;
 	
 	/*
 	 * (non-Javadoc)
