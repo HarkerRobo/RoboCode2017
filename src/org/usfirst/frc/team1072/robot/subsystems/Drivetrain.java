@@ -218,5 +218,9 @@ public class Drivetrain extends Subsystem {
 		public void setCoefficient(double coefficient) {
 			this.coefficient = coefficient;
 		}
+		
+		public double getAverageOutputCurrent(){
+			return (front.getOutputCurrent() + back.getOutputCurrent())/2;
+		}
 	}
 }

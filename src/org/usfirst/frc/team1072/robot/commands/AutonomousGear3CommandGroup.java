@@ -36,7 +36,7 @@ public class AutonomousGear3CommandGroup extends CommandGroup {
     }
     
     public boolean currentSpike() {
-    	if (Robot.drivetrain.getLeft().getOutputCurrent() >= spikeCurrent) {
+    	if (Robot.drivetrain.getLeft().getAverageOutputCurrent() >= spikeCurrent) {
     		return true;
     	}
     	return false;

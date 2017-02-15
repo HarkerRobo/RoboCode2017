@@ -16,8 +16,7 @@ public class AutonPistonCommand extends Command {
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
-		if (Robot.encoder.getDistance() == gearDistance) {
+		if ((Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2 >= gearDistance) {
 			Robot.gearPiston.putIn();
 		}
 	}

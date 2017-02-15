@@ -34,7 +34,6 @@ public class AutonomousCommandGear3 extends Command{
 	protected void initialize(){
 		Robot.drivetrain.getRight().reset();
 		Robot.drivetrain.getLeft().reset();
-		Robot.encoder.reset();
 
 		moveFirstStretch();
 		AngleTurnCommand ATC = new AngleTurnCommand(initAngle());
@@ -61,7 +60,7 @@ public class AutonomousCommandGear3 extends Command{
 
 	public void moveFirstStretch(){
 		sum += prevError;
-		currentError = initDistance - Robot.encoder.getDistance();
+		currentError = initDistance - (Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2;
 		Robot.drivetrain.drive(kp*currentError + ki*sum + kd*(currentError - prevError),
 				kp*currentError + ki*sum + kd*(currentError - prevError));
 		prevError = currentError;

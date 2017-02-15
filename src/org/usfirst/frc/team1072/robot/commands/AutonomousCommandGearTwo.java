@@ -27,14 +27,13 @@ public class AutonomousCommandGearTwo extends Command {
 	protected void initialize() {
     	Robot.drivetrain.getRight().reset();
     	Robot.drivetrain.getLeft().reset();
-    	Robot.encoder.reset();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		sum += prevError;
-		currentError = gearTwoDistance - Robot.encoder.getDistance();
+		currentError = gearTwoDistance - (Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2;
 		Robot.drivetrain.drive(kp*currentError + ki*sum + kd*(currentError - prevError),
 				kp*currentError + ki*sum + kd*(currentError - prevError));
 		prevError = currentError;
@@ -43,7 +42,7 @@ public class AutonomousCommandGearTwo extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		if (Robot.encoder.getDistance() >= gearTwoDistance) {
+		if ((Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2 >= gearTwoDistance) {
 			AngleTurnCommand ATC = new AngleTurnCommand(120);
 			return true;
 		}
