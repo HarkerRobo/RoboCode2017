@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.usfirst.frc.team1072.robot.subsystems;
 
 import org.usfirst.frc.team1072.robot.RobotMap.PID;
@@ -12,6 +9,7 @@ import edu.wpi.first.wpilibj.PIDInterface;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @author joelmanning
@@ -53,11 +51,10 @@ public class PIDDrivetrain extends Drivetrain {
 		 * @param backReversed
 		 * @param encoderReversed
 		 */
-		public PIDTrainSide(int frontChannel, int backChannel, int encoderA,
-				int encoderB, boolean frontReversed, boolean backReversed,
-				boolean encoderReversed) {
-			super(frontChannel, backChannel, encoderA, encoderB, frontReversed,
-					backReversed, encoderReversed);
+		public PIDTrainSide(int frontChannel, int backChannel, int encoderA, int encoderB, 
+							boolean frontReversed, boolean backReversed, boolean encoderReversed) {
+			super(frontChannel, backChannel, encoderA, encoderB, 
+				frontReversed, backReversed, encoderReversed);
 			pid = new PIDController(PID.Wheels.P, PID.Wheels.I, PID.Wheels.D, this, this);
 			pid.setInputRange(-MAX_SPEED, MAX_SPEED);
 			pid.setOutputRange(-1, 1);
@@ -69,8 +66,8 @@ public class PIDDrivetrain extends Drivetrain {
 		 * @param encoderA
 		 * @param encoderB
 		 */
-		public PIDTrainSide(int frontChannel, int backChannel, int encoderA,
-				int encoderB) {
+		public PIDTrainSide(int frontChannel, int backChannel, 
+							int encoderA, int encoderB) {
 			this(frontChannel, backChannel, encoderA, encoderB, false, false, false);
 		}
 		
@@ -123,6 +120,14 @@ public class PIDDrivetrain extends Drivetrain {
 		 */
 		public void enable() {
 			pid.enable();
+		}
+
+		@Override
+		public void toSmartDashboard(String name) {
+			double _P = SmartDashboard.getNumber(name + "P Constant", pid.getP());
+			double _I = SmartDashboard.getNumber(name + "I Constant", pid.getI());
+			double _D = SmartDashboard.getNumber(name + "D Constant", pid.getD());
+			pid.setPID(_P, _I, _D);
 		}
 		
 	}
