@@ -9,11 +9,5 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *@author Ashwin Reddy
  */
 public class AutonomousGear1CommandGroup extends CommandGroup {
-	
-	public static double gearOneDistance = 112; // inches
-	public static double kp = PID.MoveDist.P, ki = PID.MoveDist.I, kd = PID.MoveDist.D;
-	
-    public AutonomousGear1CommandGroup() {
-    	addSequential(new MoveDistanceCommand(gearOneDistance));
-    }
+	// need to do this and gear5
 }
