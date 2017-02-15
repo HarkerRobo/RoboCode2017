@@ -1,14 +1,14 @@
 package org.usfirst.frc.team1072.robot.commands;
 
 import org.usfirst.frc.team1072.robot.Robot;
-import org.usfirst.frc.team1072.robot.subsystems.OldDrivetrain;
+import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AutonomousGear3CommandGroup extends CommandGroup {
+public class AutonomousGear2CommandGroup extends CommandGroup {
 	public static double robotHeight = 7.125 ; // half robot height
 	public static double robotWidth = 15; // half robot width
 	public static double hexToField = 162; // center of hexagon to edge of field
@@ -24,19 +24,17 @@ public class AutonomousGear3CommandGroup extends CommandGroup {
 	
 	private int tapeWidthLeft, tapeWidthRight; 
 	
-    public AutonomousGear3CommandGroup() {
+    public AutonomousGear2CommandGroup() {
     	addSequential(new MoveDistanceCommand(initDistance));
-    	addSequential(new AngleTurnCommand(300)); // assuming that the robot turns clockwise
-    	addSequential(new MoveDistanceCommand(perpGearDistance));
     	while (!currentSpike()) {
-    		Robot.drivetrain.drive(velocityToGetCurrentSpike, velocityToGetCurrentSpike);
+    		Robot.drivetrain.setRobotSpeed(velocityToGetCurrentSpike);
     	}
-    	Robot.drivetrain.drive(0, 0);
+    	Robot.drivetrain.setRobotSpeed(0);
     	//Release gear here, drive back
     }
     
     public boolean currentSpike() {
-    	if (Robot.drivetrain.getLeft().getAverageOutputCurrent() >= spikeCurrent) {
+    	if (Robot.drivetrain.getFrontLeft().getOutputCurrent() >= spikeCurrent) {
     		return true;
     	}
     	return false;

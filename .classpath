@@ -11,6 +11,5 @@
 	<classpathentry kind="lib" path="build/jars/json-20160810.jar"/>
 	<classpathentry kind="lib" path="build/jars/SmartDashboard.jar"/>
 	<classpathentry kind="lib" path="build/jars/jna-4.2.2.jar"/>
-	<classpathentry kind="var" path="USERLIBS_DIR/CTRLib.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
