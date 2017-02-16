@@ -23,12 +23,10 @@ public class AutonomousGear3CommandGroup extends CommandGroup {
 	public static double velocityToGetCurrentSpike = 40;
 
 	private int tapeWidthLeft, tapeWidthRight; 
-	
-	private boolean reversed = false;
 
 	public AutonomousGear3CommandGroup() {
 		addSequential(new MoveDistanceCommand(initDistance));
-		addSequential(new AngleTurnCommand(reversed ? -1 : 1 * 60));
+		addSequential(new AngleTurnCommand(60));
 		addSequential(new MoveDistanceCommand(perpGearDistance));
 		while (!currentSpike()) {
 			Robot.drivetrain.drive(velocityToGetCurrentSpike, velocityToGetCurrentSpike);
@@ -37,10 +35,6 @@ public class AutonomousGear3CommandGroup extends CommandGroup {
 		//Release gear here, drive back
 	}
 
-	public void setReversed(boolean _reversed){
-		reversed = _reversed;
-	}
-	
 	public boolean currentSpike() {
 		if (Robot.drivetrain.getLeft().getAverageOutputCurrent() >= spikeCurrent) {
 			return true;

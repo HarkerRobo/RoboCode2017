@@ -5,7 +5,7 @@ import org.usfirst.frc.team1072.robot.Robot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousGear4CommandGroup extends CommandGroup {
-	
+
 	public static double robotHeight = 7.125 ; // half robot height
 	public static double robotWidth = 15; // half robot width
 	public static double hexToField = 162; // center of hexagon to edge of field
@@ -20,12 +20,10 @@ public class AutonomousGear4CommandGroup extends CommandGroup {
 	public static double velocityToGetCurrentSpike = 40;
 
 	private int tapeWidthLeft, tapeWidthRight; 
-	
-	private boolean reversed = false;
 
 	public AutonomousGear4CommandGroup() {
 		addSequential(new MoveDistanceCommand(initDistance));
-		addSequential(new AngleTurnCommand(reversed ? 1 : -1 * 60));
+		addSequential(new AngleTurnCommand(-60));
 		addSequential(new MoveDistanceCommand(perpGearDistance));
 		while (!currentSpike()) {
 			Robot.drivetrain.drive(velocityToGetCurrentSpike, velocityToGetCurrentSpike);
@@ -34,10 +32,6 @@ public class AutonomousGear4CommandGroup extends CommandGroup {
 		//Release gear here, drive back
 	}
 
-	public void setReversed(boolean _reversed){
-		reversed = _reversed;
-	}
-	
 	public boolean currentSpike() {
 		if (Robot.drivetrain.getLeft().getAverageOutputCurrent() >= spikeCurrent) {
 			return true;
