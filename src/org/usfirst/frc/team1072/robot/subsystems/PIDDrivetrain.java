@@ -21,8 +21,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class PIDDrivetrain extends Drivetrain {
 	
-	public static final double MAX_SPEED = 190;
-	
 	public void enable(){
 		((PIDTrainSide) left).enable();
 		((PIDTrainSide) right).enable();
@@ -141,10 +139,12 @@ public class PIDDrivetrain extends Drivetrain {
 		
 		@Override
 		public void toSmartDashboard(String name) {
-			double _P = SmartDashboard.getNumber(name + "P Constant", pid.getP());
+			super.toSmartDashboard(name);
+			/*double _P = SmartDashboard.getNumber(name + "P Constant", pid.getP());
 			double _I = SmartDashboard.getNumber(name + "I Constant", pid.getI());
 			double _D = SmartDashboard.getNumber(name + "D Constant", pid.getD());
-			pid.setPID(_P, _I, _D);
+			pid.setPID(_P, _I, _D);*/
+			SmartDashboard.putData(name + "PID", pid);
 		}
 	}
 }

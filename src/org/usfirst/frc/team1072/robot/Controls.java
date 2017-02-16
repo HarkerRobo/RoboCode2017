@@ -19,7 +19,7 @@ public class Controls {
 	public static final Axis ARCADE_Y = Axis.RIGHTY;
 	public static final Axis ARCADE_X = Axis.RIGHTX;
 	public static final Button SLOW_MODE = Button.A;
-	public static final Button PID_TEST = Button.RSTICK;
+	public static final Button PID_TEST = Button.LBUMPER;
 	public static final DriveControl DRIVE_CONTROL = DriveControl.TANK;
 	
 	//Winch

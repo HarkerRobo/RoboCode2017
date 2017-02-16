@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1072.robot.commands;
 
+import org.usfirst.frc.team1072.robot.Controls;
 import org.usfirst.frc.team1072.robot.OI;
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.XboxWrapper;
@@ -24,9 +25,7 @@ public class BumperWinchCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	boolean right = XboxWrapper.getInstance().getBumper(Hand.kRight);
-    	boolean left = XboxWrapper.getInstance().getBumper(Hand.kLeft);
-    	double speed = (right ? MAX_SPEED : 0) + (left ? MAX_SPEED : 0);
+    	double speed = (XboxWrapper.getInstance().getButton(Controls.WINCH_WHILE_PRESSED) ? MAX_SPEED : 0);
     	Robot.winch.setSpeed(speed);
     }
 

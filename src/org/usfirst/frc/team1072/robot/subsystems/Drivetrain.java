@@ -4,6 +4,7 @@ import org.usfirst.frc.team1072.robot.Controls;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
 import org.usfirst.frc.team1072.robot.commands.ArcadeDriveCommand;
+import org.usfirst.frc.team1072.robot.commands.DriveStaticCommand;
 import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
 import com.ctre.CANTalon;
@@ -16,6 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class Drivetrain extends Subsystem {
+	
+	public static final double MAX_SPEED = 190;
 	
 	public enum DriveControl {
 		TANK(){
@@ -30,6 +33,13 @@ public class Drivetrain extends Subsystem {
 			@Override
 			public void initialize(Drivetrain train) {
 				train.setDefaultCommand(new ArcadeDriveCommand());
+			}
+			
+		}, PIDTEST(){
+
+			@Override
+			public void initialize(Drivetrain train) {
+				train.setDefaultCommand(new DriveStaticCommand());
 			}
 			
 		};
@@ -157,7 +167,7 @@ public class Drivetrain extends Subsystem {
 		 * @see edu.wpi.first.wpilibj.Encoder#getRate()
 		 */
 		public double getRate() {
-			return encoder.getRate();
+			return Math.max(Math.min(encoder.getRate(), MAX_SPEED), -MAX_SPEED);
 		}
 		
 		/**
