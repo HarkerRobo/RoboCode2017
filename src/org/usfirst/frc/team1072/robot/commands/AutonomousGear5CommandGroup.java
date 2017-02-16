@@ -2,20 +2,17 @@ package org.usfirst.frc.team1072.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-/**
- *@author cravuri
- */
-public class AutonomousGear1CommandGroup extends CommandGroup {
+public class AutonomousGear5CommandGroup extends CommandGroup {
 	
-	double gearOneDistance = 158.44;
+	double gearFiveDistance = 158.44;
 	double perpGearDistance = 92.881;
 	
-	public AutonomousGear1CommandGroup() {
-		addSequential(new MoveDistanceCommand(gearOneDistance));
+	public AutonomousGear5CommandGroup() {
+		addSequential(new MoveDistanceCommand(gearFiveDistance));
 		addSequential(new AngleTurnCommand(-60));
 		addSequential(new MoveDistanceCommand(perpGearDistance));
 		addSequential(new PusherCommand());
 		addSequential(new MoveDistanceCommand(24));
 	}
-	
+
 }
