@@ -55,7 +55,7 @@ public class Robot extends IterativeRobot {
 	public static enum DriveControl {
 		TANK, ARCADE, PIDTEST
 	}
-	
+
 	public static enum Gears {
 		LEFT, CENTER, RIGHT
 	}
@@ -148,6 +148,24 @@ public class Robot extends IterativeRobot {
 		String side = (String) ((SendableChooser) SmartDashboard.getData("Side Chooser")).getSelected();
 		String gear = (String) ((SendableChooser) SmartDashboard.getData("Gear Chooser")).getSelected();
 
+		switch(side) {
+		case "Red":
+			switch(gear) {
+				case "Left": autonomousCommand = new AutonomousGear1CommandGroup(); break;
+				case "Center": autonomousCommand = new AutonomousGear2CommandGroup(); break;
+				case "Right": autonomousCommand = new AutonomousGear3CommandGroup(); break;
+				default: autonomousCommand = null; break;
+			}
+		case "Blue":
+			switch(gear){
+				case "Left": autonomousCommand = new AutonomousGear4CommandGroup();
+				case "Center": autonomousCommand = new AutonomousGear2CommandGroup();
+				case "Right": autonomousCommand = new AutonomousGear5CommandGroup();
+				default: autonomousCommand = null; break;
+			}
+		}
+
+		/*		
 		if(gear.equals("Center")){
 			autonomousCommand = new AutonomousGear2CommandGroup();
 		} else if(gear.equals("Left")){
@@ -161,6 +179,7 @@ public class Robot extends IterativeRobot {
 			else
 				autonomousCommand = new AutonomousGear5CommandGroup();
 		}
+		 */
 
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
