@@ -15,7 +15,7 @@ public class AutonomousGear1CommandGroup extends CommandGroup {
 		addSequential(new AngleTurnCommand(-60));
 		addSequential(new MoveDistanceCommand(perpGearDistance));
 		addSequential(new PusherCommand());
-		addSequential(new MoveDistanceCommand(24));
+		addSequential(new MoveDistanceCommand(-24));
 	}
 	
 }
