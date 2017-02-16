@@ -18,6 +18,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1072.robot.RobotMap.Gears;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
 import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGear2;
+import org.usfirst.frc.team1072.robot.commands.AutonomousGear1CommandGroup;
+import org.usfirst.frc.team1072.robot.commands.AutonomousGear2CommandGroup;
+import org.usfirst.frc.team1072.robot.commands.AutonomousGear3CommandGroup;
+import org.usfirst.frc.team1072.robot.commands.AutonomousGear4CommandGroup;
+import org.usfirst.frc.team1072.robot.commands.AutonomousGear5CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.SlowModeCommand;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
@@ -46,11 +51,15 @@ public class Robot extends IterativeRobot {
 	public static enum WinchControl {
 		TOGGLE, BUMPERS
 	}
-	
+
 	public static enum DriveControl {
 		TANK, ARCADE, PIDTEST
 	}
 	
+	public static enum Gears {
+		LEFT, CENTER, RIGHT
+	}
+
 	public static final WinchControl winchControl = WinchControl.BUMPERS;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
@@ -124,15 +133,35 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-//		autonomousCommand = chooser.getSelected();
-//
-//		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-//		switch(autoSelected) {
-//			case "My Auto": autonomousCommand = new MyAutoCommand(); break;
-//			case "Default Auto": default: autonomousCommand = new ExampleCommand(); break;
-//		}
-//
-//		// schedule the autonomous command (example)
+		/* 
+		autonomousCommand = chooser.getSelected();
+
+		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		switch(autoSelected) {
+			case "My Auto": autonomousCommand = new MyAutoCommand(); break;
+			case "Default Auto": default: autonomousCommand = new ExampleCommand(); break;
+		}
+
+		schedule the autonomous command (example)
+		 */
+
+		String side = (String) ((SendableChooser) SmartDashboard.getData("Side Chooser")).getSelected();
+		String gear = (String) ((SendableChooser) SmartDashboard.getData("Gear Chooser")).getSelected();
+
+		if(gear.equals("Center")){
+			autonomousCommand = new AutonomousGear2CommandGroup();
+		} else if(gear.equals("Left")){
+			if(side.equals("Red"))
+				autonomousCommand = new AutonomousGear1CommandGroup();
+			else
+				autonomousCommand = new AutonomousGear4CommandGroup();
+		} else if(gear.equals("Right")){
+			if(side.equals("Red"))
+				autonomousCommand = new AutonomousGear3CommandGroup();
+			else
+				autonomousCommand = new AutonomousGear5CommandGroup();
+		}
+
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
