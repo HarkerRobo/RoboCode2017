@@ -41,12 +41,33 @@ public class PistonCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
+<<<<<<< Updated upstream
 		if (!prev && XboxWrapper.getInstance().getXButton()) {
 			Robot.gearPiston.putIn();
 		} else if(prev && !XboxWrapper.getInstance().getXButton()){
 			Robot.gearPiston.pullOut();
 		}
 		prev = XboxWrapper.getInstance().getXButton();
+=======
+<<<<<<< Updated upstream
+		if (OI.controller.getXButton()) {
+=======
+<<<<<<< Updated upstream
+		if (OI.cont.getXButton()) {
+>>>>>>> Stashed changes
+			if (penetration) {
+				Robot.gearPiston.pullOut();
+			} else {
+				Robot.gearPiston.putIn();
+			}
+		}
+=======
+		if(OI.cont.getXButton()){
+			Robot.gearPiston.putIn();
+		}
+
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
