@@ -158,9 +158,9 @@ public class Robot extends IterativeRobot {
 			}
 		case "Blue":
 			switch(gear){
-				case "Left": autonomousCommand = new AutonomousGear4CommandGroup();
-				case "Center": autonomousCommand = new AutonomousGear2CommandGroup();
-				case "Right": autonomousCommand = new AutonomousGear5CommandGroup();
+				case "Left": autonomousCommand = new AutonomousGear4CommandGroup(); break;
+				case "Center": autonomousCommand = new AutonomousGear2CommandGroup(); break;
+				case "Right": autonomousCommand = new AutonomousGear5CommandGroup(); break;
 				default: autonomousCommand = null; break;
 			}
 		}
