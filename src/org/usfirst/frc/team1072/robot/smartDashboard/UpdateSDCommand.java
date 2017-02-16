@@ -35,7 +35,7 @@ public class UpdateSDCommand extends Command {
     	SmartDashboard.putData(Scheduler.getInstance());
     	//Subsystems
     	Robot.drivetrain.toSmartDashboard();
-    	Robot.winch.toSmartDashboard("Winch");
+    	//Robot.winch.toSmartDashboard("Winch");
     	Robot.push.toSmartDashboard();
     	Robot.shifter.toSmartDashboard("Shifter Solenoid");
     	//Misc

@@ -20,9 +20,9 @@ public class RobotMap {
 	// public static int rangefinderModule = 1;
 	public static class PID {
 		public static class Wheels {
-			public static final double P = 1;
-			public static final double I = 1;
-			public static final double D = 1;
+			public static final double P = 0.002;
+			public static final double I = 0;
+			public static final double D = 0;
 		}
 		public static class MoveDist {
 			public static final double P = 1;
@@ -53,7 +53,8 @@ public class RobotMap {
 			}
 		}
 		public static class Winches {
-			public static int port = 5;
+			public static final int A = 5;
+			public static final int B = 6;
 		}
 	}
 	public class Gears {

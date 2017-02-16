@@ -1,9 +1,12 @@
+/**
+ * 
+ */
 package org.usfirst.frc.team1072.robot.subsystems;
 
+import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap.PID;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
-import org.usfirst.frc.team1072.robot.subsystems.PIDDrivetrain.PIDTrainSide;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDInterface;
@@ -18,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class PIDDrivetrain extends Drivetrain {
 	
-	public static final double MAX_SPEED = 160;
+	public static final double MAX_SPEED = 190;
 	
 	public void enable(){
 		((PIDTrainSide) left).enable();
@@ -39,7 +42,7 @@ public class PIDDrivetrain extends Drivetrain {
 				Encoders.RB, false, false, true);
 	}
 	
-	public void disable() {
+	public void disable(){
 		((PIDTrainSide) left).disable();
 		((PIDTrainSide) right).disable();
 	}
@@ -57,24 +60,31 @@ public class PIDDrivetrain extends Drivetrain {
 		 * @param backReversed
 		 * @param encoderReversed
 		 */
-		public PIDTrainSide(int frontChannel, int backChannel, int encoderA, int encoderB, 
-							boolean frontReversed, boolean backReversed, boolean encoderReversed) {
-			super(frontChannel, backChannel, encoderA, encoderB, 
-				frontReversed, backReversed, encoderReversed);
+		public PIDTrainSide(int frontChannel, int backChannel, int encoderA,
+				int encoderB, boolean frontReversed, boolean backReversed,
+				boolean encoderReversed) {
+			super(frontChannel, backChannel, encoderA, encoderB, frontReversed,
+					backReversed, encoderReversed);
 			pid = new PIDController(PID.Wheels.P, PID.Wheels.I, PID.Wheels.D, this, this);
 			pid.setInputRange(-MAX_SPEED, MAX_SPEED);
 			pid.setOutputRange(-1, 1);
-			this.setPIDSourceType(PIDSourceType.kRate);
 		}
 		
+		/**
+		 * 
+		 */
+		public void disable() {
+			pid.disable();
+		}
+
 		/**
 		 * @param frontChannel
 		 * @param backChannel
 		 * @param encoderA
 		 * @param encoderB
 		 */
-		public PIDTrainSide(int frontChannel, int backChannel, 
-							int encoderA, int encoderB) {
+		public PIDTrainSide(int frontChannel, int backChannel, int encoderA,
+				int encoderB) {
 			this(frontChannel, backChannel, encoderA, encoderB, false, false, false);
 		}
 		
@@ -87,7 +97,6 @@ public class PIDDrivetrain extends Drivetrain {
 		@Override
 		public void drive(double speed) {
 			pid.setSetpoint(speedAdjustments(speed) * MAX_SPEED);
-//			System.out.println("setpoint: " + pid.getSetpoint());
 		}
 
 		/* (non-Javadoc)
@@ -96,7 +105,6 @@ public class PIDDrivetrain extends Drivetrain {
 		@Override
 		public void pidWrite(double output) {
 			rawDrive(output);
-			System.out.println("pidoutput: " + output);
 		}
 
 		/* (non-Javadoc)
@@ -120,8 +128,7 @@ public class PIDDrivetrain extends Drivetrain {
 		 */
 		@Override
 		public double pidGet() {
-			System.out.println("pidGet: " + encoder.pidGet());
-			return encoder.pidGet();
+			return encoder.getRate();
 		}
 
 		/**
@@ -131,7 +138,7 @@ public class PIDDrivetrain extends Drivetrain {
 		public void enable() {
 			pid.enable();
 		}
-
+		
 		@Override
 		public void toSmartDashboard(String name) {
 			double _P = SmartDashboard.getNumber(name + "P Constant", pid.getP());
@@ -139,10 +146,5 @@ public class PIDDrivetrain extends Drivetrain {
 			double _D = SmartDashboard.getNumber(name + "D Constant", pid.getD());
 			pid.setPID(_P, _I, _D);
 		}
-		
-		public void disable() {
-			pid.disable();
-		}
-		
 	}
 }
