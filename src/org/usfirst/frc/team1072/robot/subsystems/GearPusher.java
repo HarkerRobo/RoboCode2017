@@ -41,8 +41,8 @@ public class GearPusher extends Subsystem {
 	}
 	public void toSmartDashboard()
     {
-    	SmartDashboard.putBoolean("Pusher out", push.get().equals(Value.kForward));
-    	SmartDashboard.putBoolean("Closer out", close.get().equals(Value.kForward));
+		SmartDashboard.putString("push", ":" + push.get().toString());
+		SmartDashboard.putString("close", ":" + close.get().toString());
     }
     
     

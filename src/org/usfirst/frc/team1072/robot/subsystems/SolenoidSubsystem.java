@@ -31,7 +31,7 @@ public class SolenoidSubsystem extends Subsystem {
 	}
 
 	public void toSmartDashboard(String name){
-		SmartDashboard.putData("Solenoid " + name,  sol);
+		SmartDashboard.putString(name, ":" + sol.get().toString());
 	}
     
 }

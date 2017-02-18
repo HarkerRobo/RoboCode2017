@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class TankDriveCommand extends Command {
 	
+	private static final double THRESHOLD = 0.03;
+
 	public TankDriveCommand() {
     	requires(Robot.drivetrain);
     }
@@ -26,8 +28,12 @@ public class TankDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double sLeft = XboxWrapper.getInstance().getAxis(Controls.TANK_LEFT);
-    	double sRight = XboxWrapper.getInstance().getAxis(Controls.TANK_RIGHT);
+    	double sLeft = -XboxWrapper.getInstance().getAxis(Controls.TANK_LEFT);
+    	double sRight = -XboxWrapper.getInstance().getAxis(Controls.TANK_RIGHT);
+		sLeft = (Math.abs(sLeft) < THRESHOLD) ? 0 : sLeft;
+		sRight = (Math.abs(sRight) < THRESHOLD) ? 0 : sRight;
+		sLeft *= Math.abs(sLeft);
+		sRight *= Math.abs(sRight);
 		Robot.drivetrain.drive(sLeft, sRight);
 //		System.out.println("left: " + sLeft + ", right: " + sRight);
     }

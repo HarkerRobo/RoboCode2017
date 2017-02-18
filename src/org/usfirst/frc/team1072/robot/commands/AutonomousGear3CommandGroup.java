@@ -27,10 +27,12 @@ public class AutonomousGear3CommandGroup extends CommandGroup {
 		addSequential(new MoveDistanceCommand(initDistance));
 		addSequential(new AngleTurnCommand(60));
 		addSequential(new MoveDistanceCommand(perpGearDistance));
-		while (!currentSpike()) {
+		addSequential(new PusherCommand());
+		addSequential(new MoveDistanceCommand(-24));
+		/*while (!currentSpike()) {
 			Robot.drivetrain.drive(velocityToGetCurrentSpike, velocityToGetCurrentSpike);
 		}
-		Robot.drivetrain.drive(0, 0);
+		Robot.drivetrain.drive(0, 0);*/
 		//Release gear here, drive back
 	}
 

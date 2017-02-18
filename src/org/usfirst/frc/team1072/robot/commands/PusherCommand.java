@@ -46,7 +46,7 @@ public class PusherCommand extends Command {
 	
 	// Called once after isFinished returns true
 	protected void end() {
-		if(Robot.push.getPush().get().equals(Value.kForward)){
+		if(!Robot.push.getPush().get().equals(Value.kReverse)){
 			Robot.push.getPush().set(Value.kReverse);
 		} else {
 			if(Robot.push.getClose().get().equals(Value.kReverse)){

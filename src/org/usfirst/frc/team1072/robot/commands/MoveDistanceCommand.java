@@ -9,37 +9,45 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class MoveDistanceCommand extends Command {
 	private double distance;
-	double kp = PID.MoveDist.P, ki = PID.MoveDist.I, kd = PID.MoveDist.D;
-	double sum = 0;
-	double prevError;
-	double currentError;
-	double errMargin = 2;
+	//double kp = PID.MoveDist.P, ki = PID.MoveDist.I, kd = PID.MoveDist.D;
+	//double sum = 0;
+	//double prevError;
+	//double currentError;
+	//double errMargin = 2;
 	
     public MoveDistanceCommand(double distance){
     	this.distance = distance;
-    	prevError = distance;
+    	//prevError = distance;
     	requires(Robot.drivetrain);
-    	Robot.drivetrain.getLeft().reset();
-    	Robot.drivetrain.getRight().reset();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	Robot.drivetrain.getLeft().reset();
+    	Robot.drivetrain.getRight().reset();
+    	//Robot.drivetrain.drive(0.5, 0.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	sum += prevError;
-		currentError = distance - (Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2;
+    	double dif = distance - (Robot.drivetrain.getRight().getDistance() + Robot.drivetrain.getLeft().getDistance())/2;
+    	dif /= 10;
+    	if(Math.abs(dif) > 0.6){
+    		dif = Math.signum(distance) * 0.6;
+    	} else if(Math.abs(dif) < 0.2){
+    		dif = Math.signum(distance) * 0.2;
+    	}
+    	Robot.drivetrain.drive(dif, dif);
+    	/*sum += prevError;
+		currentError = distance - (Robot.drivetrain.getRight().getDistance() + Robot.drivetrain.getRight().getDistance())/2;
 		Robot.drivetrain.drive(kp*currentError + ki*sum + kd*(currentError - prevError),
 				kp*currentError + ki*sum + kd*(currentError - prevError));
-		prevError = currentError;
+		prevError = currentError;*/
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return noError((Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2 - distance);
+    	return Math.abs(Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2 >= Math.abs(distance);
     }
 
     // Called once after isFinished returns true
@@ -52,11 +60,11 @@ public class MoveDistanceCommand extends Command {
     protected void interrupted() {
     }
     
-    private boolean noError(double err) {
+    /*private boolean noError(double err) {
     	if (err <= errMargin && err >= -errMargin) {
     		return true;
     	} else {
     		return false;
     	}
-    }
+    }*/
 }

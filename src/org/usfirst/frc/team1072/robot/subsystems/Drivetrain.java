@@ -55,8 +55,8 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	protected void initializeSides() {
-		left = new TrainSide(Talons.FL, Talons.BL, Encoders.LA, Encoders.LB, true, true, false);
-		right = new TrainSide(Talons.FR, Talons.BR, Encoders.RA, Encoders.RB, false, false, true);
+		left = new TrainSide(Talons.FL, Talons.BL, Encoders.LA, Encoders.LB, false, false, false);
+		right = new TrainSide(Talons.FR, Talons.BR, Encoders.RA, Encoders.RB, true, true, true);
 	}
 	
 	public void initDefaultCommand() {
@@ -88,8 +88,6 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public class TrainSide {
-		
-		private static final double THRESHOLD = 0.05;
 		
 		protected Encoder encoder;
 		protected CANTalon front;
@@ -134,9 +132,7 @@ public class Drivetrain extends Subsystem {
 		}
 		
 		public double speedAdjustments(double speed) {
-			speed = (Math.abs(speed) < THRESHOLD) ? 0 : speed;
 			speed = Math.max(Math.min(speed, 1), -1);
-			speed *= Math.abs(speed);
 			speed *= coefficient;
 			return speed;
 		}
@@ -167,7 +163,7 @@ public class Drivetrain extends Subsystem {
 		 * @see edu.wpi.first.wpilibj.Encoder#getRate()
 		 */
 		public double getRate() {
-			return Math.max(Math.min(encoder.getRate(), MAX_SPEED), -MAX_SPEED);
+			return encoder.getRate();
 		}
 		
 		/**

@@ -35,9 +35,9 @@ public class PIDDrivetrain extends Drivetrain {
 	@Override
 	protected void initializeSides() {
 		left = new PIDTrainSide(Talons.FL, Talons.BL, Encoders.LA, Encoders.LB,
-				true, true, false);
+				false, false, false);
 		right = new PIDTrainSide(Talons.FR, Talons.BR, Encoders.RA,
-				Encoders.RB, false, false, true);
+				Encoders.RB, true, true, true);
 	}
 	
 	public void disable(){
@@ -48,6 +48,7 @@ public class PIDDrivetrain extends Drivetrain {
 	public class PIDTrainSide extends TrainSide implements PIDSource, PIDOutput {
 		
 		private PIDController pid;
+		private double prevSpeed;
 		
 		/**
 		 * @param frontChannel
@@ -63,6 +64,7 @@ public class PIDDrivetrain extends Drivetrain {
 				boolean encoderReversed) {
 			super(frontChannel, backChannel, encoderA, encoderB, frontReversed,
 					backReversed, encoderReversed);
+			prevSpeed = 0;
 			pid = new PIDController(PID.Wheels.P, PID.Wheels.I, PID.Wheels.D, this, this);
 			pid.setInputRange(-MAX_SPEED, MAX_SPEED);
 			pid.setOutputRange(-1, 1);
@@ -94,7 +96,7 @@ public class PIDDrivetrain extends Drivetrain {
 		 */
 		@Override
 		public void drive(double speed) {
-			pid.setSetpoint(speedAdjustments(speed) * MAX_SPEED);
+			pid.setSetpoint(speed * MAX_SPEED);
 		}
 
 		/* (non-Javadoc)
@@ -102,7 +104,8 @@ public class PIDDrivetrain extends Drivetrain {
 		 */
 		@Override
 		public void pidWrite(double output) {
-			rawDrive(output);
+			prevSpeed += output;
+			rawDrive(prevSpeed);
 		}
 
 		/* (non-Javadoc)
@@ -126,7 +129,7 @@ public class PIDDrivetrain extends Drivetrain {
 		 */
 		@Override
 		public double pidGet() {
-			return encoder.getRate();
+			return getRate();
 		}
 
 		/**

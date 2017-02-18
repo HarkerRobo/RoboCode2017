@@ -21,18 +21,18 @@ public class RobotMap {
 	public static class PID {
 		public static class Wheels {
 			public static final double P = 0.006;
-			public static final double I = 0.00001;
+			public static final double I = 0.000000;
 			public static final double D = 0;
 		}
 		public static class MoveDist {
-			public static final double P = 1;
-			public static final double I = 1;
-			public static final double D = 1;
+			public static final double P = 0.2;
+			public static final double I = 0;
+			public static final double D = 0;
 		}
 		public static class TurnAngle {
-			public static final double P = 1;
-			public static final double I = 1;
-			public static final double D = 1;
+			public static final double P = 0.1;
+			public static final double I = 0;
+			public static final double D = 0;
 		}
 	}
 	public static final int XBOX = 0;

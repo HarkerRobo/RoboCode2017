@@ -63,7 +63,7 @@ public class Robot extends IterativeRobot {
 	public static final WinchControl winchControl = WinchControl.BUMPERS;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
-	public static PIDDrivetrain drivetrain;
+	public static Drivetrain drivetrain;
 	public static Piston gearPiston;
 	public static Winch winch;
 	//public static RaspiNetworker raspi;
@@ -83,7 +83,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		drivetrain = new PIDDrivetrain();
+		drivetrain = new Drivetrain();
 		winch = new Winch();
 		push = new GearPusher();
 		shifter = new Shifter();
@@ -112,7 +112,7 @@ public class Robot extends IterativeRobot {
 	public void disabledInit() {
 		drivetrain.getLeft().reset();
 		drivetrain.getRight().reset();
-		drivetrain.disable();
+		//drivetrain.disable();
 	}
 
 	@Override
@@ -205,7 +205,7 @@ public class Robot extends IterativeRobot {
 		UpdateSDCommand sdc = new UpdateSDCommand();
 		sdc.start();
 		XboxWrapper.getInstance().whenPressed(Button.A, new SlowModeCommand());
-		Robot.drivetrain.enable();
+		//Robot.drivetrain.enable();
 	}
 
 	/**

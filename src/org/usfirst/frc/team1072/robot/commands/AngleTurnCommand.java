@@ -13,16 +13,15 @@ public class AngleTurnCommand extends Command {
 	
 	private double initialAngle;
 	private double angle;
-	private double prevError;
+	/*private double prevError;
 	double kp = PID.TurnAngle.P, ki = PID.TurnAngle.I, kd = PID.TurnAngle.D;
 	double sum = 0;
-	double currentError;
-	double errMargin = 1;
+	double currentError;*/
+	double errMargin = 3;
 	
 	public AngleTurnCommand(double angle){
-    		this.angle = angle;
-    		prevError = angle;
-    		initialAngle = Robot.gyro.getAngle() % 360;
+		requires(Robot.drivetrain);
+    	this.angle = (Robot.gyro.getAngle() + angle) % 360;
     }
 
     // Called just before this Command runs the first time
@@ -32,16 +31,30 @@ public class AngleTurnCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	sum += prevError;
+    	double dif = (angle - Robot.gyro.getAngle()) % 360;
+    	if(dif > 180){
+    		dif -= 360;
+    	}
+    	double div = dif/90;
+    	if(Math.abs(div) > 0.5){
+    		div = Math.signum(div) * 0.5;
+    	} else if(Math.abs(div) < 0.2){
+    		div = Math.signum(div) * 0.2;
+    	}
+    	double leftSpeed = div;
+    	double rightSpeed = -div;
+    	Robot.drivetrain.drive(leftSpeed, rightSpeed);
+    	System.out.println("Dif " + dif + " gave speeds " + leftSpeed + ", " + rightSpeed);
+    	/*sum += prevError;
 		currentError = (angle - (Robot.gyro.getAngle() % 360 - initialAngle)) % 360;
 		Robot.drivetrain.drive(kp*currentError + ki*sum + kd*(currentError - prevError),
 				-(kp*currentError + ki*sum + kd*(currentError - prevError)));
-		prevError = currentError;
+		prevError = currentError;*/
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return noError(((Robot.gyro.getAngle() % 360 - initialAngle) - angle) % 360);
+    	return Math.abs((angle - Robot.gyro.getAngle())%360) < errMargin;
     }
 
     // Called once after isFinished returns true
@@ -54,11 +67,11 @@ public class AngleTurnCommand extends Command {
     protected void interrupted() {
     }
     
-    private boolean noError(double err) {
+    /*private boolean noError(double err) {
     	if (err <= errMargin && err >= -errMargin) {
     		return true;
     	} else {
     		return false;
     	}
-    }
+    }*/
 }
