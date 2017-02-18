@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AutonomousGear4CommandGroup extends CommandGroup {
 
-	public static double robotHeight = 7.125 ; // half robot height
+	public static double robotHeight = 7.125 * 2; // half robot height
 	public static double robotWidth = 15; // half robot width
 	public static double hexToField = 162; // center of hexagon to edge of field
 	public static double boilerDiag = 36.75; // half of the boiler diagonal
@@ -22,10 +22,12 @@ public class AutonomousGear4CommandGroup extends CommandGroup {
 	private int tapeWidthLeft, tapeWidthRight; 
 
 	public AutonomousGear4CommandGroup() {
+		requires(Robot.drivetrain);
+		requires(Robot.push);
 		addSequential(new MoveDistanceCommand(initDistance));
-		addSequential(new AngleTurnCommand(-60));
+		addSequential(new AngleTurnCommand(60));
 		addSequential(new MoveDistanceCommand(perpGearDistance));
-		addSequential(new PusherCommand());
+		addSequential(new AutonPusherCommand());
 		addSequential(new MoveDistanceCommand(-24));
 		/*while (!currentSpike()) {
 			Robot.drivetrain.drive(velocityToGetCurrentSpike, velocityToGetCurrentSpike);

@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class XboxWrapper extends XboxController {
 	
 	private static XboxWrapper instance = new XboxWrapper(0);
+	private static XboxWrapper second = new XboxWrapper(1);
 
 	private Map<Button, JoystickButton> buttons;
 	
@@ -93,5 +94,9 @@ public class XboxWrapper extends XboxController {
 	
 	public static XboxWrapper getInstance(){
 		return instance;
+	}
+	
+	public static XboxWrapper getSecond(){
+		return second;
 	}
 }

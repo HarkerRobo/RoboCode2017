@@ -145,7 +145,7 @@ public class Robot extends IterativeRobot {
 		schedule the autonomous command (example)
 		 */
 
-		String side = (String) ((SendableChooser) SmartDashboard.getData("Side Chooser")).getSelected();
+		/*String side = (String) ((SendableChooser) SmartDashboard.getData("Side Chooser")).getSelected();
 		String gear = (String) ((SendableChooser) SmartDashboard.getData("Gear Chooser")).getSelected();
 
 		switch(side) {
@@ -163,7 +163,7 @@ public class Robot extends IterativeRobot {
 				case "Right": autonomousCommand = new AutonomousGear5CommandGroup(); break;
 				default: autonomousCommand = null; break;
 			}
-		}
+		}*/
 
 		/*		
 		if(gear.equals("Center")){
@@ -180,7 +180,7 @@ public class Robot extends IterativeRobot {
 				autonomousCommand = new AutonomousGear5CommandGroup();
 		}
 		 */
-
+		autonomousCommand = new AutonomousGear4CommandGroup();
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
