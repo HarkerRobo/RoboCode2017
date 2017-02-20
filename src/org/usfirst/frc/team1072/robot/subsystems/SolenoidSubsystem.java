@@ -23,7 +23,7 @@ public class SolenoidSubsystem extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        XboxWrapper.getInstance().whenPressed(trigger, new TriggerSolenoidCommand(this));
+        //XboxWrapper.getInstance().whenPressed(trigger, new TriggerSolenoidCommand(this));
     }
 
 	public DoubleSolenoid getSol() {

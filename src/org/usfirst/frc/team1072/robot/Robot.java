@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -13,7 +14,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 
 import org.usfirst.frc.team1072.robot.RobotMap.Gears;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
@@ -92,6 +92,9 @@ public class Robot extends IterativeRobot {
 		//raspi = new RaspiNetworker();
 		compress = new Compressor(0);
 		compress.setClosedLoopControl(true);
+		push.getClose().set(Value.kForward);
+		push.getPush().set(Value.kReverse);
+		shifter.getSol().set(Value.kReverse);
 		//CameraServer.getInstance().startAutomaticCapture();
 		//raspi.start();
 		//SmartDashboard.putData("H264", new H264Widget());

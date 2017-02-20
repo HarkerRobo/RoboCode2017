@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1072.robot.subsystems;
 
 import org.usfirst.frc.team1072.robot.Controls;
+import org.usfirst.frc.team1072.robot.OI;
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RobotMap;
 import org.usfirst.frc.team1072.robot.XboxWrapper;
@@ -28,8 +29,10 @@ public class GearPusher extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        XboxWrapper.getInstance().whenPressed(Controls.PUSHER, new PusherCommand());
-        XboxWrapper.getInstance().whenPressed(Controls.CLOSER, new CloserCommand());
+        //XboxWrapper.getInstance().whenPressed(Controls.PUSHER, new PusherCommand());
+        //XboxWrapper.getInstance().whenPressed(Controls.CLOSER, new CloserCommand());
+    	OI.gp.getButtonX().whenPressed(new PusherCommand());
+    	OI.gp.getButtonY().whenPressed(new CloserCommand());
     }
 
 	public DoubleSolenoid getPush() {
@@ -42,7 +45,7 @@ public class GearPusher extends Subsystem {
 	public void toSmartDashboard()
     {
 		SmartDashboard.putString("push", ":" + push.get().toString());
-		SmartDashboard.putString("close", ":" + close.get().toString());
+		SmartDashboard.putString("flaps", close.get().equals(Value.kForward) ? "Closed" : "Open");
     }
     
     

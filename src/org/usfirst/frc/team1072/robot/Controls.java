@@ -5,6 +5,7 @@ package org.usfirst.frc.team1072.robot;
 
 import org.usfirst.frc.team1072.robot.XboxWrapper.Axis;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
+import org.usfirst.frc.team1072.robot.smartDashboard.SmartEnum;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain.DriveControl;
 
 /**
@@ -20,7 +21,7 @@ public class Controls {
 	public static final Axis ARCADE_X = Axis.RIGHTX;
 	public static final Button SLOW_MODE = Button.A;
 	public static final Button PID_TEST = Button.LBUMPER;
-	public static final DriveControl DRIVE_CONTROL = DriveControl.ARCADE;
+	public static final SmartEnum<DriveControl> DRIVE_CONTROL = new SmartEnum<DriveControl>(DriveControl.ARCADE, "Drive Control");
 	
 	//Winch
 	public static final Button WINCH_WHILE_PRESSED = Button.RBUMPER;

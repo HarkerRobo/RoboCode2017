@@ -5,6 +5,7 @@ import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
 import org.usfirst.frc.team1072.robot.commands.ArcadeDriveCommand;
 import org.usfirst.frc.team1072.robot.commands.DriveStaticCommand;
+import org.usfirst.frc.team1072.robot.commands.ManualDriveCommand;
 import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
 import com.ctre.CANTalon;
@@ -21,30 +22,7 @@ public class Drivetrain extends Subsystem {
 	public static final double MAX_SPEED = 190;
 	
 	public enum DriveControl {
-		TANK(){
-			
-			@Override
-			public void initialize(Drivetrain train) {
-				train.setDefaultCommand(new TankDriveCommand());
-			}
-			
-		}, ARCADE(){
-			
-			@Override
-			public void initialize(Drivetrain train) {
-				train.setDefaultCommand(new ArcadeDriveCommand());
-			}
-			
-		}, PIDTEST(){
-
-			@Override
-			public void initialize(Drivetrain train) {
-				train.setDefaultCommand(new DriveStaticCommand());
-			}
-			
-		};
-		
-		public abstract void initialize(Drivetrain train);
+		TANK, ARCADE
 	}
 	
 	protected TrainSide left;
@@ -60,7 +38,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public void initDefaultCommand() {
-		Controls.DRIVE_CONTROL.initialize(this);
+		setDefaultCommand(new ManualDriveCommand());
 	}
 	
 	/**

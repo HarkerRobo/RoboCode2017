@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ArcadeDriveCommand extends Command {
 	
-	private static final double DEAD_ZONE = 0.04;
+	private static final double DEAD_ZONE = 0.08;
 	private int flip;
 	
 	public ArcadeDriveCommand() {

@@ -13,7 +13,9 @@ import org.usfirst.frc.team1072.robot.commands.AutonomousGear2CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear3CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear4CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear5CommandGroup;
+import org.usfirst.frc.team1072.robot.commands.CloserCommand;
 import org.usfirst.frc.team1072.robot.commands.MoveDistanceCommand;
+import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,6 +33,8 @@ public class UpdateSDCommand extends Command {
 	AutonomousGear3CommandGroup autonomousCommand3;
 	AutonomousGear4CommandGroup autonomousCommand4;
 	AutonomousGear5CommandGroup autonomousCommand5;
+	Command flaps;
+	Command shift;
 	BufferedImage image;
 	private int port;
 	private String ip;
@@ -41,6 +45,9 @@ public class UpdateSDCommand extends Command {
     	autonomousCommand3 = new AutonomousGear3CommandGroup();
     	autonomousCommand4 = new AutonomousGear4CommandGroup();
     	autonomousCommand5 = new AutonomousGear5CommandGroup();
+    	flaps = new CloserCommand();
+    	shift = new TriggerSolenoidCommand(Robot.shifter);
+    	setRunWhenDisabled(true);
     }
 
     protected void initialize() {
@@ -51,7 +58,8 @@ public class UpdateSDCommand extends Command {
     	gear.addObject("Left", (String) "Left");
     	gear.addObject("Center", (String) "Center");
     	gear.addObject("Right", (String) "Right");
-    	
+    	SmartDashboard.putData("Flaps!", flaps);
+    	SmartDashboard.putData("Shift!", shift);
     	SmartDashboard.putData("Side Chooser", side);
     	SmartDashboard.putData("Gear Chooser", gear);
     	SmartDashboard.putData("Autonomous Command Gear 1", autonomousCommand1);

@@ -18,7 +18,7 @@ public class AutonPusherCommand extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		Robot.push.getClose().set(Value.kReverse);
-		setTimeout(0.5);
+		setTimeout(0.25);
 	}
 	
 	// Called repeatedly when this Command is scheduled to run
@@ -35,7 +35,7 @@ public class AutonPusherCommand extends Command {
 				return true;
 			} else {
 				Robot.push.getPush().set(Value.kForward);
-				setTimeout(1.0);
+				setTimeout(0.5);
 			}
 		}
 		return false;
