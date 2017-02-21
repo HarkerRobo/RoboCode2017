@@ -52,8 +52,8 @@ public class GamepadWrapper extends Joystick {
     public static final int LOGITECH_STICK_LEFT_PORT = 11;
     public static final int LOGITECH_STICK_RIGHT_PORT = 12;
 
-    public static final int LOGITECH_BUMPER_LEFT_PORT = 5;
-    public static final int LOGITECH_BUMPER_RIGHT_PORT = 6;
+    public static final int LOGITECH_BUMPER_LEFT_PORT = 7;
+    public static final int LOGITECH_BUMPER_RIGHT_PORT = 8;
     
     public static final int LOGITECH_AXIS_LEFT_X = 0;
     public static final int LOGITECH_AXIS_LEFT_Y = 1;
