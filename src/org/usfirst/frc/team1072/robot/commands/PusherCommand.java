@@ -20,7 +20,7 @@ public class PusherCommand extends Command {
 		if(!Robot.push.getPush().get().equals(Value.kForward) && !Robot.push.getClose().get().equals(Value.kReverse)){
 			Robot.push.getClose().set(Value.kReverse);
 			System.out.println("Closed closer");
-			setTimeout(0.25);
+			setTimeout(0.35);
 		} else {
 			setTimeout(0);
 		}
@@ -36,7 +36,7 @@ public class PusherCommand extends Command {
 		if(isTimedOut()){
 			if(Robot.push.getPush().get().equals(Value.kReverse)){
 				Robot.push.getPush().set(Value.kForward);
-				setTimeout(0.5);
+				setTimeout(0.7);
 			} else {
 				return true;
 			}
@@ -47,8 +47,8 @@ public class PusherCommand extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		if(!Robot.push.getPush().get().equals(Value.kReverse)){
-			Robot.push.getPush().set(Value.kReverse);
-			Robot.push.getClose().set(Value.kForward);
+			//Robot.push.getPush().set(Value.kReverse);
+			(new DelayedCloseCommand()).start();
 		} else {
 			if(Robot.push.getClose().get().equals(Value.kReverse)){
 				Robot.push.getPush().set(Value.kForward);

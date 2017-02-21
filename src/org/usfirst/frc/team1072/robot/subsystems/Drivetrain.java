@@ -58,6 +58,8 @@ public class Drivetrain extends Subsystem {
 	public void drive(double leftSpeed, double rightSpeed){
 		left.drive(leftSpeed);
 		right.drive(rightSpeed);
+		SmartDashboard.putNumber("Left Input", leftSpeed);
+		SmartDashboard.putNumber("Right Input", rightSpeed);
 	}
 	
 	public void toSmartDashboard(){
@@ -86,6 +88,8 @@ public class Drivetrain extends Subsystem {
 		public void toSmartDashboard(String name) {
 			SmartDashboard.putNumber(name + " Speed", getRate());
 			SmartDashboard.putNumber(name + " Distance", getDistance());
+			SmartDashboard.putNumber(name + " Front Current", front.getOutputCurrent());
+			SmartDashboard.putNumber(name + " Back Current", back.getOutputCurrent());
 		}
 
 		public TrainSide(int frontChannel, int backChannel, int encoderA,

@@ -74,11 +74,10 @@ public class UpdateSDCommand extends Command {
 
     protected void execute() {
     	//Commands
-    	SmartDashboard.putData(Scheduler.getInstance());
-    	SmartDashboard.putData("Turn 90 Degrees", new AngleTurnCommand(90));
-    	SmartDashboard.putData("Turn -90 Degrees", new AngleTurnCommand(-90));
+    	//SmartDashboard.putData(Scheduler.getInstance());
     	//Subsystems
     	Robot.drivetrain.toSmartDashboard();
+    	SmartDashboard.putNumber("Compressor Current", Robot.compress.getCompressorCurrent());
     	//Robot.winch.toSmartDashboard("Winch");
     	Robot.push.toSmartDashboard();
     	Robot.shifter.toSmartDashboard("Shifter");

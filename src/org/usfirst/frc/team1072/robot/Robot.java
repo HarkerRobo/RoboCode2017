@@ -92,6 +92,8 @@ public class Robot extends IterativeRobot {
 		//raspi = new RaspiNetworker();
 		compress = new Compressor(0);
 		compress.setClosedLoopControl(true);
+		compress.start();
+		//compress.stop();
 		push.getClose().set(Value.kForward);
 		push.getPush().set(Value.kReverse);
 		shifter.getSol().set(Value.kReverse);
@@ -183,7 +185,7 @@ public class Robot extends IterativeRobot {
 				autonomousCommand = new AutonomousGear5CommandGroup();
 		}
 		 */
-		autonomousCommand = new AutonomousGear4CommandGroup();
+		//autonomousCommand = new AutonomousGear2CommandGroup();
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}

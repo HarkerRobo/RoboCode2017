@@ -32,7 +32,7 @@ public class GearPusher extends Subsystem {
         //XboxWrapper.getInstance().whenPressed(Controls.PUSHER, new PusherCommand());
         //XboxWrapper.getInstance().whenPressed(Controls.CLOSER, new CloserCommand());
     	OI.gp.getButtonX().whenPressed(new PusherCommand());
-    	OI.gp.getButtonY().whenPressed(new CloserCommand());
+    	//OI.gp.getButtonY().whenPressed(new CloserCommand());
     }
 
 	public DoubleSolenoid getPush() {

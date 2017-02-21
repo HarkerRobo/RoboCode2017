@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ManualDriveCommand extends Command {
 
-    private static final double THRESHOLD = 0.05;
+    private static final double THRESHOLD = 0.1;
 
 	public ManualDriveCommand() {
         requires(Robot.drivetrain);
@@ -70,8 +70,8 @@ public class ManualDriveCommand extends Command {
 			Robot.drivetrain.drive(0, 0);
 		} else {
 			double k = Math.max(1.0, Math.max(Math.abs(y+x), Math.abs(y-x)));
-			double left = (y - x * Math.abs(x))/k;
-			double right = (y + x * Math.abs(x))/k;
+			double left = (y + x * Math.abs(x))/k;
+			double right = (y - x * Math.abs(x))/k;
 			Robot.drivetrain.drive(left, right);
 		}
     }
