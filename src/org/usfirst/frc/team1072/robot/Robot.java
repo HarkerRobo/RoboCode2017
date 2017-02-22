@@ -23,7 +23,9 @@ import org.usfirst.frc.team1072.robot.commands.AutonomousGear2CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear3CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear4CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear5CommandGroup;
+import org.usfirst.frc.team1072.robot.commands.CloserCommand;
 import org.usfirst.frc.team1072.robot.commands.SlowModeCommand;
+import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.OldDrivetrain;
@@ -106,6 +108,8 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		//SmartDashboard.putData("Auto mode", chooser);
 		//SmartDashboard.putNumber("Value" + counter, 5.0);
+		OI.gp2.getButtonBumperRight().whenPressed(new TriggerSolenoidCommand(shifter));
+		OI.gp2.getButtonBumperLeft().whenPressed(new CloserCommand());
 	}
 
 	/**
