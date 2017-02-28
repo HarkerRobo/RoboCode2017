@@ -30,7 +30,7 @@ public class MoveDistanceCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double dif = distance - (Robot.drivetrain.getRight().getDistance() + Robot.drivetrain.getLeft().getDistance())/2;
+    	double dif = distance - (Robot.drivetrain.getRight().getDistance() + Robot.drivetrain.getRight().getDistance())/2;
     	dif /= 30;
     	if(Math.abs(dif) > 0.4){
     		dif = Math.signum(distance) * 0.4;
@@ -47,7 +47,7 @@ public class MoveDistanceCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2 >= Math.abs(distance);
+    	return Math.abs(Robot.drivetrain.getRight().getDistance() + Robot.drivetrain.getRight().getDistance())/2 >= Math.abs(distance);
     }
 
     // Called once after isFinished returns true
