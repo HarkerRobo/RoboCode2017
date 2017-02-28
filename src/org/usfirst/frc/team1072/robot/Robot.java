@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1072.robot;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -26,6 +25,7 @@ import org.usfirst.frc.team1072.robot.commands.AutonomousGear5CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.CloserCommand;
 import org.usfirst.frc.team1072.robot.commands.SlowModeCommand;
 import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
+import org.usfirst.frc.team1072.robot.smartDashboard.SmartEnum;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.OldDrivetrain;
@@ -34,12 +34,11 @@ import org.usfirst.frc.team1072.robot.subsystems.GearPusher;
 import org.usfirst.frc.team1072.robot.subsystems.PIDDrivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.Shifter;
 import org.usfirst.frc.team1072.robot.subsystems.Winch;
-//import org.usfirst.team1072.robot.smartDashboard.H264Widget;
+// import org.usfirst.team1072.robot.smartDashboard.H264Widget;
 import org.usfirst.frc.team1072.robot.subsystems.Piston;
 import org.usfirst.frc.team1072.robot.subsystems.SolenoidSubsystem;
-//import org.usfirst.team1072.robot.smartDashboard.UpdateSDCommand;
 
-
+// import org.usfirst.team1072.robot.smartDashboard.UpdateSDCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -49,35 +48,42 @@ import org.usfirst.frc.team1072.robot.subsystems.SolenoidSubsystem;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	
 	public static enum WinchControl {
 		TOGGLE, BUMPERS
 	}
-
+	
 	public static enum DriveControl {
 		TANK, ARCADE, PIDTEST
 	}
-
-	public static enum Gears {
-		LEFT, CENTER, RIGHT
+	
+	public static enum Side {
+		RED, BLUE
 	}
-
+	
+	public static enum Position {
+		LEFT, RIGHT, CENTER
+	}
+	
 	public static final WinchControl winchControl = WinchControl.BUMPERS;
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	public static Piston gearPiston;
 	public static Winch winch;
-	//public static RaspiNetworker raspi;
+	// public static RaspiNetworker raspi;
 	public static Compressor compress;
 	public static GearPusher push;
 	public static SolenoidSubsystem shifter;
 	public static ADXRS450_Gyro gyro;
 	public static BuiltInAccelerometer accel;
-
+	public static SmartEnum<Side> side;
+	public static SmartEnum<Position> position;
+	
 	Command autonomousCommand;
-	//SendableChooser<Command> chooser = new SendableChooser<>();
-
+	
+	// SendableChooser<Command> chooser = new SendableChooser<>();
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -91,27 +97,30 @@ public class Robot extends IterativeRobot {
 		shifter = new Shifter();
 		gyro = new ADXRS450_Gyro();
 		accel = new BuiltInAccelerometer();
-		//raspi = new RaspiNetworker();
+		// raspi = new RaspiNetworker();
 		compress = new Compressor(0);
 		compress.setClosedLoopControl(true);
 		compress.start();
-		//compress.stop();
+		// compress.stop();
 		push.getClose().set(Value.kForward);
 		push.getPush().set(Value.kReverse);
 		shifter.getSol().set(Value.kReverse);
-		//CameraServer.getInstance().startAutomaticCapture();
-		//raspi.start();
-		//SmartDashboard.putData("H264", new H264Widget());
-		//SmartDashboard.putData("Test Encoders:", new EncoderTest());
-		//gearPiston = new GearPiston();
-		//chooser.addDefault("Default Auto", new ExampleCommand());
+		// CameraServer.getInstance().startAutomaticCapture();
+		// raspi.start();
+		// SmartDashboard.putData("H264", new H264Widget());
+		// SmartDashboard.putData("Test Encoders:", new EncoderTest());
+		// gearPiston = new GearPiston();
+		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		//SmartDashboard.putData("Auto mode", chooser);
-		//SmartDashboard.putNumber("Value" + counter, 5.0);
-		OI.gp2.getButtonBumperRight().whenPressed(new TriggerSolenoidCommand(shifter));
+		// SmartDashboard.putData("Auto mode", chooser);
+		// SmartDashboard.putNumber("Value" + counter, 5.0);
+		OI.gp2.getButtonBumperRight().whenPressed(
+				new TriggerSolenoidCommand(shifter));
 		OI.gp2.getButtonBumperLeft().whenPressed(new CloserCommand());
+		side = new SmartEnum<Side>(Side.BLUE);
+		position = new SmartEnum<Position>(Position.CENTER);
 	}
-
+	
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
@@ -121,20 +130,20 @@ public class Robot extends IterativeRobot {
 	public void disabledInit() {
 		drivetrain.getLeft().reset();
 		drivetrain.getRight().reset();
-		//drivetrain.disable();
+		// drivetrain.disable();
 	}
-
+	
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
+	
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autks with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboaonomous modes using the dashboard. The sendable
-	 * chooser code worrd, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
+	 * LabVIEW Dashboaonomous modes using the dashboard. The sendable chooser
+	 * code worrd, remove all of the chooser code and uncomment the getString
+	 * code to get the auto name from the text box below the Gyro
 	 *
 	 * You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
@@ -142,59 +151,62 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		/* 
-		autonomousCommand = chooser.getSelected();
-
-		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-			case "My Auto": autonomousCommand = new MyAutoCommand(); break;
-			case "Default Auto": default: autonomousCommand = new ExampleCommand(); break;
-		}
-
-		schedule the autonomous command (example)
+		/*
+		 * autonomousCommand = chooser.getSelected();
+		 * 
+		 * String autoSelected = SmartDashboard.getString("Auto Selector",
+		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
+		 * = new MyAutoCommand(); break; case "Default Auto": default:
+		 * autonomousCommand = new ExampleCommand(); break; }
+		 * 
+		 * schedule the autonomous command (example)
 		 */
-
-		/*String side = (String) ((SendableChooser) SmartDashboard.getData("Side Chooser")).getSelected();
-		String gear = (String) ((SendableChooser) SmartDashboard.getData("Gear Chooser")).getSelected();
-
-		switch(side) {
-		case "Red":
-			switch(gear) {
-				case "Left": autonomousCommand = new AutonomousGear1CommandGroup(); break;
-				case "Center": autonomousCommand = new AutonomousGear2CommandGroup(); break;
-				case "Right": autonomousCommand = new AutonomousGear3CommandGroup(); break;
-				default: autonomousCommand = null; break;
-			}
-		case "Blue":
-			switch(gear){
-				case "Left": autonomousCommand = new AutonomousGear4CommandGroup(); break;
-				case "Center": autonomousCommand = new AutonomousGear2CommandGroup(); break;
-				case "Right": autonomousCommand = new AutonomousGear5CommandGroup(); break;
-				default: autonomousCommand = null; break;
-			}
-		}*/
-
-		/*		
-		if(gear.equals("Center")){
-			autonomousCommand = new AutonomousGear2CommandGroup();
-		} else if(gear.equals("Left")){
-			if(side.equals("Red"))
-				autonomousCommand = new AutonomousGear1CommandGroup();
-			else
-				autonomousCommand = new AutonomousGear4CommandGroup();
-		} else if(gear.equals("Right")){
-			if(side.equals("Red"))
-				autonomousCommand = new AutonomousGear3CommandGroup();
-			else
-				autonomousCommand = new AutonomousGear5CommandGroup();
+		
+		// String side = (String) ((SendableChooser)
+		// SmartDashboard.getData("Side Chooser")).getSelected();
+		// String gear = (String) ((SendableChooser)
+		// SmartDashboard.getData("Gear Chooser")).getSelected();
+		
+		switch(side.get()){
+			case RED:
+				switch(position.get()){
+					case LEFT:
+						autonomousCommand = new AutonomousGear1CommandGroup();
+						break;
+					case CENTER:
+						autonomousCommand = new AutonomousGear2CommandGroup();
+						break;
+					case RIGHT:
+						autonomousCommand = new AutonomousGear3CommandGroup();
+						break;
+					default:
+						autonomousCommand = null;
+						break;
+				}
+				break;
+			case BLUE:
+				switch(position.get()){
+					case LEFT:
+						autonomousCommand = new AutonomousGear4CommandGroup();
+						break;
+					case CENTER:
+						autonomousCommand = new AutonomousGear2CommandGroup();
+						break;
+					case RIGHT:
+						autonomousCommand = new AutonomousGear5CommandGroup();
+						break;
+					default:
+						autonomousCommand = null;
+						break;
+				}
+				break;
 		}
-		 */
-		//autonomousCommand = new AutonomousGear2CommandGroup();
-		if (autonomousCommand != null) {
+		
+		if(autonomousCommand != null) {
 			autonomousCommand.start();
 		}
 	}
-
+	
 	/**
 	 * This function is called periodically during autonomous
 	 */
@@ -202,21 +214,21 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
+	
 	@Override
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
+		if(autonomousCommand != null)
 			autonomousCommand.cancel();
 		UpdateSDCommand sdc = new UpdateSDCommand();
 		sdc.start();
 		XboxWrapper.getInstance().whenPressed(Button.A, new SlowModeCommand());
-		//Robot.drivetrain.enable();
+		// Robot.drivetrain.enable();
 	}
-
+	
 	/**
 	 * This function is called periodically during operator control
 	 */
@@ -224,7 +236,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 	}
-
+	
 	/**
 	 * This function is called periodically during test mode
 	 */
