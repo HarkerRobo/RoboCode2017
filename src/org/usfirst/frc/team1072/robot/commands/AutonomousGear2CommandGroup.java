@@ -10,13 +10,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutonomousGear2CommandGroup extends CommandGroup {
 	
-	public static double gearTwoDistance = 56; // inches
+	public static double gearTwoDistance = 106; // inches
 	public static double kp = PID.MoveDist.P, ki = PID.MoveDist.I, kd = PID.MoveDist.D;
 	
     public AutonomousGear2CommandGroup() {
-    	addSequential(new MoveDistanceCommand(gearTwoDistance));
-    	addSequential(new AutonPusherCommand());
-    	addSequential(new MoveDistanceCommand(-24));
-    	//TODO cross the line
+    	addSequential(new DriveDistanceTimed(gearTwoDistance));
+    	addSequential(new PusherStart());
+    	addSequential(new WaitCommand(1));
+    	addSequential(new DriveDistanceTimed(-24));
+    	addSequential(new PusherEnd());
     }
 }

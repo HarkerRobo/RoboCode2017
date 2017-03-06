@@ -3,8 +3,6 @@ package org.usfirst.frc.team1072.robot.subsystems;
 import org.usfirst.frc.team1072.robot.Controls;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
-import org.usfirst.frc.team1072.robot.commands.ArcadeDriveCommand;
-import org.usfirst.frc.team1072.robot.commands.DriveStaticCommand;
 import org.usfirst.frc.team1072.robot.commands.ManualDriveCommand;
 import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AngleTurnCommand extends Command {
 	
-	private double initialAngle;
+	private double inputAngle;
 	private double angle;
 	/*private double prevError;
 	double kp = PID.TurnAngle.P, ki = PID.TurnAngle.I, kd = PID.TurnAngle.D;
@@ -21,12 +21,13 @@ public class AngleTurnCommand extends Command {
 	
 	public AngleTurnCommand(double angle){
 		requires(Robot.drivetrain);
-    	this.angle = (Robot.gyro.getAngle() + angle) % 360;
+		this.inputAngle = angle;
+    	//this.angle = (Robot.gyro.getAngle() + angle) % 360;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	angle = (inputAngle + Robot.gyro.getAngle()) % 360;
     }
 
     // Called repeatedly when this Command is scheduled to run

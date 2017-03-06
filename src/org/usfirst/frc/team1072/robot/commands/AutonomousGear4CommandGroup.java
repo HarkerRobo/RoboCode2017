@@ -24,11 +24,11 @@ public class AutonomousGear4CommandGroup extends CommandGroup {
 	public AutonomousGear4CommandGroup() {
 		requires(Robot.drivetrain);
 		requires(Robot.push);
-		addSequential(new MoveDistanceCommand(initDistance));
+		addSequential(new DriveDistanceTimed(initDistance));
 		addSequential(new AngleTurnCommand(60));
-		addSequential(new MoveDistanceCommand(perpGearDistance));
+		addSequential(new DriveDistanceTimed(perpGearDistance));
 		addSequential(new AutonPusherCommand());
-		addSequential(new MoveDistanceCommand(-24));
+		addSequential(new DriveDistanceTimed(-24));
 		/*while (!currentSpike()) {
 			Robot.drivetrain.drive(velocityToGetCurrentSpike, velocityToGetCurrentSpike);
 		}

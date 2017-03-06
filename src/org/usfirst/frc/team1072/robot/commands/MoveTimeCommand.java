@@ -9,29 +9,18 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 public class MoveTimeCommand extends TimedCommand {
 	private double speed;
     public MoveTimeCommand(double ti) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     		this(ti, 1);
-    		requires(Robot.drivetrain);
     }
     
     public MoveTimeCommand(double ti, double sp){
     		super(ti);
+    		requires(Robot.drivetrain);
     		speed = sp;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     		Robot.drivetrain.drive(speed, speed);
-    }
-
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
-
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
     }
 
     // Called once after isFinished returns true

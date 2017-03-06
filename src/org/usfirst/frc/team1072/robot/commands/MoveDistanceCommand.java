@@ -8,6 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
  *@author cravuri
  */
 public class MoveDistanceCommand extends Command {
+	
+	public enum WorkingEncoders {
+		LEFT, RIGHT, BOTH
+	}
+	
+	public static final WorkingEncoders working = WorkingEncoders.LEFT;
+	
 	private double distance;
 	//double kp = PID.MoveDist.P, ki = PID.MoveDist.I, kd = PID.MoveDist.D;
 	//double sum = 0;
@@ -30,7 +37,18 @@ public class MoveDistanceCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double dif = distance - (Robot.drivetrain.getRight().getDistance() + Robot.drivetrain.getRight().getDistance())/2;
+    	double dif = distance;
+    	switch(working){
+    		case LEFT:
+    			dif -= Robot.drivetrain.getLeft().getDistance();
+    			break;
+    		case RIGHT:
+    			dif -= Robot.drivetrain.getRight().getDistance();
+    			break;
+    		case BOTH:
+    			dif -= (Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2;
+    			break;
+    	}
     	dif /= 30;
     	if(Math.abs(dif) > 0.4){
     		dif = Math.signum(distance) * 0.4;
@@ -47,7 +65,7 @@ public class MoveDistanceCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(Robot.drivetrain.getRight().getDistance() + Robot.drivetrain.getRight().getDistance())/2 >= Math.abs(distance);
+    	return Math.abs(Robot.drivetrain.getLeft().getDistance() + Robot.drivetrain.getRight().getDistance())/2 >= Math.abs(distance);
     }
 
     // Called once after isFinished returns true

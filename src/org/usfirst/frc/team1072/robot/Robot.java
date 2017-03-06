@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1072.robot.RobotMap.Gears;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
-import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGear2;
+import org.usfirst.frc.team1072.robot.commands.AutonomousCommand;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear1CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear2CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear3CommandGroup;
@@ -35,7 +35,6 @@ import org.usfirst.frc.team1072.robot.subsystems.PIDDrivetrain;
 import org.usfirst.frc.team1072.robot.subsystems.Shifter;
 import org.usfirst.frc.team1072.robot.subsystems.Winch;
 // import org.usfirst.team1072.robot.smartDashboard.H264Widget;
-import org.usfirst.frc.team1072.robot.subsystems.Piston;
 import org.usfirst.frc.team1072.robot.subsystems.SolenoidSubsystem;
 
 // import org.usfirst.team1072.robot.smartDashboard.UpdateSDCommand;
@@ -69,7 +68,6 @@ public class Robot extends IterativeRobot {
 	public static final DriveControl driveControl = DriveControl.TANK;
 	public static OI oi;
 	public static Drivetrain drivetrain;
-	public static Piston gearPiston;
 	public static Winch winch;
 	// public static RaspiNetworker raspi;
 	public static Compressor compress;
@@ -96,6 +94,8 @@ public class Robot extends IterativeRobot {
 		push = new GearPusher();
 		shifter = new Shifter();
 		gyro = new ADXRS450_Gyro();
+		gyro.calibrate();
+		gyro.reset();
 		accel = new BuiltInAccelerometer();
 		// raspi = new RaspiNetworker();
 		compress = new Compressor(0);
@@ -105,7 +105,7 @@ public class Robot extends IterativeRobot {
 		push.getClose().set(Value.kForward);
 		push.getPush().set(Value.kReverse);
 		shifter.getSol().set(Value.kReverse);
-		// CameraServer.getInstance().startAutomaticCapture();
+		CameraServer.getInstance().startAutomaticCapture();
 		// raspi.start();
 		// SmartDashboard.putData("H264", new H264Widget());
 		// SmartDashboard.putData("Test Encoders:", new EncoderTest());
@@ -119,6 +119,8 @@ public class Robot extends IterativeRobot {
 		OI.gp2.getButtonBumperLeft().whenPressed(new CloserCommand());
 		side = new SmartEnum<Side>(Side.BLUE);
 		position = new SmartEnum<Position>(Position.CENTER);
+		UpdateSDCommand sdc = new UpdateSDCommand();
+		sdc.start();
 	}
 	
 	/**
@@ -130,7 +132,7 @@ public class Robot extends IterativeRobot {
 	public void disabledInit() {
 		drivetrain.getLeft().reset();
 		drivetrain.getRight().reset();
-		// drivetrain.disable();
+		gyro.reset();
 	}
 	
 	@Override
@@ -151,33 +153,17 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		/*
-		 * autonomousCommand = chooser.getSelected();
-		 * 
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 * 
-		 * schedule the autonomous command (example)
-		 */
-		
-		// String side = (String) ((SendableChooser)
-		// SmartDashboard.getData("Side Chooser")).getSelected();
-		// String gear = (String) ((SendableChooser)
-		// SmartDashboard.getData("Gear Chooser")).getSelected();
-		
 		switch(side.get()){
 			case RED:
 				switch(position.get()){
 					case LEFT:
-						autonomousCommand = new AutonomousGear1CommandGroup();
+						autonomousCommand = AutonomousCommand.RED_LEFT;
 						break;
 					case CENTER:
-						autonomousCommand = new AutonomousGear2CommandGroup();
+						autonomousCommand = AutonomousCommand.RED_CENTER;
 						break;
 					case RIGHT:
-						autonomousCommand = new AutonomousGear3CommandGroup();
+						autonomousCommand = AutonomousCommand.RED_RIGHT;
 						break;
 					default:
 						autonomousCommand = null;
@@ -187,13 +173,13 @@ public class Robot extends IterativeRobot {
 			case BLUE:
 				switch(position.get()){
 					case LEFT:
-						autonomousCommand = new AutonomousGear4CommandGroup();
+						autonomousCommand = AutonomousCommand.BLUE_LEFT;
 						break;
 					case CENTER:
-						autonomousCommand = new AutonomousGear2CommandGroup();
+						autonomousCommand = AutonomousCommand.BLUE_CENTER;
 						break;
 					case RIGHT:
-						autonomousCommand = new AutonomousGear5CommandGroup();
+						autonomousCommand = AutonomousCommand.BLUE_RIGHT;
 						break;
 					default:
 						autonomousCommand = null;
@@ -201,7 +187,6 @@ public class Robot extends IterativeRobot {
 				}
 				break;
 		}
-		
 		if(autonomousCommand != null) {
 			autonomousCommand.start();
 		}
@@ -223,8 +208,6 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if(autonomousCommand != null)
 			autonomousCommand.cancel();
-		UpdateSDCommand sdc = new UpdateSDCommand();
-		sdc.start();
 		XboxWrapper.getInstance().whenPressed(Button.A, new SlowModeCommand());
 		// Robot.drivetrain.enable();
 	}

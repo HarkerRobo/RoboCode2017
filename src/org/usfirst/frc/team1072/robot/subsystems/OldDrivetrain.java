@@ -10,7 +10,6 @@ import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Encoders;
 import org.usfirst.frc.team1072.robot.RobotMap.Robot.Drive.Talons;
 import org.usfirst.frc.team1072.robot.XboxWrapper;
 import org.usfirst.frc.team1072.robot.XboxWrapper.Button;
-import org.usfirst.frc.team1072.robot.commands.ArcadeDriveCommand;
 import org.usfirst.frc.team1072.robot.commands.DriveCommand;
 import org.usfirst.frc.team1072.robot.commands.TankDriveCommand;
 
@@ -107,7 +106,7 @@ public class OldDrivetrain extends Subsystem {
     public void initDefaultCommand() {
     	switch(Robot.driveControl){
 			case ARCADE:
-				setDefaultCommand(new ArcadeDriveCommand());
+				//setDefaultCommand(new ArcadeDriveCommand());
 				break;
 			case TANK:
 				setDefaultCommand(new TankDriveCommand());

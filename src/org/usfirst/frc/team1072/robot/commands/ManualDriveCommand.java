@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ManualDriveCommand extends Command {
 
-    private static final double THRESHOLD = 0.1;
+    private static final double THRESHOLD = 0.15;
 
 	public ManualDriveCommand() {
         requires(Robot.drivetrain);

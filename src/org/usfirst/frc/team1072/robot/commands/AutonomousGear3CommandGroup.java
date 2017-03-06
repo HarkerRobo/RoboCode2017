@@ -24,11 +24,11 @@ public class AutonomousGear3CommandGroup extends CommandGroup {
 	private int tapeWidthLeft, tapeWidthRight; 
 
 	public AutonomousGear3CommandGroup() {
-		addSequential(new MoveDistanceCommand(initDistance));
+		addSequential(new DriveDistanceTimed(initDistance));
 		addSequential(new AngleTurnCommand(-60));
-		addSequential(new MoveDistanceCommand(perpGearDistance));
+		addSequential(new DriveDistanceTimed(perpGearDistance));
 		addSequential(new AutonPusherCommand());
-		addSequential(new MoveDistanceCommand(-24));
+		addSequential(new DriveDistanceTimed(-24));
 		/*while (!currentSpike()) {
 			Robot.drivetrain.drive(velocityToGetCurrentSpike, velocityToGetCurrentSpike);
 		}

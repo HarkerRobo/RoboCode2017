@@ -8,11 +8,11 @@ public class AutonomousGear5CommandGroup extends CommandGroup {
 	double perpGearDistance = 43.167;
 	
 	public AutonomousGear5CommandGroup() {
-		addSequential(new MoveDistanceCommand(gearFiveDistance));
+		addSequential(new DriveDistanceTimed(gearFiveDistance));
 		addSequential(new AngleTurnCommand(-54.739));
-		addSequential(new MoveDistanceCommand(perpGearDistance));
+		addSequential(new DriveDistanceTimed(perpGearDistance));
 		addSequential(new AutonPusherCommand());
-		addSequential(new MoveDistanceCommand(-24));
+		addSequential(new DriveDistanceTimed(-24));
 	}
 
 }

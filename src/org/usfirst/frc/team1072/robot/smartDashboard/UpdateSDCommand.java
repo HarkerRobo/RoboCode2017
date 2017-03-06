@@ -7,7 +7,6 @@ import java.awt.EventQueue;
 
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.commands.AngleTurnCommand;
-import org.usfirst.frc.team1072.robot.commands.AutonomousCommandGear2;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear1CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear2CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear3CommandGroup;
@@ -15,6 +14,8 @@ import org.usfirst.frc.team1072.robot.commands.AutonomousGear4CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.AutonomousGear5CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.CloserCommand;
 import org.usfirst.frc.team1072.robot.commands.MoveDistanceCommand;
+import org.usfirst.frc.team1072.robot.commands.MoveTimeCommand;
+import org.usfirst.frc.team1072.robot.commands.TimeTestCommand;
 import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -70,6 +71,10 @@ public class UpdateSDCommand extends Command {
     	SmartDashboard.putData("Turn 90 Degrees", new AngleTurnCommand(90));
     	SmartDashboard.putData("Turn -90 Degrees", new AngleTurnCommand(-90));
     	SmartDashboard.putData("Move 100 Inches", new MoveDistanceCommand(100));
+    	SmartDashboard.putData("Move 4 seconds .3", new MoveTimeCommand(4, .3));
+    	SmartDashboard.putData("Move 4 seconds .4", new MoveTimeCommand(4, .4));
+    	SmartDashboard.putNumber("Drive Time", 1);
+    	SmartDashboard.putData("Drive for _ seconds", new TimeTestCommand());
     }
 
     protected void execute() {
