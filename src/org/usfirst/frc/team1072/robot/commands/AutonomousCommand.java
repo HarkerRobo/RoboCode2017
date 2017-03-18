@@ -3,7 +3,7 @@ package org.usfirst.frc.team1072.robot.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * I'm given an array of 3 values
  */
 public class AutonomousCommand extends CommandGroup {
 
@@ -16,10 +16,11 @@ public class AutonomousCommand extends CommandGroup {
 	
     private AutonomousCommand(double initialDistance, double turn, double secondDistance) {
         addSequential(new DriveDistanceTimed(initialDistance));
+        addSequential(new WaitCommand(0.5));
         addSequential(new AngleTurnCommand(turn));
         addSequential(new DriveDistanceTimed(secondDistance));
         addSequential(new PusherStart());
-        addSequential(new WaitCommand(1));
+        addSequential(new WaitCommand(0.5));
         addSequential(new DriveDistanceTimed(-24));
         addSequential(new PusherEnd());
     }

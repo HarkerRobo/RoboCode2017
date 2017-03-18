@@ -25,6 +25,7 @@ import org.usfirst.frc.team1072.robot.commands.AutonomousGear5CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.CloserCommand;
 import org.usfirst.frc.team1072.robot.commands.SlowModeCommand;
 import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
+import org.usfirst.frc.team1072.robot.commands.auton2.VisionAutonCommand;
 import org.usfirst.frc.team1072.robot.smartDashboard.SmartEnum;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
 import org.usfirst.frc.team1072.robot.subsystems.Drivetrain;
@@ -69,7 +70,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drivetrain drivetrain;
 	public static Winch winch;
-	// public static RaspiNetworker raspi;
+	public static RaspiNetworker rpinet;
 	public static Compressor compress;
 	public static GearPusher push;
 	public static SolenoidSubsystem shifter;
@@ -97,16 +98,15 @@ public class Robot extends IterativeRobot {
 		gyro.calibrate();
 		gyro.reset();
 		accel = new BuiltInAccelerometer();
-		// raspi = new RaspiNetworker();
+		rpinet = new RaspiNetworker();
 		compress = new Compressor(0);
 		compress.setClosedLoopControl(true);
 		compress.start();
-		// compress.stop();
 		push.getClose().set(Value.kForward);
 		push.getPush().set(Value.kReverse);
 		shifter.getSol().set(Value.kReverse);
 		CameraServer.getInstance().startAutomaticCapture();
-		// raspi.start();
+		rpinet.start();
 		// SmartDashboard.putData("H264", new H264Widget());
 		// SmartDashboard.putData("Test Encoders:", new EncoderTest());
 		// gearPiston = new GearPiston();
@@ -157,13 +157,13 @@ public class Robot extends IterativeRobot {
 			case RED:
 				switch(position.get()){
 					case LEFT:
-						autonomousCommand = AutonomousCommand.RED_LEFT;
+						autonomousCommand = VisionAutonCommand.RED_LEFT;
 						break;
 					case CENTER:
-						autonomousCommand = AutonomousCommand.RED_CENTER;
+						autonomousCommand = VisionAutonCommand.RED_CENTER;
 						break;
 					case RIGHT:
-						autonomousCommand = AutonomousCommand.RED_RIGHT;
+						autonomousCommand = VisionAutonCommand.RED_RIGHT;
 						break;
 					default:
 						autonomousCommand = null;
@@ -173,13 +173,13 @@ public class Robot extends IterativeRobot {
 			case BLUE:
 				switch(position.get()){
 					case LEFT:
-						autonomousCommand = AutonomousCommand.BLUE_LEFT;
+						autonomousCommand = VisionAutonCommand.BLUE_LEFT;
 						break;
 					case CENTER:
-						autonomousCommand = AutonomousCommand.BLUE_CENTER;
+						autonomousCommand = VisionAutonCommand.BLUE_CENTER;
 						break;
 					case RIGHT:
-						autonomousCommand = AutonomousCommand.BLUE_RIGHT;
+						autonomousCommand = VisionAutonCommand.BLUE_RIGHT;
 						break;
 					default:
 						autonomousCommand = null;
@@ -210,6 +210,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		XboxWrapper.getInstance().whenPressed(Button.A, new SlowModeCommand());
 		// Robot.drivetrain.enable();
+		rpinet.stop();
 	}
 	
 	/**
