@@ -33,7 +33,7 @@ public class Winch extends Subsystem {
 	 */
 	public void setSpeed(double speed) {
 		talon1.set(speed);
-		talon2.set(-speed);
+		talon2.set(speed);
 	}
 
 	public void initDefaultCommand() {

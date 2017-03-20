@@ -106,7 +106,7 @@ public class Robot extends IterativeRobot {
 		push.getPush().set(Value.kReverse);
 		shifter.getSol().set(Value.kReverse);
 		CameraServer.getInstance().startAutomaticCapture();
-		rpinet.start();
+		//rpinet.start();
 		// SmartDashboard.putData("H264", new H264Widget());
 		// SmartDashboard.putData("Test Encoders:", new EncoderTest());
 		// gearPiston = new GearPiston();
@@ -157,13 +157,13 @@ public class Robot extends IterativeRobot {
 			case RED:
 				switch(position.get()){
 					case LEFT:
-						autonomousCommand = VisionAutonCommand.RED_LEFT;
+						autonomousCommand = AutonomousCommand.RED_LEFT;
 						break;
 					case CENTER:
-						autonomousCommand = VisionAutonCommand.RED_CENTER;
+						autonomousCommand = AutonomousCommand.RED_CENTER;
 						break;
 					case RIGHT:
-						autonomousCommand = VisionAutonCommand.RED_RIGHT;
+						autonomousCommand = AutonomousCommand.RED_RIGHT;
 						break;
 					default:
 						autonomousCommand = null;
@@ -173,13 +173,13 @@ public class Robot extends IterativeRobot {
 			case BLUE:
 				switch(position.get()){
 					case LEFT:
-						autonomousCommand = VisionAutonCommand.BLUE_LEFT;
+						autonomousCommand = AutonomousCommand.BLUE_LEFT;
 						break;
 					case CENTER:
-						autonomousCommand = VisionAutonCommand.BLUE_CENTER;
+						autonomousCommand = AutonomousCommand.BLUE_CENTER;
 						break;
 					case RIGHT:
-						autonomousCommand = VisionAutonCommand.BLUE_RIGHT;
+						autonomousCommand = AutonomousCommand.BLUE_RIGHT;
 						break;
 					default:
 						autonomousCommand = null;

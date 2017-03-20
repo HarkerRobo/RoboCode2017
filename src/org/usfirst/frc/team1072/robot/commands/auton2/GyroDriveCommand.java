@@ -4,6 +4,7 @@ import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.commands.DriveDistanceTimed.Surface;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,10 +23,10 @@ public class GyroDriveCommand extends Command {
 	
 	public static final Surface SURFACE = Surface.CARPET;
 	
-	public static final double KP = 900;
+	public static final double KP = 120;
 	
 	protected double zeroAngle;
-	protected long zeroTime;
+	protected double zeroTime;
 	
 	protected double goalAngle;
 	protected double goalDistance;
@@ -43,13 +44,17 @@ public class GyroDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double adj = ((goalAngle - Robot.gyro.getAngle()) % 360 - 180)/KP;
+    	double adj = (goalAngle + zeroAngle - Robot.gyro.getAngle()) % 360;
+    	if(adj > 180)
+    		adj -= 360;
+    	adj /= KP;
+    	SmartDashboard.putNumber("Adjustment", adj);
     	Robot.drivetrain.drive(0.4 + adj,  0.4 - adj);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return System.currentTimeMillis() *  1000 / SURFACE.divisor >= goalDistance;
+    	return (timeSinceInitialized() - zeroTime) >= goalDistance / SURFACE.divisor;
     }
 
     // Called once after isFinished returns true
@@ -64,6 +69,6 @@ public class GyroDriveCommand extends Command {
     
     public void zero(){
     	zeroAngle = Robot.gyro.getAngle();
-    	zeroTime = System.currentTimeMillis();
+    	zeroTime = timeSinceInitialized();
     }
 }

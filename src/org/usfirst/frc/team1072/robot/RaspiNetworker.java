@@ -17,6 +17,8 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 /**
  * @author joelmanning
  *
@@ -29,28 +31,36 @@ public class RaspiNetworker extends Thread {
 	private BufferedReader in;
 	private PrintWriter out;
 	private List<JSONListener> listeners;
+	private boolean running;
 	
 	public RaspiNetworker(){
+		listeners = new ArrayList<JSONListener>();
 		try {
 			socket = new Socket(ip, port);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
-			listeners = new ArrayList<JSONListener>();
 		} catch(UnknownHostException e) {
 			e.printStackTrace();
 		} catch(IOException e) {
 			e.printStackTrace();
+			DriverStation.reportError("IOException", false);
 		}
 	}
 	
 	public void run(){
-		while(true){
+		running = true;
+		while(running){
 			try {
-				JSONObject obj = new JSONObject(in.readLine());
+				String line = in.readLine();
+				if(line == null || line.equals("")){
+					continue;
+				}
+				System.out.println("Recieved line: " + line);
+				JSONObject obj = new JSONObject(line);
 				for(JSONListener l: listeners){
 					l.recieve(obj);
 				}
-				//System.out.println("Recieved JSON Object: " + obj.toString());
+				System.out.println("Recieved JSON Object: " + obj.toString());
 			} catch(JSONException e) {
 				e.printStackTrace();
 			} catch(IOException e) {
@@ -69,5 +79,13 @@ public class RaspiNetworker extends Thread {
 	
 	public interface JSONListener {
 		public void recieve(JSONObject obj);
+	}
+	
+	public void end(){
+		running = false;
+	}
+	
+	public void clearListeners(){
+		listeners.clear();
 	}
 }
