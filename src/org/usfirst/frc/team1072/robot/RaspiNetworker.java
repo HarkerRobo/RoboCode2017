@@ -14,10 +14,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * @author joelmanning
@@ -41,6 +43,7 @@ public class RaspiNetworker extends Thread {
 			out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
 		} catch(UnknownHostException e) {
 			e.printStackTrace();
+			DriverStation.reportError("HostException", false);
 		} catch(IOException e) {
 			e.printStackTrace();
 			DriverStation.reportError("IOException", false);
@@ -55,12 +58,16 @@ public class RaspiNetworker extends Thread {
 				if(line == null || line.equals("")){
 					continue;
 				}
-				System.out.println("Recieved line: " + line);
 				JSONObject obj = new JSONObject(line);
 				for(JSONListener l: listeners){
 					l.recieve(obj);
 				}
 				System.out.println("Recieved JSON Object: " + obj.toString());
+				JSONArray corners = obj.optJSONArray("corners");
+				if(corners != null){
+					SmartDashboard.putNumber("Distance", corners.getDouble(0));
+					SmartDashboard.putNumber("Angle", corners.getDouble(1));
+				}
 			} catch(JSONException e) {
 				e.printStackTrace();
 			} catch(IOException e) {
