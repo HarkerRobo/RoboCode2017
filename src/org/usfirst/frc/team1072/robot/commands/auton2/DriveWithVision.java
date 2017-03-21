@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import org.usfirst.frc.team1072.robot.Robot;
 import org.usfirst.frc.team1072.robot.RaspiNetworker.JSONListener;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /**
  *
  */
@@ -22,8 +24,12 @@ public class DriveWithVision extends GyroDriveCommand {
 
 			@Override
 			public void recieve(JSONObject obj) {
-				JSONArray arr = obj.getJSONArray("corners");
-				setGoals(arr.getDouble(1), arr.getDouble(0));
+				JSONArray corners = obj.optJSONArray("corners");
+				if(corners != null){
+					double dist = corners.getDouble(0);
+					double angle = corners.getDouble(1) * 0.0952428;
+					setGoals(dist, angle);
+				}
 			}
         	
         });
