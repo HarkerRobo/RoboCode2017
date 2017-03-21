@@ -25,6 +25,7 @@ import org.usfirst.frc.team1072.robot.commands.AutonomousGear5CommandGroup;
 import org.usfirst.frc.team1072.robot.commands.CloserCommand;
 import org.usfirst.frc.team1072.robot.commands.SlowModeCommand;
 import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
+import org.usfirst.frc.team1072.robot.commands.auton2.DriveWithVision;
 import org.usfirst.frc.team1072.robot.commands.auton2.VisionAutonCommand;
 import org.usfirst.frc.team1072.robot.smartDashboard.SmartEnum;
 import org.usfirst.frc.team1072.robot.smartDashboard.UpdateSDCommand;
@@ -106,7 +107,7 @@ public class Robot extends IterativeRobot {
 		push.getPush().set(Value.kReverse);
 		shifter.getSol().set(Value.kReverse);
 		CameraServer.getInstance().startAutomaticCapture();
-		//rpinet.start();
+		rpinet.start();
 		// SmartDashboard.putData("H264", new H264Widget());
 		// SmartDashboard.putData("Test Encoders:", new EncoderTest());
 		// gearPiston = new GearPiston();
@@ -187,6 +188,7 @@ public class Robot extends IterativeRobot {
 				}
 				break;
 		}
+		autonomousCommand = new DriveWithVision(50, 0);
 		if(autonomousCommand != null) {
 			autonomousCommand.start();
 		}

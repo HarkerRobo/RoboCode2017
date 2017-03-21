@@ -15,11 +15,6 @@ public class DriveWithVision extends GyroDriveCommand {
     public DriveWithVision(double initialDistance, double initialAngle) {
         super(initialDistance);
         this.zeroAngle = initialAngle;
-    }
-    
-    @Override
-    public void initialize(){
-    	super.initialize();
         Robot.rpinet.addListener(new JSONListener(){
 
 			@Override
@@ -33,7 +28,13 @@ public class DriveWithVision extends GyroDriveCommand {
 			}
         	
         });
-        Robot.rpinet.start();
+    }
+    
+    @Override
+    public void initialize(){
+    	super.initialize();
+
+        //Robot.rpinet.start();
     }
     
     public void setGoals(double angle, double distance){

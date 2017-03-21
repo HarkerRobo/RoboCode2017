@@ -17,6 +17,7 @@ import org.usfirst.frc.team1072.robot.commands.MoveDistanceCommand;
 import org.usfirst.frc.team1072.robot.commands.MoveTimeCommand;
 import org.usfirst.frc.team1072.robot.commands.TimeTestCommand;
 import org.usfirst.frc.team1072.robot.commands.TriggerSolenoidCommand;
+import org.usfirst.frc.team1072.robot.commands.auton2.DriveWithVision;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
@@ -75,6 +76,7 @@ public class UpdateSDCommand extends Command {
     	SmartDashboard.putData("Move 4 seconds .4", new MoveTimeCommand(4, .4));
     	SmartDashboard.putNumber("Drive Time", 1);
     	SmartDashboard.putData("Drive for _ seconds", new TimeTestCommand());
+    	SmartDashboard.putData("Drive With Vision", new DriveWithVision(50, 0));
     }
 
     protected void execute() {
