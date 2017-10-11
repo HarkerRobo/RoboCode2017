@@ -190,7 +190,7 @@ public class Robot extends IterativeRobot {
 				}
 				break;
 		}
-		autonomousCommand = new DriveWithVision(50, 0);
+		//autonomousCommand = new DriveWithVision(50, 0);
 		if(autonomousCommand != null) {
 			autonomousCommand.start();
 		}
