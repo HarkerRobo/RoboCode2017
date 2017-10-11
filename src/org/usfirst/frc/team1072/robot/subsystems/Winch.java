@@ -32,7 +32,7 @@ public class Winch extends Subsystem {
 	 * @see com.ctre.CANTalon#set(double)
 	 */
 	public void setSpeed(double speed) {
-		talon1.set(speed);
+		talon1.set(-speed);
 		talon2.set(speed);
 	}
 

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1072.robot;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
@@ -106,7 +107,8 @@ public class Robot extends IterativeRobot {
 		push.getClose().set(Value.kForward);
 		push.getPush().set(Value.kReverse);
 		shifter.getSol().set(Value.kReverse);
-		CameraServer.getInstance().startAutomaticCapture();
+		UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
+		cam.setResolution(640, 480);
 		rpinet.start();
 		// SmartDashboard.putData("H264", new H264Widget());
 		// SmartDashboard.putData("Test Encoders:", new EncoderTest());
